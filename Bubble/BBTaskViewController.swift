@@ -10,6 +10,8 @@ import UIKit
 
 class BBTaskViewController: UIViewController {
 
+    var taskBubbleView: BBTaskBubbleView!
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -20,18 +22,24 @@ class BBTaskViewController: UIViewController {
     
     override init() {
         super.init()
+        
+        self.taskBubbleView = BBTaskBubbleView(origin: CGPointMake(20.0, 100.0), radius: 20.0)
+        self.taskBubbleView.bubbleText = "who are-nice-people"
+        self.view.addSubview(self.taskBubbleView)
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 }
 
