@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C35AEE519D7372E002FC55F /* BBDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE019D7372E002FC55F /* BBDataCenter.swift */; };
+		0C35AEE619D7372E002FC55F /* BBDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE119D7372E002FC55F /* BBDuration.swift */; };
+		0C35AEE719D7372E002FC55F /* BBTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE219D7372E002FC55F /* BBTask.swift */; };
+		0C35AEE819D7372E002FC55F /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE319D7372E002FC55F /* DictionaryExtension.swift */; };
+		0C35AEE919D7372E002FC55F /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE419D7372E002FC55F /* NSDateExtension.swift */; };
 		28FF93CC19D73082000815A8 /* BBGoogleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */; };
 		28FF93CD19D73082000815A8 /* BBCalenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CB19D73082000815A8 /* BBCalenderModel.swift */; };
 		28FF93EC19D7341C000815A8 /* BBAppIntroMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93EB19D7341C000815A8 /* BBAppIntroMgr.swift */; };
@@ -32,6 +37,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C35AEE019D7372E002FC55F /* BBDataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBDataCenter.swift; path = BBData/BBDataCenter.swift; sourceTree = "<group>"; };
+		0C35AEE119D7372E002FC55F /* BBDuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBDuration.swift; path = BBData/BBDuration.swift; sourceTree = "<group>"; };
+		0C35AEE219D7372E002FC55F /* BBTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBTask.swift; path = BBData/BBTask.swift; sourceTree = "<group>"; };
+		0C35AEE319D7372E002FC55F /* DictionaryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryExtension.swift; path = BBData/DictionaryExtension.swift; sourceTree = "<group>"; };
+		0C35AEE419D7372E002FC55F /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtension.swift; path = BBData/NSDateExtension.swift; sourceTree = "<group>"; };
 		28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBGoogleLoginManager.swift; sourceTree = "<group>"; };
 		28FF93CB19D73082000815A8 /* BBCalenderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBCalenderModel.swift; sourceTree = "<group>"; };
 		28FF93EB19D7341C000815A8 /* BBAppIntroMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBAppIntroMgr.swift; sourceTree = "<group>"; };
@@ -68,6 +78,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C35AEDF19D73721002FC55F /* BBData */ = {
+			isa = PBXGroup;
+			children = (
+				0C35AEE019D7372E002FC55F /* BBDataCenter.swift */,
+				0C35AEE119D7372E002FC55F /* BBDuration.swift */,
+				0C35AEE219D7372E002FC55F /* BBTask.swift */,
+				0C35AEE319D7372E002FC55F /* DictionaryExtension.swift */,
+				0C35AEE419D7372E002FC55F /* NSDateExtension.swift */,
+			);
+			name = BBData;
+			sourceTree = "<group>";
+		};
 		28FF93CE19D7309C000815A8 /* CalenderData */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +120,7 @@
 		310E680519D5A32700C8D0EE /* Bubble */ = {
 			isa = PBXGroup;
 			children = (
+				0C35AEDF19D73721002FC55F /* BBData */,
 				310E680819D5A32700C8D0EE /* AppDelegate.swift */,
 				310E680D19D5A32700C8D0EE /* BBTaskViewController.swift */,
 				310E683919D6110000C8D0EE /* BBBubbleView.swift */,
@@ -239,12 +262,17 @@
 			files = (
 				310E680E19D5A32700C8D0EE /* BBTaskViewController.swift in Sources */,
 				310E683819D60EF900C8D0EE /* BBCenterBubbleView.swift in Sources */,
+				0C35AEE919D7372E002FC55F /* NSDateExtension.swift in Sources */,
 				310E680919D5A32700C8D0EE /* AppDelegate.swift in Sources */,
+				0C35AEE619D7372E002FC55F /* BBDuration.swift in Sources */,
+				0C35AEE819D7372E002FC55F /* DictionaryExtension.swift in Sources */,
 				28FF93CD19D73082000815A8 /* BBCalenderModel.swift in Sources */,
 				310E683619D5EC3000C8D0EE /* String+BBExtension.swift in Sources */,
 				28FF93EC19D7341C000815A8 /* BBAppIntroMgr.swift in Sources */,
+				0C35AEE519D7372E002FC55F /* BBDataCenter.swift in Sources */,
 				310E683A19D6110000C8D0EE /* BBBubbleView.swift in Sources */,
 				310E683419D5AA2200C8D0EE /* BBTaskBubbleView.swift in Sources */,
+				0C35AEE719D7372E002FC55F /* BBTask.swift in Sources */,
 				28FF93CC19D73082000815A8 /* BBGoogleLoginManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
