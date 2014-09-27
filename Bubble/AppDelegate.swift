@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var navigationController = UINavigationController(rootViewController: self.taskViewController)
         self.window?.rootViewController = navigationController
         
+        if BBAppIntroMgr.shouldShowAppIntro(){
+            taskViewController.presentViewController(BBAppIntroMgr.getInstance().viewControllerForAppIntro, animated: true, completion: nil)
+        }
+
         return true
     }
 

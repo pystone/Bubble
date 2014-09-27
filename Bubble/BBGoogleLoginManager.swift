@@ -11,14 +11,10 @@ import UIKit
 
 
 protocol  googleOAuthDelegate: NSObjectProtocol{
-    func authorizationWasSuccessful()
-    func accessTokenWasRevoked()
-    func responseFromServiceWasReceived(responseJSONAsString:NSString, andResponseJSONAsData responseJSONAsData:NSData)
-    func errorOccuredWithShortDescription(errorOccuredWithShortDescription errorShortDescription:NSString, andErrorDetails errorDetails:NSString)
-   func errorInResponseWithBody(errorMessage:NSString)
+    func accessTokenGot()
 }
 
-class BBGoogleLoginManager: NSObject, googleOAuthDelegate{
+class BBGoogleLoginManager: NSObject{
     
     let   GOOGLE_CLIENT_ID = "1006470383786-476a513gkvb7f2foc1h75ljq24v2spk6.apps.googleusercontent.com"
     let   GOOGLE_CLIENT_SECRET = "xR9ay-SPlTGhbcgGdApRJmPn"
@@ -27,14 +23,12 @@ class BBGoogleLoginManager: NSObject, googleOAuthDelegate{
     let   AUTHOR_URL = "https://accounts.google.com/o/oauth2/auth?"
     let   ACCESS_TOKEN_URL = "https://accounts.google.com/o/oauth2/token"
     
-    
-
     var authorizationCode:NSString?
     var refreshToken:NSString?
     var urlConnection: NSURLConnection?
     var receivedData:NSMutableData = NSMutableData()
     var accessToken: NSString?
-    
+    var calenderModel: BBCalenderModel?
     
     struct Static {
         static var token : dispatch_once_t = 0
@@ -76,7 +70,7 @@ class BBGoogleLoginManager: NSObject, googleOAuthDelegate{
     }
     
     func getAccessToken() -> NSString{
-        return "";
+        return accessToken!
     }
     
     func requestAccessToken(urlString: String ,  data: NSData){
@@ -101,29 +95,11 @@ class BBGoogleLoginManager: NSObject, googleOAuthDelegate{
                 self.accessToken = token
                 NSUserDefaults.standardUserDefaults().setObject(token, forKey: "GOOGLE_ACCESS_TOKEN")
                 NSUserDefaults.standardUserDefaults().synchronize()
+                
+                calenderModel = BBCalenderModel()
             }
-            
         })
     }
     
-    func authorizationWasSuccessful(){
-        
-    }
-    
-    func accessTokenWasRevoked(){
-        
-    }
-    
-    func responseFromServiceWasReceived(responseJSONAsString:NSString, andResponseJSONAsData responseJSONAsData:NSData){
-        
-    }
-    
-    func errorOccuredWithShortDescription(errorOccuredWithShortDescription errorShortDescription:NSString, andErrorDetails errorDetails:NSString){
-        
-    }
-    
-    func errorInResponseWithBody(errorMessage:NSString){
-        
-    }
 }
 
