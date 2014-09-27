@@ -9,26 +9,16 @@
 import Foundation
 import UIKit
 
-class BBTaskBubbleView: UIView {
+class BBTaskBubbleView: BBBubbleView {
     
-    var bubbleView: UIView!
     var bubbleText: String! {
         didSet {
             // retreive the initial letters of bubble text
-            self.bubbleTextLabel?.text = bubbleText.initalCharacters().uppercaseString
+            self.bubbleTextLabel?.text = bubbleText.initalCharacters(2).uppercaseString
         }
     }
     var bubbleTextLabel: UILabel!
     var bubbleTextColor: UIColor!
-    var bubbleColor: UIColor?
-    var bubbleStrokeColor: UIColor?
-    var bubbleRadius: CGFloat = 0.0 {
-        didSet {
-            self.setNeedsLayout()
-            self.setNeedsDisplay()
-        }
-    }
-    var bubbleLayer: CAShapeLayer!
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -40,11 +30,6 @@ class BBTaskBubbleView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clearColor()
-        
-        self.bubbleView = UIView()
-        self.bubbleView.clipsToBounds = true
-        self.bubbleView.backgroundColor = UIColor.clearColor()
         
         self.bubbleTextLabel = UILabel()
         self.bubbleTextLabel.textAlignment = NSTextAlignment.Center
@@ -53,33 +38,16 @@ class BBTaskBubbleView: UIView {
         self.bubbleTextColor = UIColor.darkGrayColor()
         self.bubbleTextLabel.textColor = self.bubbleTextColor
         
-        self.bubbleLayer = CAShapeLayer()
-        self.layer.insertSublayer(self.bubbleLayer, atIndex: 0)
+        // the bubbleView is the underlying view, which holds all the other upper views
+        self.bubbleView.addSubview(self.bubbleTextLabel)
     }
     
     convenience init(origin: CGPoint, radius: CGFloat) {
         var frame = CGRectMake(origin.x, origin.y, 2*radius, 2*radius)
         self.init(frame:frame)
-        
-        self.bubbleRadius = radius
+        // this is temporary, should be implemented!
         self.bubbleColor = UIColor.greenColor()
-        
-        self.bubbleView.addSubview(self.bubbleTextLabel)
-        self.addSubview(self.bubbleView)
-    }
-    
-    override func drawRect(rect: CGRect) {
-        // set the center of the circle to be the center of the view
-        let center = CGPointMake(self.bubbleRadius, self.bubbleRadius)
-        
-        // arcCenter is in the current coordiante system
-        self.bubbleLayer.path = UIBezierPath(arcCenter: center, radius: self.bubbleRadius,
-            startAngle: 0.0, endAngle: CGFloat(2*M_PI), clockwise: true).CGPath
-        
-        // configure the circle
-        self.bubbleLayer.fillColor = self.bubbleColor?.CGColor
-        self.bubbleLayer.strokeColor = self.bubbleStrokeColor?.CGColor
-        self.bubbleLayer.lineWidth = 0.0
+        self.bubbleRadius = radius
     }
     
     override func layoutSubviews() {
@@ -87,6 +55,10 @@ class BBTaskBubbleView: UIView {
         self.bubbleView.frame = frame
         // simple implementation
         self.bubbleTextLabel.frame = frame
+    }
+    
+    override func drawRect(rect: CGRect) {
+        super.drawRect(rect)
     }
     
     func enlargeBubble(animated: Bool) {
@@ -102,6 +74,12 @@ class BBTaskBubbleView: UIView {
     */
     func mapRadius() {
         
+    }
+    
+    override func bubbleViewDidPan(sender: UIPanGestureRecognizer) {
+    }
+    
+    override func bubbleViewDidTap(sender: UITapGestureRecognizer) {
     }
     
 }

@@ -14,6 +14,8 @@
 		310E682219D5A32700C8D0EE /* BubbleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E682119D5A32700C8D0EE /* BubbleTests.swift */; };
 		310E683419D5AA2200C8D0EE /* BBTaskBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E683319D5AA2200C8D0EE /* BBTaskBubbleView.swift */; };
 		310E683619D5EC3000C8D0EE /* String+BBExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E683519D5EC3000C8D0EE /* String+BBExtension.swift */; };
+		310E683819D60EF900C8D0EE /* BBCenterBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E683719D60EF900C8D0EE /* BBCenterBubbleView.swift */; };
+		310E683A19D6110000C8D0EE /* BBBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E683919D6110000C8D0EE /* BBBubbleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		310E682119D5A32700C8D0EE /* BubbleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTests.swift; sourceTree = "<group>"; };
 		310E683319D5AA2200C8D0EE /* BBTaskBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBTaskBubbleView.swift; sourceTree = "<group>"; };
 		310E683519D5EC3000C8D0EE /* String+BBExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+BBExtension.swift"; sourceTree = "<group>"; };
+		310E683719D60EF900C8D0EE /* BBCenterBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBCenterBubbleView.swift; sourceTree = "<group>"; };
+		310E683919D6110000C8D0EE /* BBBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBBubbleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +85,9 @@
 			children = (
 				310E680819D5A32700C8D0EE /* AppDelegate.swift */,
 				310E680D19D5A32700C8D0EE /* BBTaskViewController.swift */,
+				310E683919D6110000C8D0EE /* BBBubbleView.swift */,
 				310E683319D5AA2200C8D0EE /* BBTaskBubbleView.swift */,
+				310E683719D60EF900C8D0EE /* BBCenterBubbleView.swift */,
 				310E683519D5EC3000C8D0EE /* String+BBExtension.swift */,
 				310E681219D5A32700C8D0EE /* Images.xcassets */,
 				310E681419D5A32700C8D0EE /* LaunchScreen.xib */,
@@ -215,8 +221,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				310E680E19D5A32700C8D0EE /* BBTaskViewController.swift in Sources */,
+				310E683819D60EF900C8D0EE /* BBCenterBubbleView.swift in Sources */,
 				310E680919D5A32700C8D0EE /* AppDelegate.swift in Sources */,
 				310E683619D5EC3000C8D0EE /* String+BBExtension.swift in Sources */,
+				310E683A19D6110000C8D0EE /* BBBubbleView.swift in Sources */,
 				310E683419D5AA2200C8D0EE /* BBTaskBubbleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

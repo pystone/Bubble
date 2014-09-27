@@ -11,6 +11,7 @@ import UIKit
 class BBTaskViewController: UIViewController {
 
     var taskBubbleView: BBTaskBubbleView!
+    var taskCenterBubbleView: BBCenterBubbleView!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -23,9 +24,15 @@ class BBTaskViewController: UIViewController {
     override init() {
         super.init()
         
-        self.taskBubbleView = BBTaskBubbleView(origin: CGPointMake(20.0, 100.0), radius: 20.0)
+        self.taskBubbleView = BBTaskBubbleView(origin: CGPointMake(100.0, 100.0), radius: 20.0)
         self.taskBubbleView.bubbleText = "who are-nice-people"
+        
+        var centerViewRadius: CGFloat = 100.0
+        var center: CGPoint = CGPointMake(CGRectGetMidX(self.view.bounds)-centerViewRadius, CGRectGetMidY(self.view.bounds)-centerViewRadius)
+        self.taskCenterBubbleView = BBCenterBubbleView(origin: center, radius: centerViewRadius)
+        
         self.view.addSubview(self.taskBubbleView)
+        self.view.addSubview(self.taskCenterBubbleView)
     }
 
     override func viewWillAppear(animated: Bool) {
