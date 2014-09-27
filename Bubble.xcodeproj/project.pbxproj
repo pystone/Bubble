@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28FF93CC19D73082000815A8 /* BBGoogleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */; };
+		28FF93CD19D73082000815A8 /* BBCalenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CB19D73082000815A8 /* BBCalenderModel.swift */; };
+		28FF93EC19D7341C000815A8 /* BBAppIntroMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93EB19D7341C000815A8 /* BBAppIntroMgr.swift */; };
 		310E680919D5A32700C8D0EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E680819D5A32700C8D0EE /* AppDelegate.swift */; };
 		310E680E19D5A32700C8D0EE /* BBTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E680D19D5A32700C8D0EE /* BBTaskViewController.swift */; };
 		310E681319D5A32700C8D0EE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 310E681219D5A32700C8D0EE /* Images.xcassets */; };
@@ -29,6 +32,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBGoogleLoginManager.swift; sourceTree = "<group>"; };
+		28FF93CB19D73082000815A8 /* BBCalenderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBCalenderModel.swift; sourceTree = "<group>"; };
+		28FF93EB19D7341C000815A8 /* BBAppIntroMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBAppIntroMgr.swift; sourceTree = "<group>"; };
 		310E680319D5A32700C8D0EE /* Bubble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bubble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		310E680719D5A32700C8D0EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		310E680819D5A32700C8D0EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +68,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28FF93CE19D7309C000815A8 /* CalenderData */ = {
+			isa = PBXGroup;
+			children = (
+				28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */,
+				28FF93CB19D73082000815A8 /* BBCalenderModel.swift */,
+			);
+			name = CalenderData;
+			sourceTree = "<group>";
+		};
 		310E67FA19D5A32700C8D0EE = {
 			isa = PBXGroup;
 			children = (
@@ -88,7 +103,9 @@
 				310E683919D6110000C8D0EE /* BBBubbleView.swift */,
 				310E683319D5AA2200C8D0EE /* BBTaskBubbleView.swift */,
 				310E683719D60EF900C8D0EE /* BBCenterBubbleView.swift */,
+				28FF93EB19D7341C000815A8 /* BBAppIntroMgr.swift */,
 				310E683519D5EC3000C8D0EE /* String+BBExtension.swift */,
+				28FF93CE19D7309C000815A8 /* CalenderData */,
 				310E681219D5A32700C8D0EE /* Images.xcassets */,
 				310E681419D5A32700C8D0EE /* LaunchScreen.xib */,
 				310E680619D5A32700C8D0EE /* Supporting Files */,
@@ -223,9 +240,12 @@
 				310E680E19D5A32700C8D0EE /* BBTaskViewController.swift in Sources */,
 				310E683819D60EF900C8D0EE /* BBCenterBubbleView.swift in Sources */,
 				310E680919D5A32700C8D0EE /* AppDelegate.swift in Sources */,
+				28FF93CD19D73082000815A8 /* BBCalenderModel.swift in Sources */,
 				310E683619D5EC3000C8D0EE /* String+BBExtension.swift in Sources */,
+				28FF93EC19D7341C000815A8 /* BBAppIntroMgr.swift in Sources */,
 				310E683A19D6110000C8D0EE /* BBBubbleView.swift in Sources */,
 				310E683419D5AA2200C8D0EE /* BBTaskBubbleView.swift in Sources */,
+				28FF93CC19D73082000815A8 /* BBGoogleLoginManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
