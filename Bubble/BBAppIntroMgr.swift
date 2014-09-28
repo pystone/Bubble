@@ -10,16 +10,27 @@ import Foundation
 import UIKit
 
 
-class BBAppIntroMgr: NSObject{
+class BBAppIntroMgr: NSObject, UIWebViewDelegate{
     
     var firstLoad: Bool = true
+    var _introWnd: UIWindow?
     
-    var viewControllerForAppIntro = IntroViewController()
+    var googleBtn: UIButton?
+    var iCloudBtn: UIButton?
+    var introView: UIImageView?
+    var webView: UIWebView?
+    var loginInMgr: BBGoogleLoginManager?
+    var textLabel: UILabel?
+    var cancelBtn: UIButton?
+    var activityJuhua : UIActivityIndicatorView?
     
     class func shouldShowAppIntro() -> Bool {
         
-       // var first = NSUserDefaults.standardUserDefaults().boolForKey("BBAppIntroNumKey") as Bool
-
+        var first = NSUserDefaults.standardUserDefaults().boolForKey("AppIntroVersionNumKey")
+        if first == true{
+            return false
+        }
+        
         return  true
     }
     
@@ -33,20 +44,18 @@ class BBAppIntroMgr: NSObject{
         return Static.instance!
     }
     
-}
-
-class IntroViewController: UIViewController, UIWebViewDelegate,googleOAuthDelegate {
-    var googleBtn: UIButton?
-    var iCloudBtn: UIButton?
-    var introView: UIImageView?
-    var webView: UIWebView?
-    var loginInMgr: BBGoogleLoginManager?
-    var textLabel: UILabel?
-    var cancelBtn: UIButton?
-    var activityJuhua : UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle:.Gray)
+    override init(){
+        assert(Static.instance == nil, "Singleton already initialized!")
+        _introWnd = UIWindow(frame: UIScreen.mainScreen().bounds);
+        _introWnd?.backgroundColor = UIColor.clearColor();
+    }
     
-    override func viewDidLoad() {
-        let bounds: CGRect = self.view.bounds
+    func createViews(){
+        if introView?.superview != nil{
+            return
+        }
+        
+        let bounds: CGRect = UIScreen.mainScreen().bounds
         introView = UIImageView(frame: CGRectMake(0, 0, bounds.width, bounds.height))
         var image = UIImage(named: "login_bg.png");
         introView?.image = image
@@ -76,26 +85,41 @@ class IntroViewController: UIViewController, UIWebViewDelegate,googleOAuthDelega
         cancelBtn?.titleLabel?.textAlignment = NSTextAlignment.Center
         cancelBtn?.addTarget(self, action: Selector("nextTime:"), forControlEvents: .TouchUpInside)
         
-        activityJuhua.frame = CGRectMake(140, 210, 40, 40)
-        activityJuhua.hidden = true
-
+        activityJuhua = UIActivityIndicatorView(activityIndicatorStyle:.Gray)
+        activityJuhua?.frame = CGRectMake(140, 300, 40, 40)
+        activityJuhua?.hidesWhenStopped = true
+        activityJuhua?.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         
         introView?.addSubview(googleBtn!)
         introView?.addSubview(iCloudBtn!)
         introView?.addSubview(textLabel!)
         introView?.addSubview(cancelBtn!)
-        introView?.addSubview(activityJuhua)
+    }
+    
+    func showAppIntro(){
+        createViews()
         
-        self.view.addSubview(introView!)
+        var firstLoad = true
+        
+        _introWnd?.hidden = false;
+        _introWnd?.addSubview(introView!)
+        _introWnd?.makeKeyAndVisible()
+        _introWnd?.windowLevel = UIWindowLevelStatusBar
+        
+        if firstLoad == true{
+            NSUserDefaults.standardUserDefaults().setBool(firstLoad, forKey: "AppIntroVersionNumKey")
+        }
     }
     
     func SignInPressed(sender: UIButton!) {
         
+        let bounds: CGRect = UIScreen.mainScreen().bounds
         introView?.removeFromSuperview()
-        webView = UIWebView(frame: self.view.bounds)
+        webView = UIWebView(frame: bounds)
         webView?.delegate = self
-        self.view.addSubview(webView!)
-        self.view.sendSubviewToBack(webView!)
+        _introWnd?.addSubview(webView!)
+        webView!.addSubview(activityJuhua!)
+        activityJuhua?.startAnimating()
         
         loginInMgr = BBGoogleLoginManager()
         var str : String?
@@ -108,7 +132,12 @@ class IntroViewController: UIViewController, UIWebViewDelegate,googleOAuthDelega
     }
     
     func nextTime(sender: UIButton!) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissIntroView()
+     }
+    
+    func getMainWindow() -> UIWindow{
+        var delegate = UIApplication.sharedApplication().delegate as AppDelegate
+        return delegate.window!
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
@@ -137,27 +166,25 @@ class IntroViewController: UIViewController, UIWebViewDelegate,googleOAuthDelega
             }
             
             webView.removeFromSuperview()
-            self.dismissViewControllerAnimated(true, completion: nil)
+            dismissIntroView()
             return false
             
         }
         return true
     }
     
-    func webViewDidStartLoad(webView: UIWebView) {
-          activityJuhua.startAnimating()
-          activityJuhua.hidden = false
-    }
-    
     func webViewDidFinishLoad(webView: UIWebView) {
-          self.view.bringSubviewToFront(webView)
-          activityJuhua.stopAnimating()
-          activityJuhua.hidden = true
+        activityJuhua?.stopAnimating()
     }
     
-    func accessTokenGot(){
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func dismissIntroView(){
+        introView?.removeFromSuperview()
+        _introWnd?.windowLevel = UIWindowLevelNormal
+        _introWnd?.hidden = true
+        getMainWindow().makeKeyAndVisible()
     }
-
 }
+
+
+
 
