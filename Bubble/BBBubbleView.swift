@@ -61,6 +61,12 @@ class BBBubbleView: UIView {
         self.addGestureRecognizer(panGesture)
     }
     
+    class func bubbleView(withColor: UIColor, frame: CGRect) -> BBBubbleView {
+        var view = BBBubbleView(frame: frame)
+        view.bubbleColor = withColor
+        return view
+    }
+    
     override func drawRect(rect: CGRect) {
         // set the center of the circle to be the center of the view
         let center = CGPointMake(self.bubbleRadius, self.bubbleRadius)

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum TaskCategory: Int {
     case None = 0
@@ -56,6 +57,8 @@ enum TaskIcon: Int {
 
 let IconPathNormal = "%@-normal.png"
 let IconPathSelected = "%@-highlighted.png"
+let colorList : [String] = ["blue","green","orange","pink","purple","red","teal","yellow"]
+let iconList: [String] = ["book", "code","default","design","discussion","lab","paper","video"]
 
 let IconMap: [TaskIcon: [String]] = [
     .None: [String(format: IconPathNormal, "default"), String(format: IconPathSelected, "default")],
@@ -76,4 +79,8 @@ let ResourcePath: [String: String] = [
     "LineAndMoreImage": "line_and_more",
     "TouMing": "touming"
 ]
+
+let BlurAlpha = CGFloat(0.85)
+let BlurTransitionTime = NSTimeInterval(0.7)
+let BlurViewTag = 999
 

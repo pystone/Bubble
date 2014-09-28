@@ -72,7 +72,7 @@ class BBTask {
     
     func getReadableSpentTime() -> String! {
         let totalTime = getTotalSpentTime()
-        let date = NSDate.dateWithTimeIntervalSinceReferenceDate(totalTime)
+        let date = NSDate(timeIntervalSinceReferenceDate: totalTime)
         var formatter = NSDateFormatter()
         formatter.dateFormat = "HH:mm:ss"
         formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
@@ -81,10 +81,26 @@ class BBTask {
     }
     
     func getColor() -> UIColor! {
-        let r: CGFloat = CGFloat(CategoryMap[_category]![0] / 255.0)
-        let g: CGFloat = CGFloat(CategoryMap[_category]![1] / 255.0)
-        let b: CGFloat = CGFloat(CategoryMap[_category]![2] / 255.0)
+        let r = CGFloat(Double(CategoryMap[_category]![0]) / 255.0)
+        let g = CGFloat(Double(CategoryMap[_category]![1]) / 255.0)
+        let b = CGFloat(Double(CategoryMap[_category]![2]) / 255.0)
         return UIColor(red: r, green: g, blue: b, alpha: 1.0)
+    }
+    
+    func floatEqual(f1: CGFloat, f2:CGFloat) -> Bool {
+        return abs(f1-f2) < 0.01
+    }
+    
+    func setColor(color: UIColor) {
+        let arr = CGColorGetComponents(color.CGColor)
+        
+        for (key, val) in CategoryMap {
+            if floatEqual(arr[0]*255,f2: CGFloat(val[0])) && floatEqual(arr[1]*255, f2: CGFloat(val[1])) && floatEqual(arr[2]*255, f2: CGFloat(val[2])) {
+                _category = key
+                return
+            }
+        }
+        _category = .None
     }
     
     func getIconNormal() -> String! {
