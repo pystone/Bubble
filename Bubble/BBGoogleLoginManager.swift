@@ -29,6 +29,7 @@ class BBGoogleLoginManager: NSObject{
     var receivedData:NSMutableData = NSMutableData()
     var accessToken: NSString?
     var calenderModel: BBCalenderModel?
+    var delegate: BBAppIntroMgr?
     
     struct Static {
         static var token : dispatch_once_t = 0
@@ -98,7 +99,7 @@ class BBGoogleLoginManager: NSObject{
                 NSUserDefaults.standardUserDefaults().setObject(token, forKey: "GOOGLE_ACCESS_TOKEN")
                 NSUserDefaults.standardUserDefaults().synchronize()
                 self.calenderModel?.startLoadCalenderModel(self.accessToken!)
-
+                //intro view disappear
             }
         })
     }

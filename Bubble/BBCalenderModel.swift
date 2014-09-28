@@ -62,21 +62,25 @@ class BBCalenderModel: NSObject{
                 receivedData.appendData(data)
                 let json = JSON(data:receivedData,options:nil,error:nil)
                 
-            
-                for item in json["items"].arrayValue!{
-                    var eventTile =  item["summary"].stringValue
-                    var eventTime = item["created"].stringValue
-                    println(eventTile)
-                    var Task: BBTask = BBTask()
+                if let tempItems =  json["items"].arrayValue{
+                    for item in json["items"].arrayValue!{
+                    
+                        var Task: BBTask = BBTask()
+                    
+                        if let eventTile =  item["summary"].stringValue{
+                            Task._title = eventTile
+                        }
+                        if let eventEndTimeStr = item["end"]["dateTime"].stringValue{
+                             var eventEndTime = self.stringTransToDate(eventEndTimeStr)
+                             Task._due = eventEndTime
+                        }
+                        if let eventDescription = item["description"].stringValue{
+                             Task._notes = eventDescription
+                        }
+                    
+                        BBDataCenter.sharedDataCenter().addNewTask(Task)
+                   }
                 }
-                
-                
-    
-               // if let
-                //println(tempItems)
-                
-                //println(json)
-                
             }
         })
     }
@@ -95,6 +99,21 @@ class BBCalenderModel: NSObject{
         let str = formatter.stringFromDate(date)
         
         return str
+    }
+    
+    func stringTransToDate(dateStr:String) -> NSDate{
+        //let strArray = dateStr.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet()) as NSArray
+        var newString = ""
+        if let strArray = dateStr.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet()) as [String]? {
+            if  let subStrArray = strArray[1].componentsSeparatedByString("-") as [String]?{
+                       newString = strArray[0] + " " + subStrArray[0]
+            }
+        }
+           var formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let str = formatter.dateFromString(newString)
+           println(str)
+            return str!
     }
     
 }

@@ -40,7 +40,7 @@ class IntroViewController: UIViewController, UIWebViewDelegate,googleOAuthDelega
     var Label2: UIButton?
     var introView: UIImageView?
     var webView: UIWebView?
-     var loginInMgr: BBGoogleLoginManager?
+    var loginInMgr: BBGoogleLoginManager?
     
     override func viewDidLoad() {
         let bounds: CGRect = self.view.bounds
@@ -116,6 +116,7 @@ class IntroViewController: UIViewController, UIWebViewDelegate,googleOAuthDelega
             }
             
             webView.removeFromSuperview()
+            self.dismissViewControllerAnimated(true, completion: nil)
             return false
             
         }
