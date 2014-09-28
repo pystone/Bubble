@@ -54,4 +54,6 @@ let IconMap: [TaskIcon: [String]] = [
     .Discussion: [String(format: IconPathNormal, "discussion"), String(format: IconPathSelected, "discussion")]
 ]
 
+let CALENDAR_DATA_NOTIFICATION = "didFinishedLoadingCalendarData"
+
 
