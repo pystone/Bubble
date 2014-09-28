@@ -30,6 +30,8 @@ class BBDataCenter {
         _finishedTasks = [Int: BBTask]()
         _unfinishedTasks = [Int: BBTask]()
         
+        cleanAllTasks(true)
+        
         let finished = NSUserDefaults.standardUserDefaults().objectForKey(FinishedTaskKey) as? NSArray
         let unfinished = NSUserDefaults.standardUserDefaults().objectForKey(UnfinishedTaskKey) as? NSArray
         let totalID = NSUserDefaults.standardUserDefaults().objectForKey(TotalIDKey) as? Int
@@ -39,7 +41,6 @@ class BBDataCenter {
                 let task = BBTask.fromDictionary(taskDict as NSDictionary)
                 _finishedTasks.updateValue(task, forKey: task._id)
             }
-            println("Data center init: file for finished found.");
         }
         
         if unfinished != nil {
@@ -47,12 +48,10 @@ class BBDataCenter {
                 let task = BBTask.fromDictionary(taskDict as NSDictionary)
                 _unfinishedTasks.updateValue(task, forKey: task._id)
             }
-            println("Data center init: file for unfinished found.");
         }
         
         if totalID != nil {
             BBTask.setTotalID(totalID!)
-            println("Data center init: total id number \(totalID)")
         }
     }
     
@@ -212,8 +211,6 @@ class BBDataCenter {
     }
     
     func print() {
-//        addTestTasks()
-        
         printAllTasks()
     }
     
@@ -241,13 +238,9 @@ class BBDataCenter {
     // For debug
     func testDisplayTask() {
         printDisplayTasks(getTasksForOneDay(NSDate.dateWithDate(2014, month: 8, day: 11)))
-        println("\n")
         printDisplayTasks(getTasksForOneDay(NSDate.dateWithDate(2014, month: 8, day: 12)))
-        println("\n")
         printDisplayTasks(getTasksForOneDay(NSDate.dateWithDate(2014, month: 8, day: 13)))
-        println("\n")
         printDisplayTasks(getTasksForOneDay(NSDate.dateWithDate(2014, month: 8, day: 14)))
-        println("\n")
     }
     
     func testNSDate() {

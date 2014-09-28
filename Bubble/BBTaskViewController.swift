@@ -102,15 +102,17 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         self.view.addSubview(self.taskBubbleViewAdder)
         self.view.addSubview(self.taskCenterBubbleView)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("showData"), name: CALENDAR_DATA_NOTIFICATION, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("layoutTaskBubbles"),
+            name: CALENDAR_DATA_NOTIFICATION, object: nil)
     }
     
-    func showData() {
+    func layoutTaskBubbles() {
         // load some data
         for taskID: Int in BBDataCenter.sharedDataCenter()._unfinishedTasks.keys {
             if taskExistInView(taskID) == true {
                 continue
             }
+            // this is a new task
             var taskView = BBTaskBubbleView(origin: CGPointMake(50.0, 60.0), radius: 30.0)
             taskView._taskID = taskID
             taskView.bubbleColor = UIColor.randomColor()
@@ -119,6 +121,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
 //            BBDataCenter.sharedDataCenter().updateUnfinishedTask(task)
             
             self.visibelTaskViews.append(taskView)
+            self.view.addSubview(taskView)
         }
 
         self.layoutTasksAnimated(true)
@@ -163,16 +166,18 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
                         full = false
                         tmpw = taskView.bounds.size.width / 2.0
                         tmph = taskView.bounds.size.height / 2.0
-                        
+
                         var offset:CGFloat = CGFloat(arc4random_uniform(UInt32(bubbleRect.rect.size.width - taskView.bounds.size.width)))
                         var centerx = tmpw + offset
                         offset = CGFloat(arc4random_uniform(UInt32(bubbleRect.rect.size.height - taskView.bounds.size.height)))
                         var centery = tmph + offset
                         taskView.center = CGPointMake(centerx+bubbleRect.rect.origin.x, centery+bubbleRect.rect.origin.y)
                         bubbleRect.bubbleCount = bubbleRect.bubbleCount + 1
-                        self.view.addSubview(taskView)
-                        break;
                     }
+                }
+                if (full == false) {
+                    self.availableRects[i].bubbleCount = bubbleRect.bubbleCount
+                    break;
                 }
             }
             if full == true {
