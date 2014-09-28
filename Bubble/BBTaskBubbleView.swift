@@ -23,15 +23,15 @@ class BBTaskBubbleView: BBBubbleView {
             self.bubbleTextLabel.hidden = false
         }
     }
-<<<<<<< HEAD
+
     var delegate: BBTaskBubbleViewProtocol?
-=======
+
     var _taskID: Int? {
         didSet {
             setContent()
         }
     }
->>>>>>> FETCH_HEAD
+
     var bubbleTextLabel: UILabel!
     var bubbleTextColor: UIColor!
     var bubbleTaskIconView: UIImageView!
@@ -153,9 +153,4 @@ class BBTaskBubbleView: BBBubbleView {
     override func bubbleViewDidTap(sender: UITapGestureRecognizer) {
         self.delegate?.bubbleViewDidTap()
     }
-    
-  
-//    [sender setTranslation:CGPointMake(0, 0) inView:self.view];
-
-    
 }
