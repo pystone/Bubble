@@ -96,7 +96,7 @@ class BBGoogleLoginManager: NSObject{
                 NSUserDefaults.standardUserDefaults().setObject(token, forKey: "GOOGLE_ACCESS_TOKEN")
                 NSUserDefaults.standardUserDefaults().synchronize()
                 
-                calenderModel = BBCalenderModel()
+                self.calenderModel = BBCalenderModel()
             }
         })
     }

@@ -8,6 +8,13 @@
 
 import Foundation
 
+func +=<K, V>(inout left: [K: V], right: [K: V]) -> [K: V] {
+    for (k, v) in right {
+        left.updateValue(v, forKey: k)
+    }
+    return left
+}
+
 extension Dictionary {
     
     func sortedKeys(isOrderedBefore:(Key, Key) -> Bool) -> [Key] {
@@ -21,4 +28,11 @@ extension Dictionary {
             isOrderedBefore(self[$0]!, self[$1]!)
         }
     }
+    
+    mutating func merge(anotherDict: Dictionary) {
+        for (key, val) in anotherDict {
+            self[key] = val
+        }
+    }
+    
 }
