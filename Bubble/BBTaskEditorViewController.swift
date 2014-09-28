@@ -60,36 +60,28 @@ class BBTaskEditorViewController: UIViewController {
         self.selectedColor = UIColor.whiteColor()
         self.view.backgroundColor = self.selectedColor
         
-        self.containerScrollView = UIScrollView()
+        self.containerScrollView = UIScrollView(frame: CGRectMake(0, 0, self.view.frame.width , self.view.frame.height))
         
-        var containerView = UIView()
-        containerView.frame = CGRectMake(20.0, 64.0, self.view.bounds.size.width - 40.0, self.view.bounds.size.height)
-        containerView.backgroundColor = UIColor.clearColor()
-        self.view.addSubview(containerView)
+        self.view.addSubview(self.containerScrollView)
         
-        var originY:CGFloat = 0.0, width:CGFloat = containerView.bounds.size.width
+        var originY:CGFloat = 0.0, width:CGFloat = self.containerScrollView.bounds.size.width
         var labelHeight:CGFloat = 40.0
+        let gap:CGFloat = 20
         
         var height:CGFloat = 40.0
-        //        var detailTextView: UITextView = UITextView()
-        //        detailTextView.backgroundColor = UIColor.greenColor()
-        //        detailTextView.frame = CGRectMake(0.0, originY, width, height)
-        //        detailTextView.text = "description"
-        //        detailTextView.becomeFirstResponder()
-        //        containerView.addSubview(detailTextView)
         
         originY += height
         
-        var frame: CGRect = CGRectMake(0.0, originY, width, labelHeight)
+        var frame: CGRect = CGRectMake(20, originY, width, labelHeight)
         var labelDue = UILabel(frame: frame)
         labelDue.backgroundColor = UIColor.clearColor()
         labelDue.textColor = UIColor.darkTextColor()
         labelDue.font = UIFont.boldSystemFontOfSize(20.0)
         labelDue.text = "Due"
-        containerView.addSubview(labelDue)
+        self.containerScrollView.addSubview(labelDue)
         
         originY += labelHeight
-        frame = CGRectMake(0.0, originY, width, height)
+        frame = CGRectMake(20, originY, width, height)
         self.dueDetailLabel = UILabel(frame: frame)
         self.dueDetailLabel.textColor = UIColor.darkTextColor()
         self.dueDetailLabel.text = NSDate.date().description
@@ -98,11 +90,35 @@ class BBTaskEditorViewController: UIViewController {
         var tapGesture = UITapGestureRecognizer(target: self, action: Selector("popupDatePicker"))
         self.dueDetailLabel.addGestureRecognizer(tapGesture)
         
-        containerView.addSubview(self.dueDetailLabel)
+        self.containerScrollView.addSubview(self.dueDetailLabel)
         
         originY += labelHeight
-        frame = CGRectMake(0.0, originY, width, labelHeight)
-        var labelColor = UILabel(frame: frame)
+        var colorLabel: UILabel = UILabel(frame: CGRectMake(20, originY, self.view.frame.width - 20, labelHeight))
+        colorLabel.textColor = UIColor.darkTextColor()
+        colorLabel.text = "Color"
+        colorLabel.font = UIFont.boldSystemFontOfSize(20.0)
+        self.containerScrollView.addSubview(colorLabel)
+        
+        originY += labelHeight  + gap
+        var colorSelectionBoard: BBIconSelectionBoard = BBIconSelectionBoard(frame: CGRectMake(20, originY, self.view.frame.width - 20, 150))
+        colorSelectionBoard.getBoardWithType(BBBoardType.colorBoard)
+        self.containerScrollView.addSubview(colorSelectionBoard)
+        
+        originY += 100 + gap
+        var iconLabel: UILabel = UILabel(frame: CGRectMake(20, originY, self.view.frame.width - 20, labelHeight))
+        iconLabel.textColor = UIColor.darkTextColor()
+        iconLabel.text = "Icon"
+        iconLabel.font = UIFont.boldSystemFontOfSize(20.0)
+        self.containerScrollView.addSubview(iconLabel)
+        
+        originY += labelHeight + gap
+        var iconSelectionBoard: BBIconSelectionBoard = BBIconSelectionBoard(frame: CGRectMake(20, originY, self.view.frame.width - 20, 150))
+        iconSelectionBoard.getBoardWithType(BBBoardType.iconBoard)
+        self.containerScrollView.addSubview(iconSelectionBoard)
+        
+        originY += 150 + gap
+        self.containerScrollView.contentSize = CGSizeMake(self.view.frame.width, originY)
+        
     }
     
     func popupDataPicker(){
