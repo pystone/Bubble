@@ -27,7 +27,6 @@ class BBDataCenter {
     }
     
     init () {
-//        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(NSBundle.mainBundle().bundleIdentifier!);
         _finishedTasks = [Int: BBTask]()
         _unfinishedTasks = [Int: BBTask]()
         
@@ -199,6 +198,17 @@ class BBDataCenter {
             retList = sortedTask[0...maxCnt-1];
         }
         return Array(retList);
+    }
+    
+    
+    // For test
+    func cleanAllTasks(cleanSavedFile: Bool) {
+        self._finishedTasks = [Int: BBTask]()
+        self._unfinishedTasks = [Int: BBTask]()
+        
+        if cleanSavedFile == true {
+            NSUserDefaults.standardUserDefaults().removePersistentDomainForName(NSBundle.mainBundle().bundleIdentifier!);
+        }
     }
     
     func print() {
