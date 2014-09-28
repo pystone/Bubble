@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+protocol BBTaskBubbleViewProtocol {
+    func bubbleViewDidTap()
+    func bubbleViewDidPan()
+}
+
 class BBTaskBubbleView: BBBubbleView {
     
     var bubbleText: String? {
@@ -18,6 +23,7 @@ class BBTaskBubbleView: BBBubbleView {
             self.bubbleTextLabel.hidden = false
         }
     }
+    var delegate: BBTaskBubbleViewProtocol?
     var bubbleTextLabel: UILabel!
     var bubbleTextColor: UIColor!
     var bubbleTaskIconView: UIImageView!
@@ -31,12 +37,16 @@ class BBTaskBubbleView: BBBubbleView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override init() {
+    override init () {
         super.init()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.commonInit()
+    }
+    
+    func commonInit() {
         
         self.bubbleTextLabel = UILabel()
         self.bubbleTextLabel.textAlignment = NSTextAlignment.Center
@@ -90,9 +100,11 @@ class BBTaskBubbleView: BBBubbleView {
     }
     
     override func bubbleViewDidPan(sender: UIPanGestureRecognizer) {
+        self.delegate?.bubbleViewDidPan()
     }
     
     override func bubbleViewDidTap(sender: UITapGestureRecognizer) {
+        self.delegate?.bubbleViewDidTap()
     }
     
 }

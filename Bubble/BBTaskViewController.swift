@@ -20,11 +20,13 @@ struct BubbleRect {
     }
 }
 
-class BBTaskViewController: UIViewController {
+class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     var taskCenterBubbleView: BBCenterBubbleView!
     var visibleTaskList: [BBTask]!
     var visibelTaskViews: [BBTaskBubbleView]!
     var availableRects: [BubbleRect]!
+    var taskBubbleViewAdder: BBTaskBubbleView!
+    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -43,11 +45,11 @@ class BBTaskViewController: UIViewController {
         var centerViewRadius: CGFloat = 100.0
         var origin: CGPoint = CGPointMake(CGRectGetMidX(self.view.bounds)-centerViewRadius, CGRectGetMidY(self.view.bounds)-centerViewRadius)
         self.taskCenterBubbleView = BBCenterBubbleView(origin: origin, radius: centerViewRadius)
+        self.view.addSubview(self.taskCenterBubbleView)
         
         // configure the available rects
-        // we spilit the left area to eight segments
+        // we spilit the left area to seven segments
         // the first segment
-        
         var originY = UIApplication.sharedApplication().statusBarFrame.height
         var originX:CGFloat = 0.0, leftSegWidth = origin.x, midSegWidth = 2*centerViewRadius
         var rightSegWidth = UIScreen.mainScreen().bounds.size.width-leftSegWidth-midSegWidth
@@ -75,24 +77,29 @@ class BBTaskViewController: UIViewController {
         rect = CGRectMake(originX, originY, rightSegWidth, midSegWidth)
         self.availableRects.append(BubbleRect(rect: rect, count: 0, totalCount: 1))
         
-        // the fifth segment
+        // the sixth segment
         originX = 0.0
         originY = originY + midSegWidth
         var bottomHeight = self.view.bounds.size.height - originY
         rect = CGRectMake(originX, originY, leftSegWidth, bottomHeight)
         self.availableRects.append(BubbleRect(rect: rect, count: 0, totalCount: 1))
         
-        // the sixth segment
+        // the seventh segment
         originX = originX + leftSegWidth
+        // this is for the stupid task adder bubble
+        midSegWidth -= 25.0
         rect = CGRectMake(originX, originY, midSegWidth, bottomHeight)
         self.availableRects.append(BubbleRect(rect: rect, count: 0, totalCount: 2))
         
-        // the seventh segment
-        originX = originX + midSegWidth
-        rect = CGRectMake(originX, originY, rightSegWidth, bottomHeight)
-        self.availableRects.append(BubbleRect(rect: rect, count: 0, totalCount: 1))
+        var rightPadding:CGFloat = 40.0, bottomPadding:CGFloat = 40.0, adderRadius:CGFloat = 35.0
+        var addX = self.view.bounds.size.width - rightPadding - 2.0 * adderRadius
+        var addY = self.view.bounds.size.height - bottomPadding - 2.0 * adderRadius
         
-        self.view.addSubview(self.taskCenterBubbleView)
+        var adderOrigin = CGPointMake(addX, addY)
+        // init the task bubble view adder
+        self.taskBubbleViewAdder = BBTaskBubbleView(origin: adderOrigin, radius: adderRadius)
+        self.taskBubbleViewAdder.delegate = self
+        self.view.addSubview(self.taskBubbleViewAdder)
     }
     
     func showData() {
@@ -153,11 +160,20 @@ class BBTaskViewController: UIViewController {
             if full == true {
                 break;
             }
-        }
+    }
+    }
+    
+    func bubbleViewDidTap() {
+        // push the editor controller view
+        var taskEditorViewController = BBTaskEditorViewController()
+        self.navigationController?.pushViewController(taskEditorViewController, animated: true)
+    }
+        
+    func bubbleViewDidPan() {
+        
     }
 
 }
-
 
 
 
