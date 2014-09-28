@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 protocol BBTaskBubbleViewProtocol {
-    func bubbleViewDidTap()
-    func bubbleViewDidPan()
+    func bubbleViewDidTap(sender:UITapGestureRecognizer)
+    func bubbleViewDidPan(sender:UIPanGestureRecognizer)
 }
 
 class BBTaskBubbleView: BBBubbleView {
@@ -139,7 +139,7 @@ class BBTaskBubbleView: BBBubbleView {
     
     override func bubbleViewDidPan(sender: UIPanGestureRecognizer) {
 
-        self.delegate?.bubbleViewDidPan()
+       self.delegate?.bubbleViewDidPan(sender)
 
         var offset = sender.translationInView(self.superview!)
         var newOriginX = self.center.x + offset.x
@@ -151,6 +151,6 @@ class BBTaskBubbleView: BBBubbleView {
     }
     
     override func bubbleViewDidTap(sender: UITapGestureRecognizer) {
-        self.delegate?.bubbleViewDidTap()
+        self.delegate?.bubbleViewDidTap(sender)
     }
 }

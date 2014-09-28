@@ -14,6 +14,8 @@
 		0C35AEE919D7372E002FC55F /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE419D7372E002FC55F /* NSDateExtension.swift */; };
 		0C35AF1B19D7E4F7002FC55F /* BBConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AF1A19D7E4F7002FC55F /* BBConfig.swift */; };
 		0C35AF1D19D7FBE4002FC55F /* BBTaskPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AF1C19D7FBE4002FC55F /* BBTaskPreviewView.swift */; };
+		286AB8EF19D877AE006145F2 /* icloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AB8EE19D877AE006145F2 /* icloud.png */; };
+		286AB8F119D888DE006145F2 /* BBIconSelectionBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286AB8F019D888DE006145F2 /* BBIconSelectionBoard.swift */; };
 		28C0E5AE19D795A800C3A4DF /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */; };
 		28FF93CC19D73082000815A8 /* BBGoogleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */; };
 		28FF93CD19D73082000815A8 /* BBCalenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CB19D73082000815A8 /* BBCalenderModel.swift */; };
@@ -54,6 +56,8 @@
 		0C35AEE419D7372E002FC55F /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtension.swift; path = BBData/NSDateExtension.swift; sourceTree = "<group>"; };
 		0C35AF1A19D7E4F7002FC55F /* BBConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBConfig.swift; sourceTree = "<group>"; };
 		0C35AF1C19D7FBE4002FC55F /* BBTaskPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBTaskPreviewView.swift; sourceTree = "<group>"; };
+		286AB8EE19D877AE006145F2 /* icloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icloud.png; sourceTree = "<group>"; };
+		286AB8F019D888DE006145F2 /* BBIconSelectionBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBIconSelectionBoard.swift; sourceTree = "<group>"; };
 		28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBGoogleLoginManager.swift; sourceTree = "<group>"; };
 		28FF93CB19D73082000815A8 /* BBCalenderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBCalenderModel.swift; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 		31A81CE519D8384800F3284F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				286AB8F019D888DE006145F2 /* BBIconSelectionBoard.swift */,
 				310E683919D6110000C8D0EE /* BBBubbleView.swift */,
 				310E683B19D7278200C8D0EE /* BBWaverView.swift */,
 				310E683319D5AA2200C8D0EE /* BBTaskBubbleView.swift */,
@@ -208,6 +213,7 @@
 			children = (
 				31A81CEB19D8727000F3284F /* line_and_more@2x.png */,
 				31A81CEC19D8727000F3284F /* login_bg.png */,
+				286AB8EE19D877AE006145F2 /* icloud.png */,
 				31A81CE719D8726800F3284F /* due_icon@2x.png */,
 				31A81CE819D8726800F3284F /* Google.png */,
 				31D7E11F19D7C23B00B2EC9A /* bubble_mask@2x.png */,
@@ -300,6 +306,7 @@
 				31A81CEE19D8727000F3284F /* login_bg.png in Resources */,
 				31A81CEA19D8726800F3284F /* Google.png in Resources */,
 				31A81CED19D8727000F3284F /* line_and_more@2x.png in Resources */,
+				286AB8EF19D877AE006145F2 /* icloud.png in Resources */,
 				31A81CE919D8726800F3284F /* due_icon@2x.png in Resources */,
 				310E681319D5A32700C8D0EE /* Images.xcassets in Resources */,
 			);
@@ -331,6 +338,7 @@
 				0C35AF1B19D7E4F7002FC55F /* BBConfig.swift in Sources */,
 				310E683619D5EC3000C8D0EE /* String+BBExtension.swift in Sources */,
 				28FF93EC19D7341C000815A8 /* BBAppIntroMgr.swift in Sources */,
+				286AB8F119D888DE006145F2 /* BBIconSelectionBoard.swift in Sources */,
 				0C35AEE519D7372E002FC55F /* BBDataCenter.swift in Sources */,
 				310E683A19D6110000C8D0EE /* BBBubbleView.swift in Sources */,
 				310E683419D5AA2200C8D0EE /* BBTaskBubbleView.swift in Sources */,

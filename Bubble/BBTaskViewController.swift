@@ -119,6 +119,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
             var taskView = BBTaskBubbleView(origin: CGPointMake(20.0, 30.0), radius: 30.0)
             taskView.bubbleColor = UIColor.redColor()
             taskView._taskID = taskID
+            taskView.tag = taskID
             self.visibelTaskViews.append(taskView)
         }
         
@@ -182,13 +183,17 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     }
     }
     
-    func bubbleViewDidTap() {
-        // push the editor controller view
+    func bubbleViewDidTap(sender: UITapGestureRecognizer) {
+        var bubbleView: BBTaskBubbleView  = sender.view as  BBTaskBubbleView
         var taskEditorViewController = BBTaskEditorViewController()
+        if bubbleView.tag != 0 {
+            taskEditorViewController.taskID = bubbleView.tag
+            taskEditorViewController.editTask = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(bubbleView.tag)
+        }
         self.navigationController?.pushViewController(taskEditorViewController, animated: true)
     }
         
-    func bubbleViewDidPan() {
+    func bubbleViewDidPan(sender: UIPanGestureRecognizer) {
         
     }
 
