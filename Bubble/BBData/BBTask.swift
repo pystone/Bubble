@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 var TotalID = 0
 
@@ -14,7 +15,8 @@ class BBTask {
     var _id: Int;
     var _title: String;
     var _stitle: String;
-    var _category: Int;
+    var _category: TaskCategory;
+    var _icon: TaskIcon;
     var _due: NSDate;
     var _duration: [BBDuration];
     var _location: String;
@@ -25,7 +27,8 @@ class BBTask {
         self._id = ++TotalID
         self._title = "";
         self._stitle = "";
-        self._category = 0;
+        self._category = .None;
+        self._icon = .None;
         self._due = NSDate();
         self._duration = [BBDuration]();
         self._location = "";
@@ -77,6 +80,20 @@ class BBTask {
         return "Time Spent - " + formatter.stringFromDate(date)
     }
     
+    func getColor() -> UIColor! {
+        let r: CGFloat = CGFloat(CategoryMap[_category]![0] / 255.0)
+        let g: CGFloat = CGFloat(CategoryMap[_category]![1] / 255.0)
+        let b: CGFloat = CGFloat(CategoryMap[_category]![2] / 255.0)
+        return UIColor(red: r, green: g, blue: b, alpha: 1.0)
+    }
+    
+    func getIconNormal() -> String! {
+        return IconMap[_icon]![0]
+    }
+    func getIconHighlighted () -> String! {
+        return IconMap[_icon]![1]
+    }
+    
     func setDurationForDisplay(interval: NSTimeInterval) {
         self._misc = interval;
     }
@@ -98,7 +115,8 @@ class BBTask {
         dict.setObject(self._id, forKey: "id")
         dict.setObject(self._title, forKey: "title")
         dict.setObject(self._stitle, forKey: "stitle")
-        dict.setObject(self._category, forKey: "category")
+        dict.setObject(self._category.toRaw(), forKey: "category")
+        dict.setObject(self._icon.toRaw(), forKey: "icon")
         dict.setObject(self._due.timeIntervalSince1970, forKey: "due")
         dict.setObject(self._location, forKey: "location")
         dict.setObject(self._notes, forKey: "notes")
@@ -121,7 +139,8 @@ class BBTask {
         task._id = dict.objectForKey("id") as Int
         task._title = dict.objectForKey("title") as String
         task._stitle = dict.objectForKey("stitle") as String
-        task._category = dict.objectForKey("category") as Int
+        task._category = TaskCategory.fromRaw(dict.objectForKey("category") as Int)!
+        task._icon = TaskIcon.fromRaw(dict.objectForKey("icon") as Int)!
         task._due = NSDate(timeIntervalSince1970: dict.objectForKey("due") as NSTimeInterval)
         task._location = dict.objectForKey("location") as String
         task._notes = dict.objectForKey("notes") as String

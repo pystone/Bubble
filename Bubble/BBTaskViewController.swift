@@ -100,19 +100,38 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         self.taskBubbleViewAdder = BBTaskBubbleView(origin: adderOrigin, radius: adderRadius)
         self.taskBubbleViewAdder.delegate = self
         self.view.addSubview(self.taskBubbleViewAdder)
+
+        self.view.addSubview(self.taskCenterBubbleView)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("showData"), name: CALENDAR_DATA_NOTIFICATION, object: nil)
+
     }
     
     func showData() {
-        // load some data
-        var taskView = BBTaskBubbleView(origin: CGPointMake(20.0, 30.0), radius: 30.0)
-        taskView.bubbleColor = UIColor.redColor()
-        self.visibelTaskViews.append(taskView)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name: CALENDAR_DATA_NOTIFICATION, object: nil)
         
-        taskView = BBTaskBubbleView(origin: CGPointMake(50.0, 40.0), radius: 50.0)
-        taskView.bubbleColor = UIColor.blackColor()
-        self.visibelTaskViews.append(taskView)
+        // load some data
+        
+        for taskID: Int in BBDataCenter.sharedDataCenter()._unfinishedTasks.keys {
+            if taskExistInView(taskID) == true {
+                continue
+            }
+            var taskView = BBTaskBubbleView(origin: CGPointMake(20.0, 30.0), radius: 30.0)
+            taskView.bubbleColor = UIColor.redColor()
+            taskView._taskID = taskID
+            self.visibelTaskViews.append(taskView)
+        }
         
         self.layoutTasksAnimated(true)
+    }
+    
+    func taskExistInView(taskID: Int) -> Bool {
+        for view in self.visibelTaskViews {
+            if view._taskID == taskID {
+                return true
+            }
+        }
+        return false
     }
 
     override func viewWillAppear(animated: Bool) {

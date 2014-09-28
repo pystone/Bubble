@@ -10,17 +10,16 @@ import Foundation
 import UIKit
 
 class BBTaskPreviewView: BBBubbleView {
-    let LRPos:[String: [Int]] = [
-        "Due": [72, 40],
-        "Title": [14, 112],
-        "SpentTime": [56, 210],
-        "MoreDetail": [60, 240]
-    ]
+    
+    var _taskID: Int? {
+        didSet {
+            self.setContent()
+        }
+    }
     
     var _dueText: String! {
         didSet {
             // "123d"
-            println("due text changed!")
             self._dueTextLabel?.text = _dueText
         }
     }
@@ -60,37 +59,37 @@ class BBTaskPreviewView: BBBubbleView {
         
         let dueImg = UIImage(named: ResourcePath["DueIcon"]!)
         self._dueImg = UIImageView(image: dueImg)
-        self._dueImg.frame = CGRectMake(self.frame.width*2/8, self.frame.height/8, _dueImg.frame.width, _dueImg.frame.height)
+        self._dueImg.frame = CGRectMake(43, 20, _dueImg.frame.width, _dueImg.frame.height)
         self.bubbleView.addSubview(self._dueImg)
         
         self._detailImg = UIButton.buttonWithType(.Custom) as UIButton
         let detailImg = UIImage(named: ResourcePath["LineAndMoreImage"]!)
-        self._detailImg.frame = CGRectMake(55, 240, detailImg.size.width, detailImg.size.height)
+        self._detailImg.frame = CGRectMake(30, 120, detailImg.size.width, detailImg.size.height)
         self._detailImg.setImage(detailImg, forState: .Normal)
         self._detailImg.setImage(detailImg, forState: .Highlighted)
         self._detailImg.addTarget(self, action: Selector("moreDetail:"), forControlEvents: .TouchUpInside)
         self.bubbleView.addSubview(self._detailImg)
         
-        self._dueTextLabel = UILabel(frame: CGRectMake(_dueImg.frame.origin.x + 10, _dueImg.frame.origin.y, 48*4, dueImg.size.height))
-        self._dueTextLabel.textAlignment = .Center
+        self._dueTextLabel = UILabel(frame: CGRectMake(_dueImg.frame.origin.x + _dueImg.frame.size.width + 5, _dueImg.frame.origin.y, 24*4, dueImg.size.height))
+        self._dueTextLabel.textAlignment = .Left
         self._dueTextLabel.backgroundColor = UIColor.clearColor()
         self._dueTextLabel.textColor = UIColor.whiteColor()
-        self._dueTextLabel.font = UIFont.systemFontOfSize(48)
+        self._dueTextLabel.font = UIFont.systemFontOfSize(24)
         self.bubbleView.addSubview(self._dueTextLabel)
         
-        self._titleTextLabel = UILabel(frame: CGRectMake(14, _dueImg.frame.origin.y+_dueImg.frame.size.height, self.frame.width-2*14, 125))
+        self._titleTextLabel = UILabel(frame: CGRectMake(7, 56, self.frame.width-2*7, 12*3))
         self._titleTextLabel.textAlignment = .Center
         self._titleTextLabel.numberOfLines = 0
         self._titleTextLabel.backgroundColor = UIColor.clearColor()
         self._titleTextLabel.textColor = UIColor.whiteColor()
-        self._titleTextLabel.font = UIFont.systemFontOfSize(24)
+        self._titleTextLabel.font = UIFont.systemFontOfSize(12)
         self.bubbleView.addSubview(self._titleTextLabel)
         
-        self._spentTimeTextLabel = UILabel(frame: CGRectMake(51, 210, self.frame.width-2*50, 30))
+        self._spentTimeTextLabel = UILabel(frame: CGRectMake(28, 105, self.frame.width-2*27, 10))
         self._spentTimeTextLabel.textAlignment = .Center
         self._spentTimeTextLabel.backgroundColor = UIColor.clearColor()
         self._spentTimeTextLabel.textColor = UIColor.blackColor()
-        self._spentTimeTextLabel.font = UIFont.systemFontOfSize(20)
+        self._spentTimeTextLabel.font = UIFont.systemFontOfSize(10)
         self.bubbleView.addSubview(self._spentTimeTextLabel)
     }
     
@@ -102,10 +101,13 @@ class BBTaskPreviewView: BBBubbleView {
         self.bubbleRadius = radius
     }
     
-    func setContent(task: BBTask) {
-        self._dueText = task.getReadableDueTimeFromToday()
-        self._titleText = task._title
-        self._spentTimeText = task.getReadableSpentTime()
+    func setContent() {
+        let task = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(self._taskID!)
+        if task != nil {
+            self._dueText = task!.getReadableDueTimeFromToday()
+            self._titleText = task!._title
+            self._spentTimeText = task!.getReadableSpentTime()
+        }
     }
     
     override func layoutSubviews() {

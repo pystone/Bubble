@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 class BBCalenderModel: NSObject{
     
     enum HTTPMethod{
@@ -79,6 +80,7 @@ class BBCalenderModel: NSObject{
                         }
                     
                         BBDataCenter.sharedDataCenter().addNewTask(Task)
+                        NSNotificationCenter.defaultCenter().postNotificationName(CALENDAR_DATA_NOTIFICATION, object: nil)
                    }
                 }
             }

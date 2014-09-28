@@ -23,7 +23,15 @@ class BBTaskBubbleView: BBBubbleView {
             self.bubbleTextLabel.hidden = false
         }
     }
+<<<<<<< HEAD
     var delegate: BBTaskBubbleViewProtocol?
+=======
+    var _taskID: Int? {
+        didSet {
+            setContent()
+        }
+    }
+>>>>>>> FETCH_HEAD
     var bubbleTextLabel: UILabel!
     var bubbleTextColor: UIColor!
     var bubbleTaskIconView: UIImageView!
@@ -72,6 +80,18 @@ class BBTaskBubbleView: BBBubbleView {
         self.bubbleRadius = radius
     }
     
+    func setContent() {
+        if (self._taskID==nil || self._taskID == -1) {
+            return;
+        }
+        let task = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(_taskID!)
+        if task != nil {
+            self.bubbleText = task!._title
+            self.bubbleColor = task!.getColor()
+        }
+        
+    }
+    
     override func layoutSubviews() {
         var frame = CGRectMake(0.0, 0.0, 2*self.bubbleRadius, 2*self.bubbleRadius)
         self.bubbleView.frame = frame
@@ -99,12 +119,26 @@ class BBTaskBubbleView: BBBubbleView {
         
     }
     
+    
     override func bubbleViewDidPan(sender: UIPanGestureRecognizer) {
+
         self.delegate?.bubbleViewDidPan()
+
+        var offset = sender.translationInView(self.superview!)
+        var newOriginX = self.center.x + offset.x
+        var newOriginY = self.center.y + offset.y
+        
+        sender.view?.center = CGPointMake(newOriginX, newOriginY)
+        sender.setTranslation(CGPointZero, inView:self.superview)
+        
     }
     
     override func bubbleViewDidTap(sender: UITapGestureRecognizer) {
         self.delegate?.bubbleViewDidTap()
     }
+    
+  
+//    [sender setTranslation:CGPointMake(0, 0) inView:self.view];
+
     
 }

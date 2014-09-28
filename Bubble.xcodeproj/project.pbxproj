@@ -14,8 +14,11 @@
 		0C35AEE919D7372E002FC55F /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE419D7372E002FC55F /* NSDateExtension.swift */; };
 		0C35AF1B19D7E4F7002FC55F /* BBConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AF1A19D7E4F7002FC55F /* BBConfig.swift */; };
 		0C35AF1D19D7FBE4002FC55F /* BBTaskPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AF1C19D7FBE4002FC55F /* BBTaskPreviewView.swift */; };
-		0C35AF1F19D80676002FC55F /* due_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C35AF1E19D80676002FC55F /* due_icon.png */; };
-		0C35AF2119D80B2E002FC55F /* line_and_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C35AF2019D80B2E002FC55F /* line_and_more.png */; };
+
+		0C35AF1F19D80676002FC55F /* due_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C35AF1E19D80676002FC55F /* due_icon@2x.png */; };
+		0C35AF2119D80B2E002FC55F /* line_and_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C35AF2019D80B2E002FC55F /* line_and_more@2x.png */; };
+		0C35AF2319D831AB002FC55F /* BBEditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AF2219D831AB002FC55F /* BBEditTaskView.swift */; };
+
 		2817171C19D7D4AA00430001 /* Google.png in Resources */ = {isa = PBXBuildFile; fileRef = 2817171919D7D4AA00430001 /* Google.png */; };
 		2817171D19D7D4AA00430001 /* icloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 2817171A19D7D4AA00430001 /* icloud.png */; };
 		2817171E19D7D4AA00430001 /* login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2817171B19D7D4AA00430001 /* login_bg.png */; };
@@ -55,11 +58,13 @@
 		0C35AEE419D7372E002FC55F /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtension.swift; path = BBData/NSDateExtension.swift; sourceTree = "<group>"; };
 		0C35AF1A19D7E4F7002FC55F /* BBConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBConfig.swift; sourceTree = "<group>"; };
 		0C35AF1C19D7FBE4002FC55F /* BBTaskPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBTaskPreviewView.swift; sourceTree = "<group>"; };
-		0C35AF1E19D80676002FC55F /* due_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = due_icon.png; path = ../due_icon.png; sourceTree = "<group>"; };
-		0C35AF2019D80B2E002FC55F /* line_and_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = line_and_more.png; path = ../line_and_more.png; sourceTree = "<group>"; };
-		2817171919D7D4AA00430001 /* Google.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Google.png; path = ../Google.png; sourceTree = "<group>"; };
-		2817171A19D7D4AA00430001 /* icloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icloud.png; path = ../icloud.png; sourceTree = "<group>"; };
-		2817171B19D7D4AA00430001 /* login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_bg.png; path = ../login_bg.png; sourceTree = "<group>"; };
+
+		0C35AF1E19D80676002FC55F /* due_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "due_icon@2x.png"; sourceTree = "<group>"; };
+		0C35AF2019D80B2E002FC55F /* line_and_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_and_more@2x.png"; sourceTree = "<group>"; };
+		0C35AF2219D831AB002FC55F /* BBEditTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBEditTaskView.swift; sourceTree = "<group>"; };
+		2817171919D7D4AA00430001 /* Google.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Google.png; sourceTree = "<group>"; };
+		2817171A19D7D4AA00430001 /* icloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icloud.png; sourceTree = "<group>"; };
+		2817171B19D7D4AA00430001 /* login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_bg.png; sourceTree = "<group>"; };
 		28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBGoogleLoginManager.swift; sourceTree = "<group>"; };
 		28FF93CB19D73082000815A8 /* BBCalenderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBCalenderModel.swift; sourceTree = "<group>"; };
@@ -110,6 +115,18 @@
 				0C35AEE419D7372E002FC55F /* NSDateExtension.swift */,
 			);
 			name = BBData;
+			sourceTree = "<group>";
+		};
+		2817171F19D7D4B000430001 /* imageResource */ = {
+			isa = PBXGroup;
+			children = (
+				0C35AF2019D80B2E002FC55F /* line_and_more@2x.png */,
+				0C35AF1E19D80676002FC55F /* due_icon@2x.png */,
+				2817171919D7D4AA00430001 /* Google.png */,
+				2817171A19D7D4AA00430001 /* icloud.png */,
+				2817171B19D7D4AA00430001 /* login_bg.png */,
+			);
+			name = imageResource;
 			sourceTree = "<group>";
 		};
 		28FF93CE19D7309C000815A8 /* CalenderData */ = {
@@ -302,10 +319,10 @@
 				310E681619D5A32700C8D0EE /* LaunchScreen.xib in Resources */,
 				2817171E19D7D4AA00430001 /* login_bg.png in Resources */,
 				2817171D19D7D4AA00430001 /* icloud.png in Resources */,
-				0C35AF2119D80B2E002FC55F /* line_and_more.png in Resources */,
+				0C35AF2119D80B2E002FC55F /* line_and_more@2x.png in Resources */,
 				310E681319D5A32700C8D0EE /* Images.xcassets in Resources */,
 				2817171C19D7D4AA00430001 /* Google.png in Resources */,
-				0C35AF1F19D80676002FC55F /* due_icon.png in Resources */,
+				0C35AF1F19D80676002FC55F /* due_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
