@@ -17,13 +17,15 @@ class BBCenterBubbleView: BBBubbleView {
     var taskTimer: NSTimer!
     var accumulateTime: UInt64!
     
+    var bubbleWaver: BBWaverView!
+    var maskImageView: UIImageView!
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         self.accumulateTime = 0
         
         self.taskNameLabel = UILabel()
@@ -45,10 +47,16 @@ class BBCenterBubbleView: BBBubbleView {
         self.taskTimerLabel.font = UIFont.systemFontOfSize(44)
         self.taskNameLabel.font = UIFont.systemFontOfSize(26)
         self.taskDueLabel.font = UIFont.systemFontOfSize(16)
-
-        self.addSubview(self.taskNameLabel)
-        self.addSubview(self.taskTimerLabel)
-        self.addSubview(self.taskDueLabel)
+        
+        self.bubbleWaver = BBWaverView()
+        self.bubbleView.addSubview(self.bubbleWaver)
+        
+        self.bubbleView.addSubview(self.taskNameLabel)
+        self.bubbleView.addSubview(self.taskTimerLabel)
+        self.bubbleView.addSubview(self.taskDueLabel)
+        
+        self.maskImageView = UIImageView(image: UIImage(named: "bubble_mask"))
+        self.addSubview(self.maskImageView)
     }
     
     convenience init(origin: CGPoint, radius: CGFloat) {
@@ -65,9 +73,13 @@ class BBCenterBubbleView: BBBubbleView {
     }
     
     override func layoutSubviews() {
-        
         var width = 2*self.bubbleRadius, height = 2*self.bubbleRadius
         var frame = CGRectMake(0.0, 0.0, width, height)
+        
+        self.maskImageView.frame = frame
+        self.bubbleView.frame =  frame
+        self.bubbleWaver.frame = frame
+        
         var segmentHeight = height / 5.0
         var originY:CGFloat = 0.8*segmentHeight
         
@@ -133,5 +145,4 @@ class BBCenterBubbleView: BBBubbleView {
     override func bubbleViewDidTap(sender: UITapGestureRecognizer) {
         startTaskTimer()
     }
-    
 }
