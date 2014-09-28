@@ -42,6 +42,8 @@ class BBGoogleLoginManager: NSObject{
 
     override init(){
         assert(Static.instance == nil, "Singleton already initialized!")
+        
+        calenderModel = BBCalenderModel()
     }
     
     func getAuthorationRequestURLString() ->  String{
@@ -96,7 +98,7 @@ class BBGoogleLoginManager: NSObject{
                 NSUserDefaults.standardUserDefaults().setObject(token, forKey: "GOOGLE_ACCESS_TOKEN")
                 NSUserDefaults.standardUserDefaults().synchronize()
                 
-                calenderModel = BBCalenderModel()
+                self.calenderModel?.startLoadCalenderModel(self.accessToken!)
             }
         })
     }

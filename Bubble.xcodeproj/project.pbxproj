@@ -12,6 +12,7 @@
 		0C35AEE719D7372E002FC55F /* BBTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE219D7372E002FC55F /* BBTask.swift */; };
 		0C35AEE819D7372E002FC55F /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE319D7372E002FC55F /* DictionaryExtension.swift */; };
 		0C35AEE919D7372E002FC55F /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE419D7372E002FC55F /* NSDateExtension.swift */; };
+		28C0E5AE19D795A800C3A4DF /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */; };
 		28FF93CC19D73082000815A8 /* BBGoogleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */; };
 		28FF93CD19D73082000815A8 /* BBCalenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CB19D73082000815A8 /* BBCalenderModel.swift */; };
 		28FF93EC19D7341C000815A8 /* BBAppIntroMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93EB19D7341C000815A8 /* BBAppIntroMgr.swift */; };
@@ -42,6 +43,7 @@
 		0C35AEE219D7372E002FC55F /* BBTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBTask.swift; path = BBData/BBTask.swift; sourceTree = "<group>"; };
 		0C35AEE319D7372E002FC55F /* DictionaryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryExtension.swift; path = BBData/DictionaryExtension.swift; sourceTree = "<group>"; };
 		0C35AEE419D7372E002FC55F /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtension.swift; path = BBData/NSDateExtension.swift; sourceTree = "<group>"; };
+		28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBGoogleLoginManager.swift; sourceTree = "<group>"; };
 		28FF93CB19D73082000815A8 /* BBCalenderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBCalenderModel.swift; sourceTree = "<group>"; };
 		28FF93EB19D7341C000815A8 /* BBAppIntroMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBAppIntroMgr.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				310E683719D60EF900C8D0EE /* BBCenterBubbleView.swift */,
 				28FF93EB19D7341C000815A8 /* BBAppIntroMgr.swift */,
 				310E683519D5EC3000C8D0EE /* String+BBExtension.swift */,
+				28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */,
 				28FF93CE19D7309C000815A8 /* CalenderData */,
 				310E681219D5A32700C8D0EE /* Images.xcassets */,
 				310E681419D5A32700C8D0EE /* LaunchScreen.xib */,
@@ -263,6 +266,7 @@
 				310E680E19D5A32700C8D0EE /* BBTaskViewController.swift in Sources */,
 				310E683819D60EF900C8D0EE /* BBCenterBubbleView.swift in Sources */,
 				0C35AEE919D7372E002FC55F /* NSDateExtension.swift in Sources */,
+				28C0E5AE19D795A800C3A4DF /* SwiftyJSON.swift in Sources */,
 				310E680919D5A32700C8D0EE /* AppDelegate.swift in Sources */,
 				0C35AEE619D7372E002FC55F /* BBDuration.swift in Sources */,
 				0C35AEE819D7372E002FC55F /* DictionaryExtension.swift in Sources */,
@@ -388,6 +392,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Bubble/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -399,6 +407,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Bubble/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
