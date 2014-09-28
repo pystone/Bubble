@@ -150,7 +150,6 @@ class BBAppIntroMgr: NSObject, UIWebViewDelegate{
                 var key = keyValue[0]
                 if key == "code"{
                     verifier = keyValue[1]
-                    println(verifier)
                     break;
                 }
             }
@@ -161,7 +160,6 @@ class BBAppIntroMgr: NSObject, UIWebViewDelegate{
                 let data = dataStr?.dataUsingEncoding(
                     NSUTF8StringEncoding)
                 let url : String? = loginInMgr?.getAccessTokenURL()
-                println(url)
                 loginInMgr?.requestAccessToken(url!, data: data!)
             }
             

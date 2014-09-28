@@ -44,10 +44,7 @@ class BBCalenderModel: NSObject{
         var timeMax = getMaxTime()
         var maxResults = 10;
         var orderBy = "startTime"
-        println(timeMin)
-        println(timeMax)
         var urlString = apiURL + "?" + accessTokenString + "&timeMin=" + timeMin + "&timeMax=" + timeMax + "&maxResults=" + String(maxResults)
-        println(urlString)
         var url: NSURL = NSURL(string: urlString)
         var request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "GET"
