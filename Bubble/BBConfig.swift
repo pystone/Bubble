@@ -54,4 +54,8 @@ let IconMap: [TaskIcon: [String]] = [
     .Discussion: [String(format: IconPathNormal, "discussion"), String(format: IconPathSelected, "discussion")]
 ]
 
+let ResourcePath: [String: String] = [
+    "DueIcon": "due_icon.png",
+    "LineAndMoreImage": "line_and_more.png"
+]
 

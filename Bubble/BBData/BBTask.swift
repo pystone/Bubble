@@ -43,6 +43,40 @@ class BBTask {
         return displayTask;
     }
     
+    func getReadableDueTimeFromToday() -> String! {
+        let now = NSDate()
+        let interval = self._due.timeIntervalSinceDate(now)
+        
+        if interval <= 0 {
+            return "-1"
+        }
+        
+        var readable = ""
+        if interval/86400 >= 1 {
+            readable = "\(Int(interval/86400))d"
+        }
+        else if interval/3600 >= 1 {
+            readable = "\(Int(interval/3600))h"
+        }
+        else if interval/60 >= 1 {
+            readable = "\(Int(interval/60))m"
+        }
+        else {
+            readable = "\(Int(interval))s"
+        }
+        return readable
+    }
+    
+    func getReadableSpentTime() -> String! {
+        let totalTime = getTotalSpentTime()
+        let date = NSDate.dateWithTimeIntervalSinceReferenceDate(totalTime)
+        var formatter = NSDateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        
+        return "Time Spent - " + formatter.stringFromDate(date)
+    }
+    
     func setDurationForDisplay(interval: NSTimeInterval) {
         self._misc = interval;
     }
