@@ -65,7 +65,6 @@ class BBTaskPreviewView: BBBubbleView {
         self._touming.setImage(touming, forState: .Normal)
         self._touming.setImage(touming, forState: .Highlighted)
         self._touming.addTarget(self, action: Selector("returnToSmallBall:"), forControlEvents: .TouchUpInside)
-        self._touming.alpha = 0.0
         self._newWindow.addSubview(self._touming)
         
         self.bubbleTextColor = UIColor.blackColor()
@@ -107,7 +106,16 @@ class BBTaskPreviewView: BBBubbleView {
     }
     
     convenience init(origin: CGPoint, radius: CGFloat) {
-        var frame = CGRectMake(origin.x, origin.y, 2*radius, 2*radius)
+        var newPt = origin
+        let bounds = UIScreen.mainScreen().bounds
+        
+        if newPt.x + 2*radius > bounds.size.width {
+            newPt.x = bounds.size.width - 2*radius
+        }
+        if newPt.y + 2*radius > bounds.size.height {
+            newPt.y = bounds.size.height - 2*radius
+        }
+        var frame = CGRectMake(newPt.x, newPt.y, 2*radius, 2*radius)
         self.init(frame:frame)
 
         self.bubbleColor = UIColor.orangeColor()
@@ -120,19 +128,54 @@ class BBTaskPreviewView: BBBubbleView {
             self._dueText = task!.getReadableDueTimeFromToday()
             self._titleText = task!._title
             self._spentTimeText = task!.getReadableSpentTime()
+            self.bubbleColor = task!.getColor()
         }
     }
     
-    func showMySelf() {
+    func showMySelf(color: UIColor, origin: CGPoint, radius: CGFloat) {
         self._newWindow.hidden = false
         self._newWindow.addSubview(self)
+        self.alpha = 0.0
         self._newWindow.makeKeyAndVisible()
         self._newWindow.windowLevel = UIWindowLevelStatusBar
         
-        UIView.animateWithDuration(1.0, animations: {() -> Void in
-            self._touming.alpha = 0.8
+        self.bubbleColor = color
+        
+        UIView.animateWithDuration(BlurTransitionTime, animations: { () -> Void in
+            self.alpha = 1.0
         })
-//        self._touming.
+                
+//        UIView.animateWithDuration(BlurTransitionTime, delay: BlurTransitionTime,
+//            options: UIViewAnimationOptions.TransitionNone,
+//            animations: { () -> Void in
+//                fakeBubble.bubbleRadius = self.bubbleRadius
+//            },
+//            completion: { (finished: Bool) -> Void in
+//                if finished == true {
+//                    fakeBubble.removeFromSuperview()
+//                    self.hidden = false
+//                }
+//        });
+    }
+    
+    func returnToSmallBall(sender: UIButton!) {
+        println("back to small")
+        var delegate = UIApplication.sharedApplication().delegate as AppDelegate
+        delegate.window!.rootViewController?.view.removeBlurEffect()
+        UIView.animateWithDuration(BlurTransitionTime,
+            animations: { () -> Void in
+                self.alpha = 0.0
+            },
+            completion: { (finished: Bool) -> Void in
+                self._touming.removeFromSuperview()
+                self.removeFromSuperview()
+                self._newWindow.windowLevel = UIWindowLevelNormal
+                self._newWindow.hidden = true
+                
+                delegate.window!.makeKeyAndVisible()
+            }
+        );
+        
     }
     
     override func layoutSubviews() {
@@ -160,19 +203,5 @@ class BBTaskPreviewView: BBBubbleView {
     
     func moreDetail(sender: UIButton!) {
         println("more detail tapped")
-    }
-    
-    func returnToSmallBall(sender: UIButton!) {
-        println("back to small")
-        self._touming.removeFromSuperview()
-        self.removeFromSuperview()
-        self._newWindow.windowLevel = UIWindowLevelNormal
-        self._newWindow.hidden = true
-        
-        var delegate = UIApplication.sharedApplication().delegate as AppDelegate
-        delegate.window!.makeKeyAndVisible()
-        
-        delegate.window!.rootViewController?.view.removeBlurEffect()
-        
     }
 }

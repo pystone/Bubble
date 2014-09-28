@@ -87,6 +87,19 @@ class BBTask {
         return UIColor(red: r, green: g, blue: b, alpha: 1.0)
     }
     
+    func setColor(color: UIColor) {
+        
+        let arr = CGColorGetComponents(color.CGColor)
+        
+        for (key, val) in CategoryMap {
+            if arr[0]==CGFloat(val[0]) && arr[1]==CGFloat(val[1]) && arr[2]==CGFloat(val[2]) {
+                self._category = key
+                break
+            }
+        }
+        
+    }
+    
     func getIconNormal() -> String! {
         return IconMap[_icon]![0]
     }

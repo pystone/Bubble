@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum TaskCategory: Int {
     case None = 0
@@ -76,4 +77,8 @@ let ResourcePath: [String: String] = [
     "LineAndMoreImage": "line_and_more",
     "TouMing": "touming"
 ]
+
+let BlurAlpha = CGFloat(0.85)
+let BlurTransitionTime = NSTimeInterval(0.7)
+let BlurViewTag = 999
 

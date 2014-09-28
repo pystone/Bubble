@@ -31,7 +31,7 @@ class BBDataCenter {
         _unfinishedTasks = [Int: BBTask]()
         //cleanAllTasks(true)
         
-        cleanAllTasks(true)
+//        cleanAllTasks(true)
         
         let finished = NSUserDefaults.standardUserDefaults().objectForKey(FinishedTaskKey) as? NSArray
         let unfinished = NSUserDefaults.standardUserDefaults().objectForKey(UnfinishedTaskKey) as? NSArray

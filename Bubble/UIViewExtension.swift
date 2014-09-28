@@ -16,17 +16,17 @@ extension UIView {
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = self.frame
         blurView.alpha = 0.0
-        blurView.tag = 999
+        blurView.tag = BlurViewTag
         self.addSubview(blurView)
         
-        UIView.animateWithDuration(0.7, animations: {() -> Void in
-            blurView.alpha = 0.85
+        UIView.animateWithDuration(BlurTransitionTime, animations: {() -> Void in
+            blurView.alpha = BlurAlpha
         })
     }
     
     func removeBlurEffect() {
-        if let blurView: UIView = self.viewWithTag(999) {
-            UIView.animateWithDuration(0.7,
+        if let blurView: UIView = self.viewWithTag(BlurViewTag) {
+            UIView.animateWithDuration(BlurTransitionTime,
                 animations: { () -> Void in
                     blurView.alpha = 0.0
                 },
