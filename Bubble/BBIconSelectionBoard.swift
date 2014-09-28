@@ -7,3 +7,17 @@
 //
 
 import Foundation
+import UIKit
+
+class BBIconSelectionBoard: UIView{
+    
+    
+    func generateButton(type:BBBoardType){
+        
+    }
+    
+    func getBoardWithType(type:BBBoardType){
+            generateButton(type)
+    }
+    
+}
