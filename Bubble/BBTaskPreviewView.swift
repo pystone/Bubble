@@ -199,7 +199,7 @@ class BBTaskPreviewView: BBBubbleView {
     }
 
     
-    func returnToSmallBall(sender: UIButton!) {
+    func returnToSmallBall(sender: UIButton) {
         self._touming.removeFromSuperview()
         self.removeFromSuperview()
         self._newWindow.windowLevel = UIWindowLevelNormal
