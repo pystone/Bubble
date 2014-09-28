@@ -23,6 +23,12 @@ class BBBubbleView: UIView {
     }
     var bubbleLayer: CAShapeLayer!
     
+    var _taskID: Int? {
+        didSet {
+            setContent()
+        }
+    }
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -67,6 +73,10 @@ class BBBubbleView: UIView {
         // arcCenter is in the current coordiante system
         self.bubbleLayer.path = UIBezierPath(arcCenter: center, radius: self.bubbleRadius,
             startAngle: 0.0, endAngle: CGFloat(2*M_PI), clockwise: true).CGPath
+    }
+    
+    func setContent() {
+        // to be implemented
     }
     
     func bubbleViewDidTap(sender: UITapGestureRecognizer) {

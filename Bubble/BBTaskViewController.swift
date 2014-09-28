@@ -22,10 +22,9 @@ struct BubbleRect {
 
 class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     var taskCenterBubbleView: BBCenterBubbleView!
-    var visibleTaskList: [BBTask]!
     var visibelTaskViews: [BBTaskBubbleView]!
     var availableRects: [BubbleRect]!
-    var taskBubbleViewAdder: BBTaskBubbleView!
+    var taskBubbleViewAdder: BBStillBubbleView!
     var currentTaskID: Int!
     
     
@@ -39,7 +38,6 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     
     override init() {
         super.init()
-        self.visibleTaskList = Array()
         self.availableRects = Array()
         self.visibelTaskViews = Array()
         
@@ -99,7 +97,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         
         var adderOrigin = CGPointMake(addX, addY)
         // init the task bubble view adder
-        self.taskBubbleViewAdder = BBTaskBubbleView(origin: adderOrigin, radius: adderRadius)
+        self.taskBubbleViewAdder = BBStillBubbleView(origin: adderOrigin, radius: adderRadius)
         self.taskBubbleViewAdder.delegate = self
         self.view.addSubview(self.taskBubbleViewAdder)
         self.view.addSubview(self.taskCenterBubbleView)
@@ -189,7 +187,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
             if full == true {
                 break;
             }
-    }
+        }
     }
     
     func bubbleViewDidTap(sender: UITapGestureRecognizer) {
@@ -208,15 +206,46 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     
     func startBubbleViewTask(bubbleView: BBTaskBubbleView) {
         // push bubbleView and pop the current task
-        if (self.currentTaskID < 0) {
-            // no task undergoing
-        }
-        println("should be here")
-        // change center bubble view color
-        // change the center buble fill color
-        self.taskCenterBubbleView.bubbleWaver.waverColor = bubbleView.bubbleColor
-        
+        self.pushBubbleTask(bubbleView._taskID!)
     }
-
+    
+    func popBubbleTask(taskID: Int) {
+        if taskID <= 0 {
+            return
+        }
+        var newBubbleView = BBTaskBubbleView(origin: CGPointMake(60.0, 60.0), radius: 35.0)
+        // then we add to the visibelBubbleList
+        self.visibelTaskViews.append(newBubbleView)
+        newBubbleView._taskID = taskID
+        self.view.addSubview(newBubbleView)
+        self.layoutTasksAnimated(true)
+    }
+    
+    func pushBubbleTask(taskID: Int) {
+        // remove the bubbleView from visibleBubbleViews
+        var tmp = -1, i = 0
+        for i in 0..<self.visibelTaskViews.count {
+            // find the match one 
+            if (taskID == self.visibelTaskViews[i]._taskID) {
+                break
+            }
+        }
+        if self.taskCenterBubbleView._taskID == taskID {
+            return
+        }
+        self.taskCenterBubbleView.bubbleWaver.waverColor = self.visibelTaskViews[i].bubbleColor
+        self.taskCenterBubbleView._taskID = taskID
+        // after push, remove the view with taskID from the visibelTaskViews
+        var view = self.visibelTaskViews[i]
+        view.removeFromSuperview()
+        self.visibelTaskViews.removeAtIndex(i)
+        if self.taskCenterBubbleView._taskID > 0 {
+            tmp = self.taskCenterBubbleView._taskID!
+            // then pop centerBubbleView
+            self.popBubbleTask(tmp)
+        } else {
+            self.layoutTasksAnimated(true)
+        }
+    }
 }
 

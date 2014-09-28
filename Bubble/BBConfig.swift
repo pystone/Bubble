@@ -31,7 +31,7 @@ enum BBBoardType{
 }
 
 let CategoryMap: [TaskCategory: [Int]] = [
-    .None:      [255, 255, 255],
+    .None:      [236, 202, 97],
     .Red:       [236, 117, 97],
     .Orange:    [238, 133, 55],
     .Yellow:    [236, 202, 97],
