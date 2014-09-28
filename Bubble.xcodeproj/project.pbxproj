@@ -12,6 +12,7 @@
 		0C35AEE719D7372E002FC55F /* BBTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE219D7372E002FC55F /* BBTask.swift */; };
 		0C35AEE819D7372E002FC55F /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE319D7372E002FC55F /* DictionaryExtension.swift */; };
 		0C35AEE919D7372E002FC55F /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE419D7372E002FC55F /* NSDateExtension.swift */; };
+		0C35AF1B19D7E4F7002FC55F /* BBConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AF1A19D7E4F7002FC55F /* BBConfig.swift */; };
 		28C0E5AE19D795A800C3A4DF /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */; };
 		28FF93CC19D73082000815A8 /* BBGoogleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */; };
 		28FF93CD19D73082000815A8 /* BBCalenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CB19D73082000815A8 /* BBCalenderModel.swift */; };
@@ -45,6 +46,7 @@
 		0C35AEE219D7372E002FC55F /* BBTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBTask.swift; path = BBData/BBTask.swift; sourceTree = "<group>"; };
 		0C35AEE319D7372E002FC55F /* DictionaryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryExtension.swift; path = BBData/DictionaryExtension.swift; sourceTree = "<group>"; };
 		0C35AEE419D7372E002FC55F /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtension.swift; path = BBData/NSDateExtension.swift; sourceTree = "<group>"; };
+		0C35AF1A19D7E4F7002FC55F /* BBConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBConfig.swift; sourceTree = "<group>"; };
 		28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBGoogleLoginManager.swift; sourceTree = "<group>"; };
 		28FF93CB19D73082000815A8 /* BBCalenderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBCalenderModel.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				310E681419D5A32700C8D0EE /* LaunchScreen.xib */,
 				31D7E11E19D7C23B00B2EC9A /* Resources */,
 				310E680619D5A32700C8D0EE /* Supporting Files */,
+				0C35AF1A19D7E4F7002FC55F /* BBConfig.swift */,
 			);
 			path = Bubble;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				0C35AEE619D7372E002FC55F /* BBDuration.swift in Sources */,
 				0C35AEE819D7372E002FC55F /* DictionaryExtension.swift in Sources */,
 				28FF93CD19D73082000815A8 /* BBCalenderModel.swift in Sources */,
+				0C35AF1B19D7E4F7002FC55F /* BBConfig.swift in Sources */,
 				310E683619D5EC3000C8D0EE /* String+BBExtension.swift in Sources */,
 				28FF93EC19D7341C000815A8 /* BBAppIntroMgr.swift in Sources */,
 				0C35AEE519D7372E002FC55F /* BBDataCenter.swift in Sources */,

@@ -51,6 +51,14 @@ class BBTask {
         return self._misc as NSTimeInterval;
     }
     
+    func getTotalSpentTime() -> NSTimeInterval {
+        var spentTime: NSTimeInterval = 0.0
+        for duration in self._duration {
+            spentTime += duration._endTime.timeIntervalSinceDate(duration._startTime)
+        }
+        return spentTime
+    }
+    
     func toDictionary () -> NSDictionary {
         var dict = NSMutableDictionary()
         dict.setObject(self._id, forKey: "id")
@@ -99,10 +107,10 @@ class BBTask {
     }
     
     var description: String {
-        var desc = "\(_title)(\(_id)): \(_due.localDescription())\n"
-            for duration in self._duration {
-                desc += "\tstart: \(duration._startTime.localDescription()), end: \(duration._endTime.localDescription())\n"
-            }
+        var desc = "\(_title)(\(_id)): \(_due.localDescription()), spent: \(self.getTotalSpentTime())\n"
+        for duration in self._duration {
+            desc += "\tstart: \(duration._startTime.localDescription()), end: \(duration._endTime.localDescription())\n"
+        }
         return desc;
     }
     
