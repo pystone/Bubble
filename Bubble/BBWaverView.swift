@@ -11,7 +11,11 @@ import UIKit
 
 class BBWaverView: UIView {
     // y = Asin(wx+fi) + h
-    var waverColor: UIColor!
+    var waverColor: UIColor! {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
     var waverPeak: CGFloat!
     var waverPhase: CGFloat!
     var waverPhaseIncrement: CGFloat!
