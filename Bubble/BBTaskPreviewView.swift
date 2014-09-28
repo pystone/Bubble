@@ -34,7 +34,8 @@ class BBTaskPreviewView: BBBubbleView {
             self._spentTimeTextLabel?.text = _spentTimeText
         }
     }
-    
+    var _newWindow: UIWindow!
+    var _touming: UIButton!
     var _dueImg: UIImageView!
     var _dueTextLabel: UILabel!
     var _titleTextLabel: UILabel!
@@ -54,6 +55,18 @@ class BBTaskPreviewView: BBBubbleView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self._newWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self._newWindow?.backgroundColor = UIColor.clearColor()
+        
+        self._touming = UIButton.buttonWithType(.Custom) as UIButton
+        let touming = UIImage(named: ResourcePath["TouMing"]!)
+        self._touming.frame = CGRectMake(0, 0, touming.size.width, touming.size.height)
+        self._touming.setImage(touming, forState: .Normal)
+        self._touming.setImage(touming, forState: .Highlighted)
+        self._touming.addTarget(self, action: Selector("returnToSmallBall:"), forControlEvents: .TouchUpInside)
+        self._touming.alpha = 0.0
+        self._newWindow.addSubview(self._touming)
         
         self.bubbleTextColor = UIColor.blackColor()
         
@@ -110,6 +123,18 @@ class BBTaskPreviewView: BBBubbleView {
         }
     }
     
+    func showMySelf() {
+        self._newWindow.hidden = false
+        self._newWindow.addSubview(self)
+        self._newWindow.makeKeyAndVisible()
+        self._newWindow.windowLevel = UIWindowLevelStatusBar
+        
+        UIView.animateWithDuration(1.0, animations: {() -> Void in
+            self._touming.alpha = 0.8
+        })
+//        self._touming.
+    }
+    
     override func layoutSubviews() {
         var frame = CGRectMake(0.0, 0.0, 2*self.bubbleRadius, 2*self.bubbleRadius)
         self.bubbleView.frame = frame
@@ -135,5 +160,19 @@ class BBTaskPreviewView: BBBubbleView {
     
     func moreDetail(sender: UIButton!) {
         println("more detail tapped")
+    }
+    
+    func returnToSmallBall(sender: UIButton!) {
+        println("back to small")
+        self._touming.removeFromSuperview()
+        self.removeFromSuperview()
+        self._newWindow.windowLevel = UIWindowLevelNormal
+        self._newWindow.hidden = true
+        
+        var delegate = UIApplication.sharedApplication().delegate as AppDelegate
+        delegate.window!.makeKeyAndVisible()
+        
+        delegate.window!.rootViewController?.view.removeBlurEffect()
+        
     }
 }

@@ -139,8 +139,21 @@ class BBTask {
         task._id = dict.objectForKey("id") as Int
         task._title = dict.objectForKey("title") as String
         task._stitle = dict.objectForKey("stitle") as String
-        task._category = TaskCategory.fromRaw(dict.objectForKey("category") as Int)!
-        task._icon = TaskIcon.fromRaw(dict.objectForKey("icon") as Int)!
+        
+        let cate: Int? = dict.objectForKey("category") as? Int
+        if let category = cate {
+            task._category = TaskCategory.fromRaw(category)!
+        } else {
+            task._category = TaskCategory.None
+        }
+        
+        let ic: Int? = dict.objectForKey("icon") as? Int
+        if let icon = ic {
+            task._icon = TaskIcon.fromRaw(icon)!
+        } else {
+            task._icon = TaskIcon.None
+        }
+        
         task._due = NSDate(timeIntervalSince1970: dict.objectForKey("due") as NSTimeInterval)
         task._location = dict.objectForKey("location") as String
         task._notes = dict.objectForKey("notes") as String

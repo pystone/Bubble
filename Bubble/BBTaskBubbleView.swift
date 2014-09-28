@@ -118,6 +118,17 @@ class BBTaskBubbleView: BBBubbleView {
     }
     
     override func bubbleViewDidTap(sender: UITapGestureRecognizer) {
+        println("small ball tapped")
+        let radius = CGFloat(80.0)
+        let previewView = BBTaskPreviewView(origin: CGPointMake(self.frame.origin.x, self.frame.origin.y), radius: radius)
+
+        previewView._taskID = self._taskID
+        
+        self.superview?.addBlurEffect()
+        previewView.showMySelf()
+        
+//        self.window.la.addSubview(previewView)
+//        self.sendSubviewToBack(previewView)
     }
     
   

@@ -63,7 +63,8 @@ let CALENDAR_DATA_NOTIFICATION = "didFinishedLoadingCalendarData"
 
 let ResourcePath: [String: String] = [
     "DueIcon": "due_icon",
-    "LineAndMoreImage": "line_and_more"
+    "LineAndMoreImage": "line_and_more",
+    "TouMing": "touming"
 ]
 
 

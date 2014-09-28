@@ -113,6 +113,8 @@ class BBTaskViewController: UIViewController {
         }
         
         self.layoutTasksAnimated(true)
+        
+//        self.view.addBlurEffect()
     }
     
     func taskExistInView(taskID: Int) -> Bool {
