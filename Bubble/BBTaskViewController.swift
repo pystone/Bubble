@@ -119,7 +119,8 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
             // this is to update data
 //            var task: BBTask = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(_taskID)
 //            BBDataCenter.sharedDataCenter().updateUnfinishedTask(task)
-            
+
+            taskView.tag = taskID
             self.visibelTaskViews.append(taskView)
             self.view.addSubview(taskView)
         }
@@ -186,13 +187,17 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     }
     }
     
-    func bubbleViewDidTap() {
-        // push the editor controller view
+    func bubbleViewDidTap(sender: UITapGestureRecognizer) {
+        var bubbleView: BBTaskBubbleView  = sender.view as  BBTaskBubbleView
         var taskEditorViewController = BBTaskEditorViewController()
+        if bubbleView.tag != 0 {
+            taskEditorViewController.taskID = bubbleView.tag
+            taskEditorViewController.editTask = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(bubbleView.tag)
+        }
         self.navigationController?.pushViewController(taskEditorViewController, animated: true)
     }
         
-    func bubbleViewDidPan() {
+    func bubbleViewDidPan(sender: UIPanGestureRecognizer) {
         
     }
 

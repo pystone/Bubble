@@ -25,6 +25,11 @@ enum BigBubbleState{
     case haveYask
 }
 
+enum BBBoardType{
+    case colorBoard
+    case iconBoard
+}
+
 let CategoryMap: [TaskCategory: [Int]] = [
     .None:      [255, 255, 255],
     .Red:       [236, 117, 97],

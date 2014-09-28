@@ -22,6 +22,17 @@ class BBTaskEditorViewController: UIViewController {
         }
     }
     
+    var taskID: Int? {
+        didSet {
+            if taskID == nil {
+                self.editMode = .CREATE
+            }
+            else {
+                self.editMode = .EDIT
+            }
+        }
+    }
+    
     var selectedColor: UIColor!
     var containerScrollView: UIScrollView!
     var editTask: BBTask?
@@ -39,7 +50,13 @@ class BBTaskEditorViewController: UIViewController {
     required override init() {
         super.init()
         self.controllerName = "Create Task"
-        self.title = "Create Task"
+        
+        if self.editMode == .CREATE{
+            self.title = "Create Task"
+        }else{
+            self.title = self.editTask?._title
+        }
+        
         self.selectedColor = UIColor.whiteColor()
         self.view.backgroundColor = self.selectedColor
         
@@ -87,6 +104,14 @@ class BBTaskEditorViewController: UIViewController {
         frame = CGRectMake(0.0, originY, width, labelHeight)
         var labelColor = UILabel(frame: frame)
     }
+    
+    func popupDataPicker(){
+        
+    }
+    
+//    func getTaskDataFromDataCenter -> BBTask{
+//        BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID()
+//    }
     
     func popupDatePicker() {
         var datePicker = UIDatePicker(frame: CGRectZero)

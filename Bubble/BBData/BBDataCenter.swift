@@ -29,6 +29,7 @@ class BBDataCenter {
     init () {
         _finishedTasks = [Int: BBTask]()
         _unfinishedTasks = [Int: BBTask]()
+        //cleanAllTasks(true)
         
         cleanAllTasks(true)
         
