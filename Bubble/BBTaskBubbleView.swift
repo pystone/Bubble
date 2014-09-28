@@ -106,10 +106,22 @@ class BBTaskBubbleView: BBBubbleView {
         
     }
     
+    
     override func bubbleViewDidPan(sender: UIPanGestureRecognizer) {
+        var offset = sender.translationInView(self.superview!)
+        var newOriginX = self.center.x + offset.x
+        var newOriginY = self.center.y + offset.y
+        
+        sender.view?.center = CGPointMake(newOriginX, newOriginY)
+        sender.setTranslation(CGPointZero, inView:self.superview)
+        
     }
     
     override func bubbleViewDidTap(sender: UITapGestureRecognizer) {
     }
+    
+  
+//    [sender setTranslation:CGPointMake(0, 0) inView:self.view];
+
     
 }
