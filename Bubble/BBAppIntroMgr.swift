@@ -36,32 +36,55 @@ class BBAppIntroMgr: NSObject{
 }
 
 class IntroViewController: UIViewController, UIWebViewDelegate,googleOAuthDelegate {
-    var Label1: UIButton?
-    var Label2: UIButton?
+    var googleBtn: UIButton?
+    var iCloudBtn: UIButton?
     var introView: UIImageView?
     var webView: UIWebView?
     var loginInMgr: BBGoogleLoginManager?
+    var textLabel: UILabel?
+    var cancelBtn: UIButton?
+    var activityJuhua : UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle:.Gray)
     
     override func viewDidLoad() {
         let bounds: CGRect = self.view.bounds
         introView = UIImageView(frame: CGRectMake(0, 0, bounds.width, bounds.height))
+        var image = UIImage(named: "login_bg.png");
+        introView?.image = image
         introView?.userInteractionEnabled = true
         introView?.backgroundColor = UIColor.whiteColor()
         
-        Label1 = UIButton(frame: CGRectMake(bounds.width/2 - 80,  bounds.height/2 - 80, 160, 30))
-        Label1?.backgroundColor = UIColor.yellowColor()
-        Label1?.setTitle("Sign in With Google", forState: .Normal )
-        Label1?.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        Label1?.addTarget(self, action: Selector("SignInPressed:"), forControlEvents: .TouchUpInside)
+        googleBtn = UIButton(frame: CGRectMake(bounds.width/2 - 110,  bounds.height/2 - 70, 100, 100))
+        googleBtn?.setBackgroundImage(UIImage(named: "Google.png"), forState: .Normal)
+        googleBtn?.addTarget(self, action: Selector("SignInPressed:"), forControlEvents: .TouchUpInside)
         
-        Label2 = UIButton(frame: CGRectMake(bounds.width/2 - 80,  bounds.height/2 - 10,160 , 30))
-        Label2?.backgroundColor = UIColor.yellowColor()
-        Label2?.setTitle("Next Time", forState: .Normal)
-        Label2?.addTarget(self, action: Selector("nextTime:"), forControlEvents: .TouchUpInside)
-        Label2?.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        iCloudBtn = UIButton(frame: CGRectMake(bounds.width/2 + 10,  bounds.height/2 - 70,100 , 100))
+        iCloudBtn?.setBackgroundImage(UIImage(named: "icloud.png"), forState: .Normal)
+        iCloudBtn?.addTarget(self, action: Selector("nextTime:"), forControlEvents: .TouchUpInside)
         
-        introView?.addSubview(Label1!)
-        introView?.addSubview(Label2!)
+        textLabel = UILabel(frame: CGRectMake(70, 120, 180, 80))
+        textLabel?.backgroundColor = UIColor.clearColor()
+        textLabel?.text = "Sync Your Calendar With:"
+        textLabel?.textAlignment = NSTextAlignment.Center
+        textLabel?.numberOfLines = 2;
+        textLabel?.textColor = UIColor(red: (97/255), green: (215/255), blue: (236/255), alpha: 1.0)
+        textLabel?.font = UIFont.systemFontOfSize(24.0)
+        
+        cancelBtn = UIButton(frame: CGRectMake(70, bounds.height/2 + 50, 180, 40))
+        cancelBtn?.setTitle("Or Maybe Later", forState: .Normal)
+        cancelBtn?.setTitleColor(UIColor(red: (97/255), green: (215/255), blue: (236/255), alpha: 1.0), forState: .Normal)
+        cancelBtn?.titleLabel?.font = UIFont.systemFontOfSize(24.0)
+        cancelBtn?.titleLabel?.textAlignment = NSTextAlignment.Center
+        cancelBtn?.addTarget(self, action: Selector("nextTime:"), forControlEvents: .TouchUpInside)
+        
+        activityJuhua.frame = CGRectMake(140, 210, 40, 40)
+        activityJuhua.hidden = true
+
+        
+        introView?.addSubview(googleBtn!)
+        introView?.addSubview(iCloudBtn!)
+        introView?.addSubview(textLabel!)
+        introView?.addSubview(cancelBtn!)
+        introView?.addSubview(activityJuhua)
         
         self.view.addSubview(introView!)
     }
@@ -72,6 +95,7 @@ class IntroViewController: UIViewController, UIWebViewDelegate,googleOAuthDelega
         webView = UIWebView(frame: self.view.bounds)
         webView?.delegate = self
         self.view.addSubview(webView!)
+        self.view.sendSubviewToBack(webView!)
         
         loginInMgr = BBGoogleLoginManager()
         var str : String?
@@ -81,9 +105,6 @@ class IntroViewController: UIViewController, UIWebViewDelegate,googleOAuthDelega
         var request1: NSURLRequest = NSURLRequest(URL: urlstr)
         
         webView?.loadRequest(request1)
-        
-       // self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     func nextTime(sender: UIButton!) {
@@ -121,6 +142,17 @@ class IntroViewController: UIViewController, UIWebViewDelegate,googleOAuthDelega
             
         }
         return true
+    }
+    
+    func webViewDidStartLoad(webView: UIWebView) {
+          activityJuhua.startAnimating()
+          activityJuhua.hidden = false
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+          self.view.bringSubviewToFront(webView)
+          activityJuhua.stopAnimating()
+          activityJuhua.hidden = true
     }
     
     func accessTokenGot(){
