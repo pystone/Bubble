@@ -100,28 +100,27 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         self.taskBubbleViewAdder = BBTaskBubbleView(origin: adderOrigin, radius: adderRadius)
         self.taskBubbleViewAdder.delegate = self
         self.view.addSubview(self.taskBubbleViewAdder)
-
         self.view.addSubview(self.taskCenterBubbleView)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("showData"), name: CALENDAR_DATA_NOTIFICATION, object: nil)
-
     }
     
     func showData() {
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name: CALENDAR_DATA_NOTIFICATION, object: nil)
-        
         // load some data
-        
         for taskID: Int in BBDataCenter.sharedDataCenter()._unfinishedTasks.keys {
             if taskExistInView(taskID) == true {
                 continue
             }
-            var taskView = BBTaskBubbleView(origin: CGPointMake(20.0, 30.0), radius: 30.0)
-            taskView.bubbleColor = UIColor.redColor()
+            var taskView = BBTaskBubbleView(origin: CGPointMake(50.0, 60.0), radius: 30.0)
             taskView._taskID = taskID
+            taskView.bubbleColor = UIColor.randomColor()
+            // this is to update data
+//            var task: BBTask = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(_taskID)
+//            BBDataCenter.sharedDataCenter().updateUnfinishedTask(task)
+            
             self.visibelTaskViews.append(taskView)
         }
-        
+
         self.layoutTasksAnimated(true)
     }
     
@@ -193,12 +192,4 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     }
 
 }
-
-
-
-
-
-
-
-
 

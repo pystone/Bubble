@@ -33,6 +33,8 @@
 		31A81CEA19D8726800F3284F /* Google.png in Resources */ = {isa = PBXBuildFile; fileRef = 31A81CE819D8726800F3284F /* Google.png */; };
 		31A81CED19D8727000F3284F /* line_and_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31A81CEB19D8727000F3284F /* line_and_more@2x.png */; };
 		31A81CEE19D8727000F3284F /* login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 31A81CEC19D8727000F3284F /* login_bg.png */; };
+		31A81CF019D878DD00F3284F /* icloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 31A81CEF19D878DD00F3284F /* icloud.png */; };
+		31A81CF219D885BE00F3284F /* Color+BBExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A81CF119D885BE00F3284F /* Color+BBExtension.swift */; };
 		31D7E12019D7C23B00B2EC9A /* bubble_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31D7E11F19D7C23B00B2EC9A /* bubble_mask@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +79,8 @@
 		31A81CE819D8726800F3284F /* Google.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Google.png; sourceTree = "<group>"; };
 		31A81CEB19D8727000F3284F /* line_and_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_and_more@2x.png"; sourceTree = "<group>"; };
 		31A81CEC19D8727000F3284F /* login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_bg.png; sourceTree = "<group>"; };
+		31A81CEF19D878DD00F3284F /* icloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icloud.png; sourceTree = "<group>"; };
+		31A81CF119D885BE00F3284F /* Color+BBExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+BBExtension.swift"; sourceTree = "<group>"; };
 		31D7E11F19D7C23B00B2EC9A /* bubble_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_mask@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +149,7 @@
 				31A81CE619D8385C00F3284F /* Controllers */,
 				31A81CE519D8384800F3284F /* Views */,
 				28FF93EB19D7341C000815A8 /* BBAppIntroMgr.swift */,
+				31A81CF119D885BE00F3284F /* Color+BBExtension.swift */,
 				310E683519D5EC3000C8D0EE /* String+BBExtension.swift */,
 				28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */,
 				0C35AF1A19D7E4F7002FC55F /* BBConfig.swift */,
@@ -206,6 +211,7 @@
 		31D7E11E19D7C23B00B2EC9A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				31A81CEF19D878DD00F3284F /* icloud.png */,
 				31A81CEB19D8727000F3284F /* line_and_more@2x.png */,
 				31A81CEC19D8727000F3284F /* login_bg.png */,
 				31A81CE719D8726800F3284F /* due_icon@2x.png */,
@@ -300,6 +306,7 @@
 				31A81CEE19D8727000F3284F /* login_bg.png in Resources */,
 				31A81CEA19D8726800F3284F /* Google.png in Resources */,
 				31A81CED19D8727000F3284F /* line_and_more@2x.png in Resources */,
+				31A81CF019D878DD00F3284F /* icloud.png in Resources */,
 				31A81CE919D8726800F3284F /* due_icon@2x.png in Resources */,
 				310E681319D5A32700C8D0EE /* Images.xcassets in Resources */,
 			);
@@ -336,6 +343,7 @@
 				310E683419D5AA2200C8D0EE /* BBTaskBubbleView.swift in Sources */,
 				310E683C19D7278200C8D0EE /* BBWaverView.swift in Sources */,
 				0C35AEE719D7372E002FC55F /* BBTask.swift in Sources */,
+				31A81CF219D885BE00F3284F /* Color+BBExtension.swift in Sources */,
 				31A81CE419D837CE00F3284F /* BBTaskEditorViewController.swift in Sources */,
 				28FF93CC19D73082000815A8 /* BBGoogleLoginManager.swift in Sources */,
 			);
