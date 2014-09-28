@@ -8,7 +8,8 @@
 
 import Foundation
 
-enum TaskCategory {
+enum TaskCategory: Int {
+    case None = 0
     case Red
     case Orange
     case Yellow
@@ -20,6 +21,7 @@ enum TaskCategory {
 }
 
 let CategoryMap: [TaskCategory: [Int]] = [
+    .None:      [255, 255, 255],
     .Red:       [236, 117, 97],
     .Orange:    [238, 133, 55],
     .Yellow:    [236, 202, 97],
@@ -30,7 +32,8 @@ let CategoryMap: [TaskCategory: [Int]] = [
     .Pink:      [236, 97, 156]
 ]
 
-enum TaskIcon {
+enum TaskIcon: Int {
+    case None = 0
     case Lab
     case Reading
     case Report
@@ -42,9 +45,10 @@ enum TaskIcon {
 
 
 let IconPathNormal = "%@-normal.png"
-let IconPathSelected = "%@-selected.png"
+let IconPathSelected = "%@-highlighted.png"
 
 let IconMap: [TaskIcon: [String]] = [
+    .None: [String(format: IconPathNormal, "default"), String(format: IconPathSelected, "default")],
     .Lab: [String(format: IconPathNormal, "lab"), String(format: IconPathSelected, "lab")],
     .Reading: [String(format: IconPathNormal, "reading"), String(format: IconPathSelected, "reading")],
     .Report: [String(format: IconPathNormal, "report"), String(format: IconPathSelected, "report")],
@@ -58,8 +62,8 @@ let IconMap: [TaskIcon: [String]] = [
 let CALENDAR_DATA_NOTIFICATION = "didFinishedLoadingCalendarData"
 
 let ResourcePath: [String: String] = [
-    "DueIcon": "due_icon.png",
-    "LineAndMoreImage": "line_and_more.png"
+    "DueIcon": "due_icon",
+    "LineAndMoreImage": "line_and_more"
 ]
 
 

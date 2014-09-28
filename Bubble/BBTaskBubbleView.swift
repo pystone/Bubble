@@ -74,6 +74,7 @@ class BBTaskBubbleView: BBBubbleView {
         let task = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(_taskID!)
         if task != nil {
             self.bubbleText = task!._title
+            self.bubbleColor = task!.getColor()
         }
         
     }
