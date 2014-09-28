@@ -30,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //taskViewController.presentViewController(BBAppIntroMgr.getInstance().viewControllerForAppIntro, animated: false, completion: nil)
             BBAppIntroMgr.getInstance().showAppIntro()
         }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(CALENDAR_DATA_NOTIFICATION, object: nil)
     
         return true
     }

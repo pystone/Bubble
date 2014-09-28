@@ -18,6 +18,11 @@ class BBTaskBubbleView: BBBubbleView {
             self.bubbleTextLabel.hidden = false
         }
     }
+    var _taskID: Int? {
+        didSet {
+            setContent()
+        }
+    }
     var bubbleTextLabel: UILabel!
     var bubbleTextColor: UIColor!
     var bubbleTaskIconView: UIImageView!
@@ -60,6 +65,17 @@ class BBTaskBubbleView: BBBubbleView {
         // this is temporary, should be implemented!
         self.bubbleColor = UIColor.greenColor()
         self.bubbleRadius = radius
+    }
+    
+    func setContent() {
+        if (self._taskID==nil || self._taskID == -1) {
+            return;
+        }
+        let task = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(_taskID!)
+        if task != nil {
+            self.bubbleText = task!._title
+        }
+        
     }
     
     override func layoutSubviews() {

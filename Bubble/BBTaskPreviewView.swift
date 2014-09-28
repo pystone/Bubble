@@ -10,17 +10,16 @@ import Foundation
 import UIKit
 
 class BBTaskPreviewView: BBBubbleView {
-    let LRPos:[String: [Int]] = [
-        "Due": [72, 40],
-        "Title": [14, 112],
-        "SpentTime": [56, 210],
-        "MoreDetail": [60, 240]
-    ]
+    
+    var _taskID: Int? {
+        didSet {
+            self.setContent()
+        }
+    }
     
     var _dueText: String! {
         didSet {
             // "123d"
-            println("due text changed!")
             self._dueTextLabel?.text = _dueText
         }
     }
@@ -102,10 +101,13 @@ class BBTaskPreviewView: BBBubbleView {
         self.bubbleRadius = radius
     }
     
-    func setContent(task: BBTask) {
-        self._dueText = task.getReadableDueTimeFromToday()
-        self._titleText = task._title
-        self._spentTimeText = task.getReadableSpentTime()
+    func setContent() {
+        let task = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(self._taskID!)
+        if task != nil {
+            self._dueText = task!.getReadableDueTimeFromToday()
+            self._titleText = task!._title
+            self._spentTimeText = task!.getReadableSpentTime()
+        }
     }
     
     override func layoutSubviews() {
