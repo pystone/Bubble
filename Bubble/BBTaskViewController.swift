@@ -26,6 +26,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     var visibelTaskViews: [BBTaskBubbleView]!
     var availableRects: [BubbleRect]!
     var taskBubbleViewAdder: BBTaskBubbleView!
+    var currentTaskID: Int!
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -42,6 +43,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         self.availableRects = Array()
         self.visibelTaskViews = Array()
         
+        self.currentTaskID = -1
         var centerViewRadius: CGFloat = 100.0
         var origin: CGPoint = CGPointMake(CGRectGetMidX(self.view.bounds)-centerViewRadius, CGRectGetMidY(self.view.bounds)-centerViewRadius)
         self.taskCenterBubbleView = BBCenterBubbleView(origin: origin, radius: centerViewRadius)
@@ -115,6 +117,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
             // this is a new task
             var taskView = BBTaskBubbleView(origin: CGPointMake(50.0, 60.0), radius: 30.0)
             taskView._taskID = taskID
+            taskView.delegate = self
             taskView.bubbleColor = UIColor.randomColor()
             // this is to update data
 //            var task: BBTask = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(_taskID)
@@ -200,6 +203,18 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     }
         
     func bubbleViewDidPan(sender: UIPanGestureRecognizer) {
+        
+    }
+    
+    func startBubbleViewTask(bubbleView: BBTaskBubbleView) {
+        // push bubbleView and pop the current task
+        if (self.currentTaskID < 0) {
+            // no task undergoing
+        }
+        println("should be here")
+        // change center bubble view color
+        // change the center buble fill color
+        self.taskCenterBubbleView.bubbleWaver.waverColor = bubbleView.bubbleColor
         
     }
 
