@@ -76,8 +76,8 @@ class BBCenterBubbleView: BBBubbleView {
         var width = 2*self.bubbleRadius, height = 2*self.bubbleRadius
         var frame = CGRectMake(0.0, 0.0, width, height)
         
-        self.maskImageView.frame = frame
         self.bubbleView.frame =  frame
+        self.maskImageView.frame = frame
         self.bubbleWaver.frame = frame
         
         var segmentHeight = height / 5.0
