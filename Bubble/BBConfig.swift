@@ -20,6 +20,11 @@ enum TaskCategory: Int {
     case Pink
 }
 
+enum BigBubbleState{
+    case noTask
+    case haveYask
+}
+
 let CategoryMap: [TaskCategory: [Int]] = [
     .None:      [255, 255, 255],
     .Red:       [236, 117, 97],
@@ -65,5 +70,4 @@ let ResourcePath: [String: String] = [
     "DueIcon": "due_icon",
     "LineAndMoreImage": "line_and_more"
 ]
-
 

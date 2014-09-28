@@ -40,7 +40,9 @@ class BBTaskBubbleView: BBBubbleView {
             self.bubbleTaskIconView.hidden = false
         }
     }
-
+    let bigCircleRadius : CGFloat = 100.0
+    var bigCircleCenter: CGPoint!
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -56,6 +58,7 @@ class BBTaskBubbleView: BBBubbleView {
     
     func commonInit() {
         
+        self.bigCircleCenter = CGPointZero
         self.bubbleTextLabel = UILabel()
         self.bubbleTextLabel.textAlignment = NSTextAlignment.Center
         self.bubbleTextLabel.backgroundColor = UIColor.clearColor()
@@ -78,6 +81,7 @@ class BBTaskBubbleView: BBBubbleView {
         // this is temporary, should be implemented!
         self.bubbleColor = UIColor.greenColor()
         self.bubbleRadius = radius
+        
     }
     
     func setContent() {
@@ -98,6 +102,11 @@ class BBTaskBubbleView: BBBubbleView {
         // simple implementation
         self.bubbleTextLabel.frame = frame
         self.bubbleTaskIconView.frame = frame
+        
+        let suView: UIView = self.superview!
+        let bound : CGRect = suView.bounds
+        self.bigCircleCenter = CGPointMake(CGRectGetMidX(bound)-bigCircleRadius, CGRectGetMidY(bound)-bigCircleRadius)
+
     }
     
     override func drawRect(rect: CGRect) {
@@ -117,6 +126,14 @@ class BBTaskBubbleView: BBBubbleView {
     */
     func mapRadius() {
         
+    }
+    
+    func circlesIntersection() -> Bool{
+        var distanceX = bigCircleCenter.x - self.center.x
+        var distanceY = bigCircleCenter.y - self.center.y
+        
+        var magnitude = sqrt(distanceX * distanceX + distanceY * distanceY);
+        return magnitude < bigCircleRadius + self.bubbleRadius;
     }
     
     

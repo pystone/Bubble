@@ -11,6 +11,7 @@ import UIKit
 
 class BBCenterBubbleView: BBBubbleView {
     
+    
     var taskNameLabel: UILabel!
     var taskTimerLabel: UILabel!
     var taskDueLabel: UILabel!
@@ -19,6 +20,7 @@ class BBCenterBubbleView: BBBubbleView {
     
     var bubbleWaver: BBWaverView!
     var maskImageView: UIImageView!
+    var bubbleState:BigBubbleState!
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -59,12 +61,14 @@ class BBCenterBubbleView: BBBubbleView {
         self.addSubview(self.maskImageView)
     }
     
+    
     convenience init(origin: CGPoint, radius: CGFloat) {
         var frame = CGRectMake(origin.x, origin.y, 2*radius, 2*radius)
         self.init(frame: frame)
         
         self.bubbleColor = UIColor.lightGrayColor()
         self.bubbleRadius = radius
+        self.bubbleState = BigBubbleState.noTask
         
         // to be implemented!
         self.taskDueLabel.text = "12d"
