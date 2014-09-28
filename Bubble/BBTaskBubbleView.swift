@@ -155,11 +155,15 @@ class BBTaskBubbleView: BBBubbleView {
         let radius = CGFloat(80.0)
         let previewView = BBTaskPreviewView(origin: CGPointMake(self.frame.origin.x, self.frame.origin.y), radius: radius)
 
-        previewView._taskID = self._taskID
-        
-        self.superview?.addBlurEffect()
-        previewView.showMySelf()
-        
-        self.delegate?.bubbleViewDidTap(sender)
+        if self._taskID == nil {
+            // add new task
+            self.delegate?.bubbleViewDidTap(sender)
+        }
+        else {
+            previewView._taskID = self._taskID
+            
+            self.superview?.addBlurEffect()
+            previewView.showMySelf()
+        }
     }
 }
