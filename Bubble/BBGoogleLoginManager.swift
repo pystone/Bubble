@@ -97,8 +97,8 @@ class BBGoogleLoginManager: NSObject{
                 self.accessToken = token
                 NSUserDefaults.standardUserDefaults().setObject(token, forKey: "GOOGLE_ACCESS_TOKEN")
                 NSUserDefaults.standardUserDefaults().synchronize()
-                
                 self.calenderModel?.startLoadCalenderModel(self.accessToken!)
+
             }
         })
     }

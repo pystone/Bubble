@@ -26,6 +26,7 @@ class BBDuration {
     }
     
     func getIntervalOnEnd() -> NSTimeInterval {
+        let begin = _endTime.beginningOfDay()
         return _endTime.timeIntervalSinceDate(_endTime.beginningOfDay());
     }
 }
