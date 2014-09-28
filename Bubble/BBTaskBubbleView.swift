@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+protocol BBTaskBubbleViewProtocol {
+    func bubbleViewDidTap(sender:UITapGestureRecognizer)
+    func bubbleViewDidPan(sender:UIPanGestureRecognizer)
+}
+
 class BBTaskBubbleView: BBBubbleView {
     
     var bubbleText: String? {
@@ -18,11 +23,15 @@ class BBTaskBubbleView: BBBubbleView {
             self.bubbleTextLabel.hidden = false
         }
     }
+
+    var delegate: BBTaskBubbleViewProtocol?
+
     var _taskID: Int? {
         didSet {
             setContent()
         }
     }
+
     var bubbleTextLabel: UILabel!
     var bubbleTextColor: UIColor!
     var bubbleTaskIconView: UIImageView!
@@ -31,18 +40,25 @@ class BBTaskBubbleView: BBBubbleView {
             self.bubbleTaskIconView.hidden = false
         }
     }
-
+    let bigCircleRadius : CGFloat = 100.0
+    var bigCircleCenter: CGPoint!
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override init() {
+    override init () {
         super.init()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.commonInit()
+    }
+    
+    func commonInit() {
         
+        self.bigCircleCenter = CGPointZero
         self.bubbleTextLabel = UILabel()
         self.bubbleTextLabel.textAlignment = NSTextAlignment.Center
         self.bubbleTextLabel.backgroundColor = UIColor.clearColor()
@@ -65,6 +81,7 @@ class BBTaskBubbleView: BBBubbleView {
         // this is temporary, should be implemented!
         self.bubbleColor = UIColor.greenColor()
         self.bubbleRadius = radius
+        
     }
     
     func setContent() {
@@ -85,6 +102,11 @@ class BBTaskBubbleView: BBBubbleView {
         // simple implementation
         self.bubbleTextLabel.frame = frame
         self.bubbleTaskIconView.frame = frame
+        
+        let suView: UIView = self.superview!
+        let bound : CGRect = suView.bounds
+        self.bigCircleCenter = CGPointMake(CGRectGetMidX(bound)-bigCircleRadius, CGRectGetMidY(bound)-bigCircleRadius)
+
     }
     
     override func drawRect(rect: CGRect) {
@@ -106,8 +128,19 @@ class BBTaskBubbleView: BBBubbleView {
         
     }
     
+    func circlesIntersection() -> Bool{
+        var distanceX = bigCircleCenter.x - self.center.x
+        var distanceY = bigCircleCenter.y - self.center.y
+        
+        var magnitude = sqrt(distanceX * distanceX + distanceY * distanceY);
+        return magnitude < bigCircleRadius + self.bubbleRadius;
+    }
+    
     
     override func bubbleViewDidPan(sender: UIPanGestureRecognizer) {
+
+       self.delegate?.bubbleViewDidPan(sender)
+
         var offset = sender.translationInView(self.superview!)
         var newOriginX = self.center.x + offset.x
         var newOriginY = self.center.y + offset.y
@@ -127,12 +160,6 @@ class BBTaskBubbleView: BBBubbleView {
         self.superview?.addBlurEffect()
         previewView.showMySelf()
         
-//        self.window.la.addSubview(previewView)
-//        self.sendSubviewToBack(previewView)
+        self.delegate?.bubbleViewDidTap(sender)
     }
-    
-  
-//    [sender setTranslation:CGPointMake(0, 0) inView:self.view];
-
-    
 }

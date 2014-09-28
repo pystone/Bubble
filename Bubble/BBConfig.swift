@@ -20,6 +20,16 @@ enum TaskCategory: Int {
     case Pink
 }
 
+enum BigBubbleState{
+    case noTask
+    case haveYask
+}
+
+enum BBBoardType{
+    case colorBoard
+    case iconBoard
+}
+
 let CategoryMap: [TaskCategory: [Int]] = [
     .None:      [255, 255, 255],
     .Red:       [236, 117, 97],
@@ -66,5 +76,4 @@ let ResourcePath: [String: String] = [
     "LineAndMoreImage": "line_and_more",
     "TouMing": "touming"
 ]
-
 
