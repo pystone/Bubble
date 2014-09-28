@@ -11,14 +11,21 @@ import UIKit
 
 class BBTaskBubbleView: BBBubbleView {
     
-    var bubbleText: String! {
+    var bubbleText: String? {
         didSet {
             // retreive the initial letters of bubble text
-            self.bubbleTextLabel?.text = bubbleText.initalCharacters(2).uppercaseString
+            self.bubbleTextLabel.text = bubbleText?.initalCharacters().uppercaseString
+            self.bubbleTextLabel.hidden = false
         }
     }
     var bubbleTextLabel: UILabel!
     var bubbleTextColor: UIColor!
+    var bubbleTaskIconView: UIImageView!
+    var bubbleTaskIcon: UIImage? {
+        didSet {
+            self.bubbleTaskIconView.hidden = false
+        }
+    }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -37,9 +44,14 @@ class BBTaskBubbleView: BBBubbleView {
         
         self.bubbleTextColor = UIColor.darkGrayColor()
         self.bubbleTextLabel.textColor = self.bubbleTextColor
+        self.bubbleTextLabel.hidden = true
+        
+        self.bubbleTaskIconView = UIImageView()
+        self.bubbleTaskIconView.hidden = true
         
         // the bubbleView is the underlying view, which holds all the other upper views
         self.bubbleView.addSubview(self.bubbleTextLabel)
+        self.bubbleView.addSubview(self.bubbleTaskIconView)
     }
     
     convenience init(origin: CGPoint, radius: CGFloat) {
@@ -55,6 +67,7 @@ class BBTaskBubbleView: BBBubbleView {
         self.bubbleView.frame = frame
         // simple implementation
         self.bubbleTextLabel.frame = frame
+        self.bubbleTaskIconView.frame = frame
     }
     
     override func drawRect(rect: CGRect) {
