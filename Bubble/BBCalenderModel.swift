@@ -102,7 +102,6 @@ class BBCalenderModel: NSObject{
     }
     
     func stringTransToDate(dateStr:String) -> NSDate{
-        //let strArray = dateStr.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet()) as NSArray
         var newString = ""
         if let strArray = dateStr.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet()) as [String]? {
             if  let subStrArray = strArray[1].componentsSeparatedByString("-") as [String]?{

@@ -12,6 +12,9 @@
 		0C35AEE719D7372E002FC55F /* BBTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE219D7372E002FC55F /* BBTask.swift */; };
 		0C35AEE819D7372E002FC55F /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE319D7372E002FC55F /* DictionaryExtension.swift */; };
 		0C35AEE919D7372E002FC55F /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AEE419D7372E002FC55F /* NSDateExtension.swift */; };
+		2817171C19D7D4AA00430001 /* Google.png in Resources */ = {isa = PBXBuildFile; fileRef = 2817171919D7D4AA00430001 /* Google.png */; };
+		2817171D19D7D4AA00430001 /* icloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 2817171A19D7D4AA00430001 /* icloud.png */; };
+		2817171E19D7D4AA00430001 /* login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2817171B19D7D4AA00430001 /* login_bg.png */; };
 		28C0E5AE19D795A800C3A4DF /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */; };
 		28FF93CC19D73082000815A8 /* BBGoogleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */; };
 		28FF93CD19D73082000815A8 /* BBCalenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CB19D73082000815A8 /* BBCalenderModel.swift */; };
@@ -43,6 +46,9 @@
 		0C35AEE219D7372E002FC55F /* BBTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBTask.swift; path = BBData/BBTask.swift; sourceTree = "<group>"; };
 		0C35AEE319D7372E002FC55F /* DictionaryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryExtension.swift; path = BBData/DictionaryExtension.swift; sourceTree = "<group>"; };
 		0C35AEE419D7372E002FC55F /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtension.swift; path = BBData/NSDateExtension.swift; sourceTree = "<group>"; };
+		2817171919D7D4AA00430001 /* Google.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Google.png; sourceTree = "<group>"; };
+		2817171A19D7D4AA00430001 /* icloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icloud.png; sourceTree = "<group>"; };
+		2817171B19D7D4AA00430001 /* login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_bg.png; sourceTree = "<group>"; };
 		28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBGoogleLoginManager.swift; sourceTree = "<group>"; };
 		28FF93CB19D73082000815A8 /* BBCalenderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBCalenderModel.swift; sourceTree = "<group>"; };
@@ -92,6 +98,16 @@
 			name = BBData;
 			sourceTree = "<group>";
 		};
+		2817171F19D7D4B000430001 /* imageResource */ = {
+			isa = PBXGroup;
+			children = (
+				2817171919D7D4AA00430001 /* Google.png */,
+				2817171A19D7D4AA00430001 /* icloud.png */,
+				2817171B19D7D4AA00430001 /* login_bg.png */,
+			);
+			name = imageResource;
+			sourceTree = "<group>";
+		};
 		28FF93CE19D7309C000815A8 /* CalenderData */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +147,7 @@
 				28FF93EB19D7341C000815A8 /* BBAppIntroMgr.swift */,
 				310E683519D5EC3000C8D0EE /* String+BBExtension.swift */,
 				28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */,
+				2817171F19D7D4B000430001 /* imageResource */,
 				28FF93CE19D7309C000815A8 /* CalenderData */,
 				310E681219D5A32700C8D0EE /* Images.xcassets */,
 				310E681419D5A32700C8D0EE /* LaunchScreen.xib */,
@@ -245,7 +262,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				310E681619D5A32700C8D0EE /* LaunchScreen.xib in Resources */,
+				2817171E19D7D4AA00430001 /* login_bg.png in Resources */,
+				2817171D19D7D4AA00430001 /* icloud.png in Resources */,
 				310E681319D5A32700C8D0EE /* Images.xcassets in Resources */,
+				2817171C19D7D4AA00430001 /* Google.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +420,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -415,6 +436,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

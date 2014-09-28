@@ -20,15 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.backgroundColor = UIColor.whiteColor()
         self.window?.makeKeyAndVisible()
+    
         
         self.taskViewController = BBTaskViewController()
         var navigationController = UINavigationController(rootViewController: self.taskViewController)
         self.window?.rootViewController = navigationController
         
         if BBAppIntroMgr.shouldShowAppIntro(){
-            taskViewController.presentViewController(BBAppIntroMgr.getInstance().viewControllerForAppIntro, animated: true, completion: nil)
+            taskViewController.presentViewController(BBAppIntroMgr.getInstance().viewControllerForAppIntro, animated: false, completion: nil)
         }
-
+    
         return true
     }
 
