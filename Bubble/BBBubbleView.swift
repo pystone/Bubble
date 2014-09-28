@@ -40,6 +40,7 @@ class BBBubbleView: UIView {
         self.bubbleView.backgroundColor = UIColor.clearColor()
         
         self.bubbleLayer = CAShapeLayer()
+        
         self.addSubview(self.bubbleView)
         self.layer.insertSublayer(self.bubbleLayer, atIndex: 0)
         
@@ -58,14 +59,14 @@ class BBBubbleView: UIView {
         // set the center of the circle to be the center of the view
         let center = CGPointMake(self.bubbleRadius, self.bubbleRadius)
         
-        // arcCenter is in the current coordiante system
-        self.bubbleLayer.path = UIBezierPath(arcCenter: center, radius: self.bubbleRadius,
-            startAngle: 0.0, endAngle: CGFloat(2*M_PI), clockwise: true).CGPath
-        
-        // configure the circle
+        // configure the bubble layer
         self.bubbleLayer.fillColor = self.bubbleColor?.CGColor
         self.bubbleLayer.strokeColor = self.bubbleStrokeColor?.CGColor
         self.bubbleLayer.lineWidth = 0.0
+        
+        // arcCenter is in the current coordiante system
+        self.bubbleLayer.path = UIBezierPath(arcCenter: center, radius: self.bubbleRadius,
+            startAngle: 0.0, endAngle: CGFloat(2*M_PI), clockwise: true).CGPath
     }
     
     func bubbleViewDidTap(sender: UITapGestureRecognizer) {

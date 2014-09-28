@@ -15,6 +15,7 @@
 		2817171C19D7D4AA00430001 /* Google.png in Resources */ = {isa = PBXBuildFile; fileRef = 2817171919D7D4AA00430001 /* Google.png */; };
 		2817171D19D7D4AA00430001 /* icloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 2817171A19D7D4AA00430001 /* icloud.png */; };
 		2817171E19D7D4AA00430001 /* login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2817171B19D7D4AA00430001 /* login_bg.png */; };
+		0C35AF1B19D7E4F7002FC55F /* BBConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35AF1A19D7E4F7002FC55F /* BBConfig.swift */; };
 		28C0E5AE19D795A800C3A4DF /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */; };
 		28FF93CC19D73082000815A8 /* BBGoogleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */; };
 		28FF93CD19D73082000815A8 /* BBCalenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF93CB19D73082000815A8 /* BBCalenderModel.swift */; };
@@ -28,6 +29,8 @@
 		310E683619D5EC3000C8D0EE /* String+BBExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E683519D5EC3000C8D0EE /* String+BBExtension.swift */; };
 		310E683819D60EF900C8D0EE /* BBCenterBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E683719D60EF900C8D0EE /* BBCenterBubbleView.swift */; };
 		310E683A19D6110000C8D0EE /* BBBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E683919D6110000C8D0EE /* BBBubbleView.swift */; };
+		310E683C19D7278200C8D0EE /* BBWaverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E683B19D7278200C8D0EE /* BBWaverView.swift */; };
+		31D7E12019D7C23B00B2EC9A /* bubble_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31D7E11F19D7C23B00B2EC9A /* bubble_mask@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,7 @@
 		2817171919D7D4AA00430001 /* Google.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Google.png; sourceTree = "<group>"; };
 		2817171A19D7D4AA00430001 /* icloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icloud.png; sourceTree = "<group>"; };
 		2817171B19D7D4AA00430001 /* login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_bg.png; sourceTree = "<group>"; };
+		0C35AF1A19D7E4F7002FC55F /* BBConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBConfig.swift; sourceTree = "<group>"; };
 		28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		28FF93CA19D73082000815A8 /* BBGoogleLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBGoogleLoginManager.swift; sourceTree = "<group>"; };
 		28FF93CB19D73082000815A8 /* BBCalenderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBCalenderModel.swift; sourceTree = "<group>"; };
@@ -66,6 +70,8 @@
 		310E683519D5EC3000C8D0EE /* String+BBExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+BBExtension.swift"; sourceTree = "<group>"; };
 		310E683719D60EF900C8D0EE /* BBCenterBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBCenterBubbleView.swift; sourceTree = "<group>"; };
 		310E683919D6110000C8D0EE /* BBBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBBubbleView.swift; sourceTree = "<group>"; };
+		310E683B19D7278200C8D0EE /* BBWaverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBWaverView.swift; sourceTree = "<group>"; };
+		31D7E11F19D7C23B00B2EC9A /* bubble_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_mask@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +148,7 @@
 				310E680819D5A32700C8D0EE /* AppDelegate.swift */,
 				310E680D19D5A32700C8D0EE /* BBTaskViewController.swift */,
 				310E683919D6110000C8D0EE /* BBBubbleView.swift */,
+				310E683B19D7278200C8D0EE /* BBWaverView.swift */,
 				310E683319D5AA2200C8D0EE /* BBTaskBubbleView.swift */,
 				310E683719D60EF900C8D0EE /* BBCenterBubbleView.swift */,
 				28FF93EB19D7341C000815A8 /* BBAppIntroMgr.swift */,
@@ -151,7 +158,9 @@
 				28FF93CE19D7309C000815A8 /* CalenderData */,
 				310E681219D5A32700C8D0EE /* Images.xcassets */,
 				310E681419D5A32700C8D0EE /* LaunchScreen.xib */,
+				31D7E11E19D7C23B00B2EC9A /* Resources */,
 				310E680619D5A32700C8D0EE /* Supporting Files */,
+				0C35AF1A19D7E4F7002FC55F /* BBConfig.swift */,
 			);
 			path = Bubble;
 			sourceTree = "<group>";
@@ -179,6 +188,14 @@
 				310E682019D5A32700C8D0EE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		31D7E11E19D7C23B00B2EC9A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				31D7E11F19D7C23B00B2EC9A /* bubble_mask@2x.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31D7E12019D7C23B00B2EC9A /* bubble_mask@2x.png in Resources */,
 				310E681619D5A32700C8D0EE /* LaunchScreen.xib in Resources */,
 				2817171E19D7D4AA00430001 /* login_bg.png in Resources */,
 				2817171D19D7D4AA00430001 /* icloud.png in Resources */,
@@ -291,11 +309,13 @@
 				0C35AEE619D7372E002FC55F /* BBDuration.swift in Sources */,
 				0C35AEE819D7372E002FC55F /* DictionaryExtension.swift in Sources */,
 				28FF93CD19D73082000815A8 /* BBCalenderModel.swift in Sources */,
+				0C35AF1B19D7E4F7002FC55F /* BBConfig.swift in Sources */,
 				310E683619D5EC3000C8D0EE /* String+BBExtension.swift in Sources */,
 				28FF93EC19D7341C000815A8 /* BBAppIntroMgr.swift in Sources */,
 				0C35AEE519D7372E002FC55F /* BBDataCenter.swift in Sources */,
 				310E683A19D6110000C8D0EE /* BBBubbleView.swift in Sources */,
 				310E683419D5AA2200C8D0EE /* BBTaskBubbleView.swift in Sources */,
+				310E683C19D7278200C8D0EE /* BBWaverView.swift in Sources */,
 				0C35AEE719D7372E002FC55F /* BBTask.swift in Sources */,
 				28FF93CC19D73082000815A8 /* BBGoogleLoginManager.swift in Sources */,
 			);
