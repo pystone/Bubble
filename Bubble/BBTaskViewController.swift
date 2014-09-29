@@ -156,18 +156,6 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
 
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        if (editTask?._category != nil && editTask?._icon != nil){
-            var taskView = BBTaskBubbleView(origin: CGPointMake(50.0, 60.0), radius: 30.0)
-            taskView._taskID = editTask?._id
-            taskView.delegate = self
-            taskView.bubbleColor =  editTask?.getColor()
-            taskView.tag = editTask._id
-            self.visibelTaskViews.append(taskView)
-            self.view.addSubview(taskView)
-            
-            self.layoutTasksAnimated(true)
-        }
     }
     
     override func viewDidLoad() {
@@ -279,28 +267,28 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
         } else {
             self.layoutTasksAnimated(true)
         }
-<<<<<<< HEAD
         println("should be here")
         // change center bubble view color
         // change the center buble fill color
-        self.taskCenterBubbleView.bubbleWaver.waverColor = bubbleView.bubbleColor
+        //self.taskCenterBubbleView.bubbleWaver.waverColor = bubbleView.bubbleColor
     }
     
-    func didTapColorBtn(sender:UIButton){
-        var btn: UIButton = sender as UIButton
-        var index =  btn.tag
-        editTask?._category = TaskCategory.fromRaw(index)!
+    func haveGetNewItem(task:BBTask) {
+        BBDataCenter.sharedDataCenter().addNewTask(task)
     }
     
-    func didTapIconBtn(sender:UIButton){
-        var btn: UIButton = sender as UIButton
-        var index =  btn.tag
-        editTask?._icon = TaskIcon.fromRaw(index)!
-    }
+//    func didTapColorBtn(sender:UIButton){
+//        var btn: UIButton = sender as UIButton
+//        var index =  btn.tag
+//        editTask?._category = TaskCategory.fromRaw(index)!
+//    }
+//
+//
+//    func didTapIconBtn(sender:UIButton){
+//        var btn: UIButton = sender as UIButton
+//        var index =  btn.tag
+//        editTask?._icon = TaskIcon.fromRaw(index)!
+//    }
 
-    
-=======
-    }
->>>>>>> FETCH_HEAD
 }
 
