@@ -39,6 +39,8 @@ class BBTaskPreviewView: BBBubbleView {
     var bubbleTextLabel: UILabel!
     var bubbleTextColor: UIColor!
     
+    var _taskBubleView: BBTaskBubbleView!
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -208,7 +210,8 @@ class BBTaskPreviewView: BBBubbleView {
         var delegate = UIApplication.sharedApplication().delegate as AppDelegate
         delegate.window!.makeKeyAndVisible()
         
-        delegate.window!.rootViewController?.view.removeBlurEffect()
+//        delegate.window!.rootViewController?.view.removeBlurEffect()
+        self._taskBubleView.removeBlurEffect()
         
     }
 }

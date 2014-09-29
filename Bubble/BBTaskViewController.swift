@@ -54,13 +54,13 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol, eventCre
         
         self.finishTaskView = UIImageView(image: UIImage(named: "green-rect.png"))
         self.finishTaskView.frame = FinishTaskArea
-        self.finishTaskView.addBlurEffect()
+//        self.finishTaskView.addBlurEffect()
         self.finishTaskView.hidden = true
         self.view.addSubview(self.finishTaskView)
         
         self.deleteTaskView = UIImageView(image: UIImage(named: "red-rect.png"))
         self.deleteTaskView.frame = DeleteTaskArea
-        self.deleteTaskView.addBlurEffect()
+//        self.deleteTaskView.addBlurEffect()
         self.deleteTaskView.hidden = true
         self.view.addSubview(self.deleteTaskView)
         

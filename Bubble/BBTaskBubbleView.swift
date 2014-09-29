@@ -192,9 +192,14 @@ class BBTaskBubbleView: BBBubbleView{
         }
         else {
             previewView._taskID = self._taskID
+            previewView._taskBubleView = self
             
             self.superview?.addBlurEffect()
             previewView.showMySelf(self.bubbleColor!, origin: self.frame.origin, radius: self.bubbleRadius)
         }
+    }
+    
+    func removeSuperViewBlurEffect() {
+        self.superview?.removeBlurEffect()
     }
 }
