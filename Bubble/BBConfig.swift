@@ -32,7 +32,7 @@ enum BBBoardType{
 }
 
 let CategoryMap: [TaskCategory: [Int]] = [
-    .None:      [255, 255, 255],
+    .None:      [236, 202, 97],
     .Red:       [236, 117, 97],
     .Orange:    [238, 133, 55],
     .Yellow:    [236, 202, 97],
@@ -57,6 +57,8 @@ enum TaskIcon: Int {
 
 let IconPathNormal = "%@-normal.png"
 let IconPathSelected = "%@-highlighted.png"
+let colorList : [String] = ["blue","green","orange","pink","purple","red","teal","yellow"]
+let iconList: [String] = ["book", "code","default","design","discussion","lab","paper","video"]
 
 let IconMap: [TaskIcon: [String]] = [
     .None: [String(format: IconPathNormal, "default"), String(format: IconPathSelected, "default")],
