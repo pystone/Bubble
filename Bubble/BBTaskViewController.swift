@@ -20,12 +20,13 @@ struct BubbleRect {
     }
 }
 
-class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
+class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol, eventCreationProtocol {
     var taskCenterBubbleView: BBCenterBubbleView!
-    var visibelTaskViews: [BBTaskBubbleView]!
+    var visibleTaskViews: [BBTaskBubbleView]!
     var availableRects: [BubbleRect]!
     var taskBubbleViewAdder: BBStillBubbleView!
     var currentTaskID: Int!
+    var editTask : BBTask!
     var sharingBubbleView: BBShareView!
     var finishTaskView: UIImageView!
     var deleteTaskView: UIImageView!
@@ -42,7 +43,8 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     override init() {
         super.init()
         self.availableRects = Array()
-        self.visibelTaskViews = Array()
+        self.visibleTaskViews = Array()
+        self.editTask = BBTask()
         
         self.currentTaskID = -1
         var centerViewRadius: CGFloat = 100.0
@@ -142,23 +144,32 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
                 continue
             }
             // this is a new task
-            var taskView = BBTaskBubbleView(origin: CGPointMake(50.0, 60.0), radius: 30.0)
-            taskView._taskID = taskID
-            taskView.delegate = self
-            taskView.bubbleColor = UIColor.randomColor()
-            // this is to update data
-//            var task: BBTask = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(_taskID)
-//            BBDataCenter.sharedDataCenter().updateUnfinishedTask(task)
-
-            taskView.tag = taskID
-            self.visibelTaskViews.append(taskView)
-            self.view.addSubview(taskView)
+            self.insertTask(taskID)
         }
         self.layoutTasksAnimated(true)
     }
     
+    func insertTask(taskID: Int) {
+        var taskView = BBTaskBubbleView(origin: CGPointMake(50.0, 60.0), radius: 30.0)
+        taskView._taskID = taskID
+        taskView.delegate = self
+        taskView.bubbleColor = UIColor.randomColor()
+        taskView.tag = taskID
+        self.visibleTaskViews.append(taskView)
+        self.view.addSubview(taskView)
+    }
+    
+    func removeTask(taskID: Int) {
+        for i in 0..<self.visibleTaskViews.count {
+            if (self.visibleTaskViews[i]._taskID == taskID) {
+                self.visibleTaskViews[i].removeFromSuperview()
+                self.visibleTaskViews.removeAtIndex(i)
+            }
+        }
+    }
+    
     func taskExistInView(taskID: Int) -> Bool {
-        for view in self.visibelTaskViews {
+        for view in self.visibleTaskViews {
             if view._taskID == taskID {
                 return true
             }
@@ -168,6 +179,18 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
 
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        if (editTask?._category != nil && editTask?._icon != nil){
+            var taskView = BBTaskBubbleView(origin: CGPointMake(50.0, 60.0), radius: 30.0)
+            taskView._taskID = editTask?._id
+            taskView.delegate = self
+            taskView.bubbleColor =  editTask?.getColor()
+            taskView.tag = editTask._id
+            self.visibleTaskViews.append(taskView)
+            self.view.addSubview(taskView)
+            
+            self.layoutTasksAnimated(true)
+        }
     }
     
     override func viewDidLoad() {
@@ -181,10 +204,9 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     
     func layoutTasksAnimated(animated: Bool) {
         var centerRect = self.taskCenterBubbleView.frame
-        
         var maxVisibleCount = 8, count = 0
         
-        for taskView: BBTaskBubbleView in self.visibelTaskViews {
+        for taskView: BBTaskBubbleView in self.visibleTaskViews {
             var tw = CGRectGetWidth(taskView.bounds), th = CGRectGetHeight(taskView.bounds)
             var full = true
             for i in 0..<self.availableRects.count {
@@ -228,7 +250,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         var taskEditorViewController = BBTaskEditorViewController()
         if bubbleView.tag != 0 {
             taskEditorViewController.taskID = bubbleView.tag
-            taskEditorViewController.editTask = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(bubbleView.tag)
+            taskEditorViewController.editTask = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(bubbleView.tag)!
         }
         self.navigationController?.pushViewController(taskEditorViewController, animated: true)
     }
@@ -248,8 +270,8 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         
         let taskID = taskView._taskID
         var toDel = -1
-        for i in 0...self.visibelTaskViews.endIndex-1 {
-            let view: BBTaskBubbleView = self.visibelTaskViews[i]
+        for i in 0...self.visibleTaskViews.endIndex-1 {
+            let view: BBTaskBubbleView = self.visibleTaskViews[i]
             if view._taskID == taskID {
                 toDel = i
                 break
@@ -258,7 +280,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         if toDel != -1 {
             println("controller: task finished")
             taskView.removeFromSuperview()
-            self.visibelTaskViews.removeAtIndex(toDel)
+            self.visibleTaskViews.removeAtIndex(toDel)
             BBDataCenter.sharedDataCenter().finishTask(taskID!)
         }
     }
@@ -268,8 +290,8 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         
         let taskID = taskView._taskID
         var toDel = -1
-        for i in 0...self.visibelTaskViews.endIndex-1 {
-            let view: BBTaskBubbleView = self.visibelTaskViews[i]
+        for i in 0...self.visibleTaskViews.endIndex-1 {
+            let view: BBTaskBubbleView = self.visibleTaskViews[i]
             if view._taskID == taskID {
                 toDel = i
                 break
@@ -278,7 +300,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         if toDel != -1 {
             println("controller: task deleted")
             taskView.removeFromSuperview()
-            self.visibelTaskViews.removeAtIndex(toDel)
+            self.visibleTaskViews.removeAtIndex(toDel)
             BBDataCenter.sharedDataCenter().removeUnfinishedTask(toDel)
         }
     }
@@ -303,7 +325,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         }
         var newBubbleView = BBTaskBubbleView(origin: CGPointMake(60.0, 60.0), radius: 35.0)
         // then we add to the visibelBubbleList
-        self.visibelTaskViews.append(newBubbleView)
+        self.visibleTaskViews.append(newBubbleView)
         newBubbleView._taskID = taskID
         self.view.addSubview(newBubbleView)
         self.layoutTasksAnimated(true)
@@ -311,30 +333,43 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     
     func pushBubbleTask(taskID: Int) {
         // remove the bubbleView from visibleBubbleViews
-        var tmp = -1, i = 0
-        for i in 0..<self.visibelTaskViews.count {
+        var delIndex = 0
+        for i in 0..<self.visibleTaskViews.count {
             // find the match one 
-            if (taskID == self.visibelTaskViews[i]._taskID) {
+            if (taskID == self.visibleTaskViews[i]._taskID) {
+                delIndex = i
                 break
             }
         }
         if self.taskCenterBubbleView._taskID == taskID {
             return
         }
-        self.taskCenterBubbleView.bubbleWaver.waverColor = self.visibelTaskViews[i].bubbleColor
+        self.taskCenterBubbleView.bubbleWaver.waverColor = self.visibleTaskViews[delIndex].bubbleColor
+        var popTaskID = self.taskCenterBubbleView._taskID
         self.taskCenterBubbleView._taskID = taskID
-        // after push, remove the view with taskID from the visibelTaskViews
-        var view = self.visibelTaskViews[i]
-        view.removeFromSuperview()
-        self.visibelTaskViews.removeAtIndex(i)
-//        if self.taskCenterBubbleView._taskID > 0 {
-//            tmp = self.taskCenterBubbleView._taskID!
-//            // then pop centerBubbleView
-//            self.popBubbleTask(tmp)
-//        } else {
-//            self.layoutTasksAnimated(true)
-//        }
+
+        // after push, remove the view with taskID from the visibleTaskViews
+        self.visibleTaskViews[delIndex].removeFromSuperview()
+        self.visibleTaskViews.removeAtIndex(delIndex)
         
+        if popTaskID > 0 {
+            // then pop centerBubbleView
+            self.popBubbleTask(popTaskID!)
+        } else {
+            self.layoutTasksAnimated(true)
+        }
+    }
+    
+    func didTapColorBtn(sender:UIButton){
+        var btn: UIButton = sender as UIButton
+        var index =  btn.tag
+        editTask?._category = TaskCategory.fromRaw(index)!
+    }
+    
+    func didTapIconBtn(sender:UIButton){
+        var btn: UIButton = sender as UIButton
+        var index =  btn.tag
+        editTask?._icon = TaskIcon.fromRaw(index)!
     }
 }
 

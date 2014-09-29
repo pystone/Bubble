@@ -21,7 +21,7 @@ protocol BBTaskBubbleViewProtocol {
     func leaveDeleteTaskArea()
 }
 
-class BBTaskBubbleView: BBBubbleView {
+class BBTaskBubbleView: BBBubbleView{
     
     var bubbleText: String? {
         didSet {
@@ -158,6 +158,10 @@ class BBTaskBubbleView: BBBubbleView {
         
         if sender.state == .Ended {
             println("task view: touch ends")
+            if self.circlesIntersection() {
+                self.delegate?.startBubbleViewTask(self)
+            }
+            
             if self.inFinishArea(self.frame) == true {
                 self.delegate?.finishTask(self)
             } else if self.inDeleteArea(self.frame) == true {
@@ -165,9 +169,7 @@ class BBTaskBubbleView: BBBubbleView {
             }
         }
         else {
-            if self.circlesIntersection() {
-                self.delegate?.startBubbleViewTask(self)
-            }
+            
             
             if self.inFinishArea(self.frame) == true {
                 self.delegate?.enterFinishTaskArea()
@@ -194,12 +196,5 @@ class BBTaskBubbleView: BBBubbleView {
             self.superview?.addBlurEffect()
             previewView.showMySelf(self.bubbleColor!, origin: self.frame.origin, radius: self.bubbleRadius)
         }
-    }
-    
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-//        let touch = event.allTouches()?.anyObject()
-//        let point = touch?.locationInView(self)
-        
-        
     }
 }

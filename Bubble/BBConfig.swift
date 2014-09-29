@@ -52,8 +52,9 @@ enum TaskIcon: Int {
 
 let IconPathNormal = "%@-normal.png"
 let IconPathSelected = "%@-highlighted.png"
-let colorList : [String] = ["blue","green","orange","pink","purple","red","teal","yellow"]
-let iconList: [String] = ["book", "code","default","design","discussion","lab","paper","video"]
+let colorList : [String] = ["red","orange","yellow","green","teal","blue","purple","pink"]
+let iconList: [String] = ["default","lab","paper","book","design","video","code","discussion"]
+
 
 let IconMap: [TaskIcon: [String]] = [
     .None: [String(format: IconPathNormal, "default"), String(format: IconPathSelected, "default")],
