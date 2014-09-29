@@ -46,12 +46,12 @@ class BBCenterBubbleView: BBBubbleView {
         self.taskDueLabel.textAlignment = NSTextAlignment.Center
         
         // currently, we do not allow customization
-        self.taskNameLabel.textColor = UIColor.darkTextColor()
-        self.taskTimerLabel.textColor = UIColor.darkTextColor()
-        self.taskDueLabel.textColor = UIColor.darkTextColor()
+        self.taskNameLabel.textColor = UIColor.whiteColor()
+        self.taskTimerLabel.textColor = UIColor.whiteColor()
+        self.taskDueLabel.textColor = UIColor.whiteColor()
         
-        self.taskTimerLabel.font = UIFont.systemFontOfSize(44)
-        self.taskNameLabel.font = UIFont.systemFontOfSize(26)
+        self.taskTimerLabel.font = UIFont.systemFontOfSize(40)
+        self.taskNameLabel.font = UIFont.systemFontOfSize(22)
         self.taskDueLabel.font = UIFont.systemFontOfSize(16)
         
         self.emptyTimeLabel.textColor = UIColor.darkTextColor()
@@ -74,7 +74,7 @@ class BBCenterBubbleView: BBBubbleView {
         var frame = CGRectMake(origin.x, origin.y, 2*radius, 2*radius)
         self.init(frame: frame)
         
-        self.bubbleColor = UIColor(red: 235/255.0, green: 252/255.0, blue: 1.0, alpha: 1.0)
+        self.bubbleColor = UIColor(white: 0.6, alpha: 0.4)
         self.bubbleRadius = radius
         
         // to be implemented!
@@ -113,6 +113,16 @@ class BBCenterBubbleView: BBBubbleView {
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
+    }
+    
+    override func setContent() {
+        if (self._taskID==nil || self._taskID == -1) {
+            return;
+        }
+        let task = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(_taskID!)
+        if task != nil {
+            self.taskNameLabel.text = task!._title
+        }
     }
     
     func setTaskName(name: String) {

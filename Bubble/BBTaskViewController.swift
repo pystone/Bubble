@@ -358,6 +358,9 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol, eventCre
         } else {
             self.layoutTasksAnimated(true)
         }
+        // once pushed. restart the timer if needed
+        // bad implementation
+        self.taskCenterBubbleView.accumulateTime = 0;
     }
     
     func didTapColorBtn(sender:UIButton){
