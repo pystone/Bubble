@@ -38,17 +38,61 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bubble/BBIconSelectionBoard.swift"
-            timestampString = "433640899.806142"
+            filePath = "Bubble/BBTaskViewController.swift"
+            timestampString = "433648681.129268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "generateButton(_:)"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Bubble.BBTaskViewController.viewWillAppear (Bubble.BBTaskViewController)(Swift.Bool) -&gt; ()"
+                  moduleName = "Bubble"
+                  urlString = "file:///Users/appleapple/Desktop/Project%20B/code/BubbleTwo/Bubble/BBTaskViewController.swift"
+                  timestampString = "433648700.647987"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "150"
+                  endingLineNumber = "150"
+                  offsetFromSymbolStart = "532">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Bubble.BBTaskViewController.viewWillAppear (Bubble.BBTaskViewController)(Swift.Bool) -&gt; ()"
+                  moduleName = "Bubble"
+                  urlString = "file:///Users/appleapple/Desktop/Project%20B/code/BubbleTwo/Bubble/BBTaskViewController.swift"
+                  timestampString = "433648700.648304"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "150"
+                  endingLineNumber = "150"
+                  offsetFromSymbolStart = "952">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Bubble.BBTaskViewController.viewWillAppear (Bubble.BBTaskViewController)(Swift.Bool) -&gt; ()"
+                  moduleName = "Bubble"
+                  urlString = "file:///Users/appleapple/Desktop/Project%20B/code/BubbleTwo/Bubble/BBTaskViewController.swift"
+                  timestampString = "433648700.648557"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "150"
+                  endingLineNumber = "150"
+                  offsetFromSymbolStart = "3540">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -14,7 +14,7 @@ enum TaskEditMode {
     case EDIT
 }
 
-class BBTaskEditorViewController: UIViewController {
+class BBTaskEditorViewController: UIViewController,UITextFieldDelegate{
     
     var controllerName: String! {
         didSet {
@@ -35,9 +35,9 @@ class BBTaskEditorViewController: UIViewController {
     
     var selectedColor: UIColor!
     var containerScrollView: UIScrollView!
-    var editTask: BBTask?
+    var editTask =  BBTask()
     var editMode: TaskEditMode?
-    var dueDetailLabel: UILabel!
+    var dueDetailField: UITextField!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -50,13 +50,7 @@ class BBTaskEditorViewController: UIViewController {
     required override init() {
         super.init()
         self.controllerName = "Create Task"
-        
-        if self.editMode == .CREATE{
-            self.title = "Create Task"
-        }else{
-            self.title = self.editTask?._title
-        }
-        
+        self.title = "Create Task"        
         self.selectedColor = UIColor.whiteColor()
         self.view.backgroundColor = self.selectedColor
         
@@ -73,26 +67,25 @@ class BBTaskEditorViewController: UIViewController {
         originY += height
         
         var frame: CGRect = CGRectMake(20, originY, width, labelHeight)
-        var labelDue = UILabel(frame: frame)
-        labelDue.backgroundColor = UIColor.clearColor()
-        labelDue.textColor = UIColor.darkTextColor()
-        labelDue.font = UIFont.boldSystemFontOfSize(20.0)
-        labelDue.text = "Due"
-        self.containerScrollView.addSubview(labelDue)
+//        var labelDue = UILabel(frame: frame)
+//        labelDue.backgroundColor = UIColor.clearColor()
+//        labelDue.textColor = UIColor.darkTextColor()
+//        labelDue.font = UIFont.boldSystemFontOfSize(20.0)
+//        labelDue.text = "Due"
+//        self.containerScrollView.addSubview(labelDue)
         
-        originY += labelHeight
-        frame = CGRectMake(20, originY, width, height)
-        self.dueDetailLabel = UILabel(frame: frame)
-        self.dueDetailLabel.textColor = UIColor.darkTextColor()
-        self.dueDetailLabel.text = NSDate.date().description
-        self.dueDetailLabel.userInteractionEnabled = true
+//        originY += labelHeight
+//        frame = CGRectMake(20, originY, width - 50, height)
+//        self.dueDetailField = UITextField(frame: frame)
+//        self.dueDetailField.delegate = self
+//        self.dueDetailField.userInteractionEnabled = true
+//        self.dueDetailField.backgroundColor = UIColor.whiteColor()
+//        self.dueDetailField.text = NSDate.date().description
+//        self.dueDetailField.borderStyle = UITextBorderStyle.Line
+//        
+//        self.containerScrollView.addSubview(self.dueDetailField)
         
-        var tapGesture = UITapGestureRecognizer(target: self, action: Selector("popupDatePicker"))
-        self.dueDetailLabel.addGestureRecognizer(tapGesture)
-        
-        self.containerScrollView.addSubview(self.dueDetailLabel)
-        
-        originY += labelHeight
+//        originY += labelHeight
         var colorLabel: UILabel = UILabel(frame: CGRectMake(20, originY, self.view.frame.width - 20, labelHeight))
         colorLabel.textColor = UIColor.darkTextColor()
         colorLabel.text = "Color"
@@ -118,16 +111,23 @@ class BBTaskEditorViewController: UIViewController {
         
         originY += 150 + gap
         self.containerScrollView.contentSize = CGSizeMake(self.view.frame.width, originY)
-        
     }
     
-    func popupDataPicker(){
-        
-    }
     
-    //    func getTaskDataFromDataCenter -> BBTask{
-    //        BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID()
-    //    }
+//    func dp(sender: UITextField) {
+//        
+//        var datePickerView  : UIDatePicker = UIDatePicker()
+//        datePickerView.datePickerMode = UIDatePickerMode.Date
+//        sender.inputView = datePickerView
+//        datePickerView.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+//        
+//    }
+    
+//    func handleDatePicker(sender: UIDatePicker) {
+//        var dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = "dd MMM yyyy"
+//        textfieldjobdate.text = dateFormatter.stringFromDate(sender.date)
+//    }
     
     func popupDatePicker() {
         var datePicker = UIDatePicker(frame: CGRectZero)
@@ -140,4 +140,5 @@ class BBTaskEditorViewController: UIViewController {
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.whiteColor()
     }
+
 }
