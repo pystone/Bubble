@@ -21,11 +21,6 @@ enum TaskCategory: Int {
     case Pink
 }
 
-enum BigBubbleState{
-    case noTask
-    case haveYask
-}
-
 enum BBBoardType{
     case colorBoard
     case iconBoard
