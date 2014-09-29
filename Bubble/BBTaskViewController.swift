@@ -20,12 +20,13 @@ struct BubbleRect {
     }
 }
 
-class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
+class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCreationProtocol {
     var taskCenterBubbleView: BBCenterBubbleView!
     var visibleTaskViews: [BBTaskBubbleView]!
     var availableRects: [BubbleRect]!
     var taskBubbleViewAdder: BBStillBubbleView!
     var currentTaskID: Int!
+    var editTask : BBTask!
     var sharingBubbleView: BBShareView!
     
     
@@ -41,6 +42,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         super.init()
         self.availableRects = Array()
         self.visibleTaskViews = Array()
+        self.editTask = BBTask()
         
         self.currentTaskID = -1
         var centerViewRadius: CGFloat = 100.0
@@ -163,6 +165,18 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
 
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        if (editTask?._category != nil && editTask?._icon != nil){
+            var taskView = BBTaskBubbleView(origin: CGPointMake(50.0, 60.0), radius: 30.0)
+            taskView._taskID = editTask?._id
+            taskView.delegate = self
+            taskView.bubbleColor =  editTask?.getColor()
+            taskView.tag = editTask._id
+            self.visibleTaskViews.append(taskView)
+            self.view.addSubview(taskView)
+            
+            self.layoutTasksAnimated(true)
+        }
     }
     
     override func viewDidLoad() {
@@ -223,7 +237,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         var taskEditorViewController = BBTaskEditorViewController()
         if bubbleView.tag != 0 {
             taskEditorViewController.taskID = bubbleView.tag
-            taskEditorViewController.editTask = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(bubbleView.tag)
+            taskEditorViewController.editTask = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(bubbleView.tag)!
         }
         self.navigationController?.pushViewController(taskEditorViewController, animated: true)
     }
@@ -266,14 +280,27 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         // after push, remove the view with taskID from the visibleTaskViews
         var view = self.visibleTaskViews[i]
         view.removeFromSuperview()
+
         self.visibleTaskViews.removeAtIndex(i)
-//        if self.taskCenterBubbleView._taskID > 0 {
-//            tmp = self.taskCenterBubbleView._taskID!
-//            // then pop centerBubbleView
-//            self.popBubbleTask(tmp)
-//        } else {
-//            self.layoutTasksAnimated(true)
-//        }
+        if self.taskCenterBubbleView._taskID > 0 {
+            tmp = self.taskCenterBubbleView._taskID!
+            // then pop centerBubbleView
+            self.popBubbleTask(tmp)
+        } else {
+            self.layoutTasksAnimated(true)
+        }
+    }
+    
+    func didTapColorBtn(sender:UIButton){
+        var btn: UIButton = sender as UIButton
+        var index =  btn.tag
+        editTask?._category = TaskCategory.fromRaw(index)!
+    }
+    
+    func didTapIconBtn(sender:UIButton){
+        var btn: UIButton = sender as UIButton
+        var index =  btn.tag
+        editTask?._icon = TaskIcon.fromRaw(index)!
     }
 }
 

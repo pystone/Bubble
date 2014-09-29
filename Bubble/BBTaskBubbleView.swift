@@ -15,7 +15,7 @@ protocol BBTaskBubbleViewProtocol {
     func startBubbleViewTask(bubbleView:BBTaskBubbleView)
 }
 
-class BBTaskBubbleView: BBBubbleView {
+class BBTaskBubbleView: BBBubbleView{
     
     var bubbleText: String? {
         didSet {
@@ -165,4 +165,6 @@ class BBTaskBubbleView: BBBubbleView {
             previewView.showMySelf(self.bubbleColor!, origin: self.frame.origin, radius: self.bubbleRadius)
         }
     }
+    
+
 }

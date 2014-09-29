@@ -9,10 +9,30 @@
 import Foundation
 import UIKit
 
+protocol eventCreationProtocol{
+    func didTapColorBtn(sender:UIButton)
+    func didTapIconBtn(sender:UIButton)
+}
+
 class BBIconSelectionBoard: UIView{
     
+    var delegate:eventCreationProtocol?
     var originGapx:CGFloat = 20
     var originGapy:CGFloat = 20
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.delegate = BBTaskViewController()
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override init() {
+        super.init()
+    }
+
     func generateButton(type:BBBoardType){
         if type == BBBoardType.colorBoard{
             var originX:CGFloat = 0
@@ -21,7 +41,8 @@ class BBIconSelectionBoard: UIView{
                 var colorBtn: UIButton = UIButton(frame: CGRectMake(originX, originY, 35, 35))
                 var colorPicPath = colorList[index] + ".png"
                 colorBtn.setBackgroundImage(UIImage(named: colorPicPath), forState: .Normal)
-                colorBtn.addTarget(self, action: Selector("colorBtnPressed"), forControlEvents: .TouchUpInside)
+                colorBtn.addTarget(self, action: Selector("colorBtnPressed:"), forControlEvents: .TouchUpInside)
+                colorBtn.tag = index
                 self.addSubview(colorBtn)
                 originX += 35 + originGapx
                 if index == 3{
@@ -36,7 +57,8 @@ class BBIconSelectionBoard: UIView{
                 var iconBtn: UIButton = UIButton(frame: CGRectMake(originX, originY, 35, 35))
                 var iconPicPath = iconList[index] + ".png"
                 iconBtn.setBackgroundImage(UIImage(named: iconPicPath), forState: .Normal)
-                iconBtn.addTarget(self, action: Selector("iconBtnPressed"), forControlEvents: .TouchUpInside)
+                iconBtn.addTarget(self, action: Selector("iconBtnPressed:"), forControlEvents: .TouchUpInside)
+                iconBtn.tag = index
                 self.addSubview(iconBtn)
                 originX += 35 + originGapx
                 if index == 3{
@@ -51,12 +73,12 @@ class BBIconSelectionBoard: UIView{
             generateButton(type)
     }
     
-    func colorBtnPressed(sender:UIButton){
-        
+    func colorBtnPressed(sender:UIButton!){
+        self.delegate?.didTapColorBtn(sender)
     }
     
-    func iconBtnPressed(sender:UIButton){
-        
+    func iconBtnPressed(sender:UIButton!){
+        self.delegate?.didTapIconBtn(sender)
     }
     
 }
