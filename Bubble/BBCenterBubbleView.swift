@@ -46,9 +46,9 @@ class BBCenterBubbleView: BBBubbleView {
         self.taskDueLabel.textAlignment = NSTextAlignment.Center
         
         // currently, we do not allow customization
-        self.taskNameLabel.textColor = UIColor.whiteColor()
-        self.taskTimerLabel.textColor = UIColor.whiteColor()
-        self.taskDueLabel.textColor = UIColor.whiteColor()
+        self.taskNameLabel.textColor = UIColor.darkTextColor()
+        self.taskTimerLabel.textColor = UIColor.darkTextColor()
+        self.taskDueLabel.textColor = UIColor.darkTextColor()
         
         self.taskTimerLabel.font = UIFont.systemFontOfSize(44)
         self.taskNameLabel.font = UIFont.systemFontOfSize(26)
@@ -74,7 +74,7 @@ class BBCenterBubbleView: BBBubbleView {
         var frame = CGRectMake(origin.x, origin.y, 2*radius, 2*radius)
         self.init(frame: frame)
         
-        self.bubbleColor = UIColor(white: 0.6, alpha: 0.4)
+        self.bubbleColor = UIColor(red: 235/255.0, green: 252/255.0, blue: 1.0, alpha: 1.0)
         self.bubbleRadius = radius
         
         // to be implemented!
