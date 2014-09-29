@@ -72,7 +72,9 @@ let CALENDAR_DATA_NOTIFICATION = "didFinishedLoadingCalendarData"
 let ResourcePath: [String: String] = [
     "DueIcon": "due_icon",
     "LineAndMoreImage": "line_and_more",
-    "TouMing": "touming"
+    "TouMing": "touming",
+    "AddIcon": "add_icon",
+    "ShareIcon": "share_icon"
 ]
 
 let BlurAlpha = CGFloat(0.85)

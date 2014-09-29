@@ -13,6 +13,7 @@ class BBShareView: BBBubbleView {
     let bigCircleRadius : CGFloat = 0.0
     var bigCircleCenter: CGPoint!
     var taskViewController: BBTaskViewController!
+    var iconView: UIImageView!
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -35,9 +36,13 @@ class BBShareView: BBBubbleView {
         var frame = CGRectMake(origin.x, origin.y, 2*radius, 2*radius)
         self.init(frame:frame)
         // this is temporary, should be implemented!
-        self.bubbleColor = UIColor.greenColor()
+        self.bubbleColor = UIColor.yellowColor()
         self.bubbleRadius = radius
         
+        let shareImg = UIImage(named: ResourcePath["ShareIcon"]!)
+        self.iconView = UIImageView(image: shareImg)
+        self.iconView.frame = CGRectMake((self.frame.size.width-shareImg.size.width)/2, (self.frame.size.height-shareImg.size.height)/2, shareImg.size.width, shareImg.size.height)
+        self.addSubview(iconView)
     }
     
     override func layoutSubviews() {
@@ -75,7 +80,7 @@ class BBShareView: BBBubbleView {
     
     override func bubbleViewDidTap(sender: UITapGestureRecognizer) {
         var words = ""
-        if self.taskViewController.currentTaskID != nil {
+        if self.taskViewController.currentTaskID > 0 {
             let task = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(self.taskViewController.currentTaskID)
             words = "Busy with my due now. It's \(task?._title), due within \(task?.getReadableDueTimeFromTodayForShare()) from now. Already spent \(task?.getReadableSpentTimeForShare()) on it. Excited about it! #Bubble"
             
