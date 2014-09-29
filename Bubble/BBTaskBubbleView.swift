@@ -26,8 +26,8 @@ class BBTaskBubbleView: BBBubbleView{
     var bubbleText: String? {
         didSet {
             // retreive the initial letters of bubble text
-//            self.bubbleTextLabel.text = bubbleText?.initalCharacters().uppercaseString
-//            self.bubbleTextLabel.hidden = true
+            self.bubbleTextLabel.text = bubbleText?.initalCharacters().uppercaseString
+            self.bubbleTextLabel.hidden = true
             
         }
     }

@@ -50,8 +50,8 @@ class BBCenterBubbleView: BBBubbleView {
         self.taskTimerLabel.textColor = UIColor.whiteColor()
         self.taskDueLabel.textColor = UIColor.whiteColor()
         
-        self.taskTimerLabel.font = UIFont.systemFontOfSize(44)
-        self.taskNameLabel.font = UIFont.systemFontOfSize(26)
+        self.taskTimerLabel.font = UIFont.systemFontOfSize(40)
+        self.taskNameLabel.font = UIFont.systemFontOfSize(22)
         self.taskDueLabel.font = UIFont.systemFontOfSize(16)
         
         self.emptyTimeLabel.textColor = UIColor.darkTextColor()
@@ -113,6 +113,16 @@ class BBCenterBubbleView: BBBubbleView {
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
+    }
+    
+    override func setContent() {
+        if (self._taskID==nil || self._taskID == -1) {
+            return;
+        }
+        let task = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(_taskID!)
+        if task != nil {
+            self.taskNameLabel.text = task!._title
+        }
     }
     
     func setTaskName(name: String) {
