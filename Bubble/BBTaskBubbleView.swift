@@ -13,6 +13,12 @@ protocol BBTaskBubbleViewProtocol {
     func bubbleViewDidTap(sender:UITapGestureRecognizer)
     func bubbleViewDidPan(sender:UIPanGestureRecognizer)
     func startBubbleViewTask(bubbleView:BBTaskBubbleView)
+    func finishTask(taskView:BBTaskBubbleView)
+    func deleteTask(taskView:BBTaskBubbleView)
+    func enterFinishTaskArea()
+    func leaveFinishTaskArea()
+    func enterDeleteTaskArea()
+    func leaveDeleteTaskArea()
 }
 
 class BBTaskBubbleView: BBBubbleView{
@@ -133,6 +139,13 @@ class BBTaskBubbleView: BBBubbleView{
         return magnitude < bigCircleRadius + self.bubbleRadius;
     }
     
+    func inFinishArea(area: CGRect) -> Bool {
+        return CGRectIntersectsRect(area, FinishTaskArea)
+    }
+    
+    func inDeleteArea(area: CGRect) -> Bool {
+        return CGRectIntersectsRect(area, DeleteTaskArea)
+    }
     
     override func bubbleViewDidPan(sender: UIPanGestureRecognizer) {
         self.delegate?.bubbleViewDidPan(sender)
@@ -143,8 +156,29 @@ class BBTaskBubbleView: BBBubbleView{
         sender.view?.center = CGPointMake(newOriginX, newOriginY)
         sender.setTranslation(CGPointZero, inView:self.superview)
         
-        if self.circlesIntersection() {
-            self.delegate?.startBubbleViewTask(self)
+        if sender.state == .Ended {
+            println("task view: touch ends")
+            if self.circlesIntersection() {
+                self.delegate?.startBubbleViewTask(self)
+            }
+            
+            if self.inFinishArea(self.frame) == true {
+                self.delegate?.finishTask(self)
+            } else if self.inDeleteArea(self.frame) == true {
+                self.delegate?.deleteTask(self)
+            }
+        }
+        else {
+            
+            
+            if self.inFinishArea(self.frame) == true {
+                self.delegate?.enterFinishTaskArea()
+            } else if self.inDeleteArea(self.frame) == true {
+                self.delegate?.enterDeleteTaskArea()
+            } else {
+                self.delegate?.leaveDeleteTaskArea()
+                self.delegate?.leaveFinishTaskArea()
+            }
         }
     }
     
@@ -163,6 +197,4 @@ class BBTaskBubbleView: BBBubbleView{
             previewView.showMySelf(self.bubbleColor!, origin: self.frame.origin, radius: self.bubbleRadius)
         }
     }
-    
-
 }

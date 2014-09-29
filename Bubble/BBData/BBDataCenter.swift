@@ -69,6 +69,12 @@ class BBDataCenter {
         }
         else {
             self._unfinishedTasks.removeValueForKey(id);
+            
+            var newDuration = BBDuration()
+            newDuration._endTime = NSDate()
+            newDuration._startTime = newDuration._endTime.dateByAddingTimeInterval(-1)
+            task?._duration.append(newDuration)
+            
             self._finishedTasks.updateValue(task!, forKey: id);
             saveToFile();
             return false;

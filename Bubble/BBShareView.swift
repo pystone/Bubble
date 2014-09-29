@@ -36,7 +36,7 @@ class BBShareView: BBBubbleView {
         var frame = CGRectMake(origin.x, origin.y, 2*radius, 2*radius)
         self.init(frame:frame)
         // this is temporary, should be implemented!
-        self.bubbleColor = UIColor.yellowColor()
+        self.bubbleColor = UIColor.clearColor()
         self.bubbleRadius = radius
         
         let shareImg = UIImage(named: ResourcePath["ShareIcon"]!)
