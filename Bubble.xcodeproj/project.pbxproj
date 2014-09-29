@@ -110,7 +110,7 @@
 		310E680719D5A32700C8D0EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		310E680819D5A32700C8D0EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		310E680D19D5A32700C8D0EE /* BBTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBTaskViewController.swift; sourceTree = "<group>"; };
-		310E681219D5A32700C8D0EE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		310E681219D5A32700C8D0EE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Bubble/Images.xcassets; sourceTree = "<group>"; };
 		310E681519D5A32700C8D0EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		310E681B19D5A32700C8D0EE /* BubbleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BubbleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		310E682019D5A32700C8D0EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -171,6 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				310E680519D5A32700C8D0EE /* Bubble */,
+				310E681219D5A32700C8D0EE /* Images.xcassets */,
+				310E681419D5A32700C8D0EE /* LaunchScreen.xib */,
 				310E681E19D5A32700C8D0EE /* BubbleTests */,
 				310E680419D5A32700C8D0EE /* Products */,
 			);
@@ -188,19 +190,17 @@
 		310E680519D5A32700C8D0EE /* Bubble */ = {
 			isa = PBXGroup;
 			children = (
-				0C35AEDF19D73721002FC55F /* BBData */,
 				310E680819D5A32700C8D0EE /* AppDelegate.swift */,
-				31A81CE619D8385C00F3284F /* Controllers */,
-				31A81CE519D8384800F3284F /* Views */,
 				28FF93EB19D7341C000815A8 /* BBAppIntroMgr.swift */,
 				31A81CF119D885BE00F3284F /* Color+BBExtension.swift */,
 				310E683519D5EC3000C8D0EE /* String+BBExtension.swift */,
 				0C35AF2619D887DD002FC55F /* UIViewExtension.swift */,
 				28C0E5AD19D795A800C3A4DF /* SwiftyJSON.swift */,
 				0C35AF1A19D7E4F7002FC55F /* BBConfig.swift */,
+				0C35AEDF19D73721002FC55F /* BBData */,
+				31A81CE619D8385C00F3284F /* Controllers */,
+				31A81CE519D8384800F3284F /* Views */,
 				28FF93CE19D7309C000815A8 /* CalenderData */,
-				310E681219D5A32700C8D0EE /* Images.xcassets */,
-				310E681419D5A32700C8D0EE /* LaunchScreen.xib */,
 				31D7E11E19D7C23B00B2EC9A /* Resources */,
 				310E680619D5A32700C8D0EE /* Supporting Files */,
 			);
@@ -462,6 +462,7 @@
 				310E681519D5A32700C8D0EE /* Base */,
 			);
 			name = LaunchScreen.xib;
+			path = Bubble;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

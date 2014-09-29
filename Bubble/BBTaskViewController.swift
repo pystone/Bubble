@@ -135,10 +135,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
             self.visibelTaskViews.append(taskView)
             self.view.addSubview(taskView)
         }
-
         self.layoutTasksAnimated(true)
-        
-//        self.view.addBlurEffect()
     }
     
     func taskExistInView(taskID: Int) -> Bool {
