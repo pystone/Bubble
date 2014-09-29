@@ -81,3 +81,6 @@ let BlurAlpha = CGFloat(0.85)
 let BlurTransitionTime = NSTimeInterval(0.7)
 let BlurViewTag = 999
 
+let ScreenBounds = UIScreen.mainScreen().bounds
+let FinishTaskArea = CGRectMake(0, 0, 20, ScreenBounds.height/3)
+let DeleteTaskArea = CGRectMake(ScreenBounds.width-20, 0, 20, ScreenBounds.height/3)

@@ -27,6 +27,8 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     var taskBubbleViewAdder: BBStillBubbleView!
     var currentTaskID: Int!
     var sharingBubbleView: BBShareView!
+    var finishTaskView: UIImageView!
+    var deleteTaskView: UIImageView!
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -47,6 +49,18 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         var origin: CGPoint = CGPointMake(CGRectGetMidX(self.view.bounds)-centerViewRadius, CGRectGetMidY(self.view.bounds)-centerViewRadius)
         self.taskCenterBubbleView = BBCenterBubbleView(origin: origin, radius: centerViewRadius)
         self.view.addSubview(self.taskCenterBubbleView)
+        
+        self.finishTaskView = UIImageView(image: UIImage(named: "green-rect.png"))
+        self.finishTaskView.frame = FinishTaskArea
+        self.finishTaskView.addBlurEffect()
+        self.finishTaskView.hidden = true
+        self.view.addSubview(self.finishTaskView)
+        
+        self.deleteTaskView = UIImageView(image: UIImage(named: "red-rect.png"))
+        self.deleteTaskView.frame = DeleteTaskArea
+        self.deleteTaskView.addBlurEffect()
+        self.deleteTaskView.hidden = true
+        self.view.addSubview(self.deleteTaskView)
         
         // configure the available rects
         // we spilit the left area to seven segments
@@ -110,7 +124,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         self.view.addSubview(self.taskCenterBubbleView)
         
         var sharingOrigin = adderOrigin
-        sharingOrigin.x -= 100
+        sharingOrigin.x -= 180
         
         self.sharingBubbleView = BBShareView(origin: sharingOrigin, radius: adderRadius)
         self.sharingBubbleView.taskViewController = self
@@ -228,6 +242,61 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         self.pushBubbleTask(bubbleView._taskID!)
     }
     
+    func finishTask(taskView:BBTaskBubbleView) {
+        println("controller: finish task")
+        self.leaveFinishTaskArea()
+        
+        let taskID = taskView._taskID
+        var toDel = -1
+        for i in 0...self.visibelTaskViews.endIndex-1 {
+            let view: BBTaskBubbleView = self.visibelTaskViews[i]
+            if view._taskID == taskID {
+                toDel = i
+                break
+            }
+        }
+        if toDel != -1 {
+            println("controller: task finished")
+            taskView.removeFromSuperview()
+            self.visibelTaskViews.removeAtIndex(toDel)
+            BBDataCenter.sharedDataCenter().finishTask(taskID!)
+        }
+    }
+    func deleteTask(taskView:BBTaskBubbleView) {
+        println("controller: delete task")
+        self.leaveDeleteTaskArea()
+        
+        let taskID = taskView._taskID
+        var toDel = -1
+        for i in 0...self.visibelTaskViews.endIndex-1 {
+            let view: BBTaskBubbleView = self.visibelTaskViews[i]
+            if view._taskID == taskID {
+                toDel = i
+                break
+            }
+        }
+        if toDel != -1 {
+            println("controller: task deleted")
+            taskView.removeFromSuperview()
+            self.visibelTaskViews.removeAtIndex(toDel)
+            BBDataCenter.sharedDataCenter().removeUnfinishedTask(toDel)
+        }
+    }
+    func enterFinishTaskArea() {
+        self.finishTaskView.hidden = false
+        self.deleteTaskView.hidden = true
+    }
+    func leaveFinishTaskArea() {
+        self.finishTaskView.hidden = true
+    }
+    func enterDeleteTaskArea() {
+        self.finishTaskView.hidden = true
+        self.deleteTaskView.hidden = false
+    }
+    func leaveDeleteTaskArea() {
+        self.deleteTaskView.hidden = true
+    }
+    
     func popBubbleTask(taskID: Int) {
         if taskID <= 0 {
             return
@@ -258,13 +327,14 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         var view = self.visibelTaskViews[i]
         view.removeFromSuperview()
         self.visibelTaskViews.removeAtIndex(i)
-        if self.taskCenterBubbleView._taskID > 0 {
-            tmp = self.taskCenterBubbleView._taskID!
-            // then pop centerBubbleView
-            self.popBubbleTask(tmp)
-        } else {
-            self.layoutTasksAnimated(true)
-        }
+//        if self.taskCenterBubbleView._taskID > 0 {
+//            tmp = self.taskCenterBubbleView._taskID!
+//            // then pop centerBubbleView
+//            self.popBubbleTask(tmp)
+//        } else {
+//            self.layoutTasksAnimated(true)
+//        }
+        
     }
 }
 

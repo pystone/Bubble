@@ -92,4 +92,8 @@ class BBBubbleView: UIView {
     func bubbleViewDidPan(sender: UIPanGestureRecognizer) {
         // subclass can implment this method as needed
     }
+    
+    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+        // subclass can implement this method as needed
+    }
 }
