@@ -27,6 +27,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
     var availableRects: [BubbleRect]!
     var taskBubbleViewAdder: BBTaskBubbleView!
     var currentTaskID: Int!
+    var sharingBubbleView: BBShareView!
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -103,6 +104,15 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol {
         self.taskBubbleViewAdder.delegate = self
         self.view.addSubview(self.taskBubbleViewAdder)
         self.view.addSubview(self.taskCenterBubbleView)
+        
+        var sharingOrigin = adderOrigin
+        sharingOrigin.x -= 100
+        
+//        self.availableRects.append(BubbleRect(rect: adderOrigin, count: 0, totalCount: 2))
+        self.sharingBubbleView = BBShareView(origin: sharingOrigin, radius: adderRadius)
+        self.sharingBubbleView.taskViewController = self
+        self.view.addSubview(self.sharingBubbleView)
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("layoutTaskBubbles"),
             name: CALENDAR_DATA_NOTIFICATION, object: nil)
