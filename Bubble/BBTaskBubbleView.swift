@@ -143,8 +143,10 @@ class BBTaskBubbleView: BBBubbleView {
         sender.view?.center = CGPointMake(newOriginX, newOriginY)
         sender.setTranslation(CGPointZero, inView:self.superview)
         
-        if self.circlesIntersection() {
-            self.delegate?.startBubbleViewTask(self)
+        if sender.state == UIGestureRecognizerState.Ended {
+            if self.circlesIntersection() {
+                self.delegate?.startBubbleViewTask(self)
+            }
         }
     }
     
