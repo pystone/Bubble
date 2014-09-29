@@ -179,18 +179,6 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol, eventCre
 
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        if (editTask?._category != nil && editTask?._icon != nil){
-            var taskView = BBTaskBubbleView(origin: CGPointMake(50.0, 60.0), radius: 30.0)
-            taskView._taskID = editTask?._id
-            taskView.delegate = self
-            taskView.bubbleColor =  editTask?.getColor()
-            taskView.tag = editTask._id
-            self.visibleTaskViews.append(taskView)
-            self.view.addSubview(taskView)
-            
-            self.layoutTasksAnimated(true)
-        }
     }
     
     override func viewDidLoad() {
@@ -363,16 +351,9 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol, eventCre
         self.taskCenterBubbleView.accumulateTime = 0;
     }
     
-    func didTapColorBtn(sender:UIButton){
-        var btn: UIButton = sender as UIButton
-        var index =  btn.tag
-        editTask?._category = TaskCategory.fromRaw(index)!
+    func haveGetNewItem(task:BBTask) {
+        BBDataCenter.sharedDataCenter().addNewTask(task)
     }
     
-    func didTapIconBtn(sender:UIButton){
-        var btn: UIButton = sender as UIButton
-        var index =  btn.tag
-        editTask?._icon = TaskIcon.fromRaw(index)!
-    }
 }
 

@@ -114,21 +114,6 @@ class BBTaskEditorViewController: UIViewController,UITextFieldDelegate{
     }
     
     
-//    func dp(sender: UITextField) {
-//        
-//        var datePickerView  : UIDatePicker = UIDatePicker()
-//        datePickerView.datePickerMode = UIDatePickerMode.Date
-//        sender.inputView = datePickerView
-//        datePickerView.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents: UIControlEvents.ValueChanged)
-//        
-//    }
-    
-//    func handleDatePicker(sender: UIDatePicker) {
-//        var dateFormatter = NSDateFormatter()
-//        dateFormatter.dateFormat = "dd MMM yyyy"
-//        textfieldjobdate.text = dateFormatter.stringFromDate(sender.date)
-//    }
-    
     func popupDatePicker() {
         var datePicker = UIDatePicker(frame: CGRectZero)
     }

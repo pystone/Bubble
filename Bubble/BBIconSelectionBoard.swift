@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 
 protocol eventCreationProtocol{
-    func didTapColorBtn(sender:UIButton)
-    func didTapIconBtn(sender:UIButton)
+    func haveGetNewItem(task:BBTask)
 }
 
 class BBIconSelectionBoard: UIView{
@@ -19,6 +18,9 @@ class BBIconSelectionBoard: UIView{
     var delegate:eventCreationProtocol?
     var originGapx:CGFloat = 20
     var originGapy:CGFloat = 20
+    var newTask:BBTask?
+    var color:TaskCategory?
+    var icon:TaskIcon?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -74,11 +76,33 @@ class BBIconSelectionBoard: UIView{
     }
     
     func colorBtnPressed(sender:UIButton!){
-        self.delegate?.didTapColorBtn(sender)
+        var btn: UIButton = sender as UIButton
+        var index =  btn.tag
+        color = TaskCategory.fromRaw(index)!
+        didGetNewItem()
     }
     
     func iconBtnPressed(sender:UIButton!){
-        self.delegate?.didTapIconBtn(sender)
+        var btn: UIButton = sender as UIButton
+        var index =  btn.tag
+        icon = TaskIcon.fromRaw(index)!
+        didGetNewItem()
+    }
+    
+    func didGetNewItem(){
+         if (color != TaskCategory.None && icon != TaskIcon.None){
+            newTask = BBTask()
+            if icon == nil{
+                 icon = TaskIcon.Reading
+            }
+            if color == nil{
+                 color = TaskCategory.Yellow
+            }
+            newTask?._category = color!
+            newTask?._icon = icon!
+            self.delegate?.haveGetNewItem(newTask!)
+            
+        }
     }
     
 }
