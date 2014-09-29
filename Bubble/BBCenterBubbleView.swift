@@ -15,12 +15,12 @@ class BBCenterBubbleView: BBBubbleView {
     var taskNameLabel: UILabel!
     var taskTimerLabel: UILabel!
     var taskDueLabel: UILabel!
+    var emptyTimeLabel: UILabel!
     var taskTimer: NSTimer!
     var accumulateTime: UInt64!
     
     var bubbleWaver: BBWaverView!
     var maskImageView: UIImageView!
-    var bubbleState:BigBubbleState!
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -34,6 +34,10 @@ class BBCenterBubbleView: BBBubbleView {
         self.taskNameLabel.adjustsFontSizeToFitWidth = false
         self.taskNameLabel.numberOfLines = 0
         self.taskNameLabel.textAlignment = NSTextAlignment.Center
+        
+        self.emptyTimeLabel = UILabel()
+        self.emptyTimeLabel.adjustsFontSizeToFitWidth = false
+        self.emptyTimeLabel.textAlignment = NSTextAlignment.Center
         
         self.taskTimerLabel = UILabel()
         self.taskTimerLabel.textAlignment = NSTextAlignment.Center
@@ -50,9 +54,13 @@ class BBCenterBubbleView: BBBubbleView {
         self.taskNameLabel.font = UIFont.systemFontOfSize(26)
         self.taskDueLabel.font = UIFont.systemFontOfSize(16)
         
+        self.emptyTimeLabel.textColor = UIColor.darkTextColor()
+        self.emptyTimeLabel.font = UIFont.systemFontOfSize(46)
+        
         self.bubbleWaver = BBWaverView()
         self.bubbleView.addSubview(self.bubbleWaver)
         
+        self.bubbleView.addSubview(self.emptyTimeLabel)
         self.bubbleView.addSubview(self.taskNameLabel)
         self.bubbleView.addSubview(self.taskTimerLabel)
         self.bubbleView.addSubview(self.taskDueLabel)
@@ -66,14 +74,12 @@ class BBCenterBubbleView: BBBubbleView {
         var frame = CGRectMake(origin.x, origin.y, 2*radius, 2*radius)
         self.init(frame: frame)
         
-        self.bubbleColor = UIColor.lightGrayColor()
+        self.bubbleColor = UIColor(white: 0.6, alpha: 0.4)
         self.bubbleRadius = radius
-        self.bubbleState = BigBubbleState.noTask
         
         // to be implemented!
-        self.taskDueLabel.text = "12d"
-        self.taskNameLabel.text = "Computer Netowrks"
-        self.taskTimerLabel.text = "0:00:00"
+        self.taskDueLabel.text = ""
+        self.startTaskTimer()
     }
     
     override func layoutSubviews() {
@@ -86,6 +92,8 @@ class BBCenterBubbleView: BBBubbleView {
         
         var segmentHeight = height / 5.0
         var originY:CGFloat = 0.8*segmentHeight
+        
+        self.emptyTimeLabel.frame = CGRectMake(0.0, 1.2*segmentHeight, width, segmentHeight)
         
         // 5 segments
         frame = CGRectMake(0.0, originY, width, segmentHeight)
@@ -132,15 +140,24 @@ class BBCenterBubbleView: BBBubbleView {
     }
     
     func updateTaskTimerLabel() {
-        self.accumulateTime = self.accumulateTime + 1
-        var tmp: UInt64 = self.accumulateTime
-        var hour, minutes, seconds: UInt64
-        hour = tmp / 3600
-        tmp = tmp - hour*3600
-        minutes = tmp / 60
-        tmp = tmp - minutes*60
-        seconds = tmp
-        self.taskTimerLabel.text = String(format: "%d:%02d:%02d", arguments: [hour, minutes, seconds])
+        if (self._taskID < 0) {
+            // no task yet
+            self.emptyTimeLabel.hidden = false
+            var dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "h:mm"
+            self.emptyTimeLabel.text = dateFormatter.stringFromDate(NSDate())
+        } else {
+            self.emptyTimeLabel.hidden = true
+            self.accumulateTime = self.accumulateTime + 1
+            var tmp: UInt64 = self.accumulateTime
+            var hour, minutes, seconds: UInt64
+            hour = tmp / 3600
+            tmp = tmp - hour*3600
+            minutes = tmp / 60
+            tmp = tmp - minutes*60
+            seconds = tmp
+            self.taskTimerLabel.text = String(format: "%d:%02d:%02d", arguments: [hour, minutes, seconds])
+        }
     }
     
     override func bubbleViewDidPan(sender: UIPanGestureRecognizer) {

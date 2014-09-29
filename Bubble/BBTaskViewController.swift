@@ -22,12 +22,12 @@ struct BubbleRect {
 
 class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCreationProtocol {
     var taskCenterBubbleView: BBCenterBubbleView!
-    var visibleTaskList: [BBTask]!
     var visibelTaskViews: [BBTaskBubbleView]!
     var availableRects: [BubbleRect]!
-    var taskBubbleViewAdder: BBTaskBubbleView!
+    var taskBubbleViewAdder: BBStillBubbleView!
     var currentTaskID: Int!
     var editTask : BBTask!
+    var sharingBubbleView: BBShareView!
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -40,7 +40,6 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
     
     override init() {
         super.init()
-        self.visibleTaskList = Array()
         self.availableRects = Array()
         self.visibelTaskViews = Array()
         self.editTask = BBTask()
@@ -54,9 +53,11 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
         // configure the available rects
         // we spilit the left area to seven segments
         // the first segment
-        var originY = UIApplication.sharedApplication().statusBarFrame.height
-        var originX:CGFloat = 0.0, leftSegWidth = origin.x, midSegWidth = 2*centerViewRadius
-        var rightSegWidth = UIScreen.mainScreen().bounds.size.width-leftSegWidth-midSegWidth
+        var originY = UIApplication.sharedApplication().statusBarFrame.height + 10.0
+        var xOffset:CGFloat = 5.0, yOffset:CGFloat = 5.0
+        var originX:CGFloat = xOffset, leftSegWidth = origin.x - xOffset
+        var midSegWidth = 2*centerViewRadius
+        var rightSegWidth = UIScreen.mainScreen().bounds.size.width-leftSegWidth-midSegWidth-yOffset
         var rect = CGRectMake(originX, originY, leftSegWidth, origin.y-originY)
         self.availableRects.append(BubbleRect(rect: rect, count: 0, totalCount: 1))
         
@@ -71,7 +72,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
         self.availableRects.append(BubbleRect(rect: rect, count: 0, totalCount: 1))
         
         // the fourth segment
-        originX = 0.0
+        originX = xOffset
         originY = originY + rect.height
         rect = CGRectMake(originX, originY, leftSegWidth, midSegWidth)
         self.availableRects.append(BubbleRect(rect: rect, count: 0, totalCount: 1))
@@ -82,16 +83,16 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
         self.availableRects.append(BubbleRect(rect: rect, count: 0, totalCount: 1))
         
         // the sixth segment
-        originX = 0.0
+        originX = xOffset
         originY = originY + midSegWidth
-        var bottomHeight = self.view.bounds.size.height - originY
+        var bottomHeight = self.view.bounds.size.height - originY - 5.0
         rect = CGRectMake(originX, originY, leftSegWidth, bottomHeight)
         self.availableRects.append(BubbleRect(rect: rect, count: 0, totalCount: 1))
         
         // the seventh segment
         originX = originX + leftSegWidth
-        // this is for the stupid task adder bubble
-        midSegWidth -= 25.0
+        // this is for the stupid task adder bubble and share bubble
+        midSegWidth -= 50.0
         rect = CGRectMake(originX, originY, midSegWidth, bottomHeight)
         self.availableRects.append(BubbleRect(rect: rect, count: 0, totalCount: 2))
         
@@ -101,10 +102,22 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
         
         var adderOrigin = CGPointMake(addX, addY)
         // init the task bubble view adder
-        self.taskBubbleViewAdder = BBTaskBubbleView(origin: adderOrigin, radius: adderRadius)
+        self.taskBubbleViewAdder = BBStillBubbleView(origin: adderOrigin, radius: adderRadius)
         self.taskBubbleViewAdder.delegate = self
+        
+        self.taskBubbleViewAdder.bubbleTaskIconView.hidden = false
+        self.taskBubbleViewAdder.bubbleTaskIcon = UIImage(named: "icon-add-normal")
+        
         self.view.addSubview(self.taskBubbleViewAdder)
         self.view.addSubview(self.taskCenterBubbleView)
+        
+        var sharingOrigin = adderOrigin
+        sharingOrigin.x -= 100
+        
+        self.sharingBubbleView = BBShareView(origin: sharingOrigin, radius: adderRadius)
+        self.sharingBubbleView.taskViewController = self
+        self.view.addSubview(self.sharingBubbleView)
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("layoutTaskBubbles"),
             name: CALENDAR_DATA_NOTIFICATION, object: nil)
@@ -129,10 +142,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
             self.visibelTaskViews.append(taskView)
             self.view.addSubview(taskView)
         }
-
         self.layoutTasksAnimated(true)
-        
-//        self.view.addBlurEffect()
     }
     
     func taskExistInView(taskID: Int) -> Bool {
@@ -172,6 +182,8 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
     func layoutTasksAnimated(animated: Bool) {
         var centerRect = self.taskCenterBubbleView.frame
         
+        var maxVisibleCount = 8, count = 0
+        
         for taskView: BBTaskBubbleView in self.visibelTaskViews {
             var tw = CGRectGetWidth(taskView.bounds), th = CGRectGetHeight(taskView.bounds)
             var full = true
@@ -184,6 +196,10 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
                         // does not work
                     } else {
                         full = false
+                        count++
+                        if count >= maxVisibleCount {
+                            break;
+                        }
                         tmpw = taskView.bounds.size.width / 2.0
                         tmph = taskView.bounds.size.height / 2.0
 
@@ -199,11 +215,12 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
                     self.availableRects[i].bubbleCount = bubbleRect.bubbleCount
                     break;
                 }
+                
             }
             if full == true {
                 break;
             }
-    }
+        }
     }
     
     func bubbleViewDidTap(sender: UITapGestureRecognizer) {
@@ -222,9 +239,47 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
     
     func startBubbleViewTask(bubbleView: BBTaskBubbleView) {
         // push bubbleView and pop the current task
-        if (self.currentTaskID < 0) {
-            // no task undergoing
+        self.pushBubbleTask(bubbleView._taskID!)
+    }
+    
+    func popBubbleTask(taskID: Int) {
+        if taskID <= 0 {
+            return
         }
+        var newBubbleView = BBTaskBubbleView(origin: CGPointMake(60.0, 60.0), radius: 35.0)
+        // then we add to the visibelBubbleList
+        self.visibelTaskViews.append(newBubbleView)
+        newBubbleView._taskID = taskID
+        self.view.addSubview(newBubbleView)
+        self.layoutTasksAnimated(true)
+    }
+    
+    func pushBubbleTask(taskID: Int) {
+        // remove the bubbleView from visibleBubbleViews
+        var tmp = -1, i = 0
+        for i in 0..<self.visibelTaskViews.count {
+            // find the match one 
+            if (taskID == self.visibelTaskViews[i]._taskID) {
+                break
+            }
+        }
+        if self.taskCenterBubbleView._taskID == taskID {
+            return
+        }
+        self.taskCenterBubbleView.bubbleWaver.waverColor = self.visibelTaskViews[i].bubbleColor
+        self.taskCenterBubbleView._taskID = taskID
+        // after push, remove the view with taskID from the visibelTaskViews
+        var view = self.visibelTaskViews[i]
+        view.removeFromSuperview()
+        self.visibelTaskViews.removeAtIndex(i)
+        if self.taskCenterBubbleView._taskID > 0 {
+            tmp = self.taskCenterBubbleView._taskID!
+            // then pop centerBubbleView
+            self.popBubbleTask(tmp)
+        } else {
+            self.layoutTasksAnimated(true)
+        }
+<<<<<<< HEAD
         println("should be here")
         // change center bubble view color
         // change the center buble fill color
@@ -244,5 +299,8 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
     }
 
     
+=======
+    }
+>>>>>>> FETCH_HEAD
 }
 

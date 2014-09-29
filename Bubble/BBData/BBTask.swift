@@ -70,6 +70,30 @@ class BBTask {
         return readable
     }
     
+    func getReadableDueTimeFromTodayForShare() -> String! {
+        let now = NSDate()
+        let interval = self._due.timeIntervalSinceDate(now)
+        
+        if interval <= 0 {
+            return "-1"
+        }
+        
+        var readable = ""
+        if interval/86400 >= 1 {
+            readable = "\(Int(interval/86400)) days"
+        }
+        else if interval/3600 >= 1 {
+            readable = "\(Int(interval/3600)) hours"
+        }
+        else if interval/60 >= 1 {
+            readable = "\(Int(interval/60)) minutes"
+        }
+        else {
+            readable = "\(Int(interval)) seconds"
+        }
+        return readable
+    }
+    
     func getReadableSpentTime() -> String! {
         let totalTime = getTotalSpentTime()
         let date = NSDate(timeIntervalSinceReferenceDate: totalTime)
@@ -78,6 +102,24 @@ class BBTask {
         formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
         
         return "Time Spent - " + formatter.stringFromDate(date)
+    }
+    
+    func getReadableSpentTimeForShare() -> String! {
+        let totalTime = getTotalSpentTime()
+        var readable = ""
+        if totalTime/86400 >= 1 {
+            readable = "\(Int(totalTime/86400)) days"
+        }
+        else if totalTime/3600 >= 1 {
+            readable = "\(Int(totalTime/3600)) hours"
+        }
+        else if totalTime/60 >= 1 {
+            readable = "\(Int(totalTime/60)) minutes"
+        }
+        else {
+            readable = "\(Int(totalTime)) seconds"
+        }
+        return readable
     }
     
     func getColor() -> UIColor! {

@@ -21,18 +21,13 @@ enum TaskCategory: Int {
     case Pink
 }
 
-enum BigBubbleState{
-    case noTask
-    case haveYask
-}
-
 enum BBBoardType{
     case colorBoard
     case iconBoard
 }
 
 let CategoryMap: [TaskCategory: [Int]] = [
-    .None:      [255, 255, 255],
+    .None:      [236, 202, 97],
     .Red:       [236, 117, 97],
     .Orange:    [238, 133, 55],
     .Yellow:    [236, 202, 97],
@@ -78,7 +73,9 @@ let CALENDAR_DATA_NOTIFICATION = "didFinishedLoadingCalendarData"
 let ResourcePath: [String: String] = [
     "DueIcon": "due_icon",
     "LineAndMoreImage": "line_and_more",
-    "TouMing": "touming"
+    "TouMing": "touming",
+    "AddIcon": "add_icon",
+    "ShareIcon": "share_icon"
 ]
 
 let BlurAlpha = CGFloat(0.85)

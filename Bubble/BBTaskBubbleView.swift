@@ -20,18 +20,14 @@ class BBTaskBubbleView: BBBubbleView{
     var bubbleText: String? {
         didSet {
             // retreive the initial letters of bubble text
-            self.bubbleTextLabel.text = bubbleText?.initalCharacters().uppercaseString
-            self.bubbleTextLabel.hidden = false
+//            self.bubbleTextLabel.text = bubbleText?.initalCharacters().uppercaseString
+//            self.bubbleTextLabel.hidden = true
+            
         }
     }
 
     var delegate: BBTaskBubbleViewProtocol?
 
-    var _taskID: Int? {
-        didSet {
-            setContent()
-        }
-    }
 
     var bubbleTextLabel: UILabel!
     var bubbleTextColor: UIColor!
@@ -39,6 +35,7 @@ class BBTaskBubbleView: BBBubbleView{
     var bubbleTaskIcon: UIImage? {
         didSet {
             self.bubbleTaskIconView.hidden = false
+            self.bubbleTaskIconView.image = bubbleTaskIcon
         }
     }
     let bigCircleRadius : CGFloat = 100.0
@@ -84,7 +81,7 @@ class BBTaskBubbleView: BBBubbleView{
         self.bubbleRadius = radius
     }
     
-    func setContent() {
+    override func setContent() {
         if (self._taskID==nil || self._taskID == -1) {
             return;
         }
@@ -92,6 +89,7 @@ class BBTaskBubbleView: BBBubbleView{
         if task != nil {
             self.bubbleText = task!._title
             self.bubbleColor = task!.getColor()
+            self.bubbleTaskIcon = UIImage(named: IconMap[task!._icon]![0])
         }
     }
     
@@ -99,6 +97,7 @@ class BBTaskBubbleView: BBBubbleView{
         var frame = CGRectMake(0.0, 0.0, 2*self.bubbleRadius, 2*self.bubbleRadius)
         self.bubbleView.frame = frame
         // simple implementation
+        frame = CGRectInset(frame, 0.5*self.bubbleRadius, 0.5*self.bubbleRadius)
         self.bubbleTextLabel.frame = frame
         self.bubbleTaskIconView.frame = frame
         
@@ -136,18 +135,17 @@ class BBTaskBubbleView: BBBubbleView{
     
     
     override func bubbleViewDidPan(sender: UIPanGestureRecognizer) {
-
         self.delegate?.bubbleViewDidPan(sender)
-        if self.circlesIntersection() {
-
-            self.delegate?.startBubbleViewTask(self)
-        }
         var offset = sender.translationInView(self.superview!)
         var newOriginX = self.center.x + offset.x
         var newOriginY = self.center.y + offset.y
         
         sender.view?.center = CGPointMake(newOriginX, newOriginY)
         sender.setTranslation(CGPointZero, inView:self.superview)
+        
+        if self.circlesIntersection() {
+            self.delegate?.startBubbleViewTask(self)
+        }
     }
     
     override func bubbleViewDidTap(sender: UITapGestureRecognizer) {

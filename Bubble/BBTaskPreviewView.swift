@@ -11,12 +11,6 @@ import UIKit
 
 class BBTaskPreviewView: BBBubbleView {
     
-    var _taskID: Int? {
-        didSet {
-            self.setContent()
-        }
-    }
-    
     var _dueText: String! {
         didSet {
             // "123d"
@@ -122,7 +116,7 @@ class BBTaskPreviewView: BBBubbleView {
         self.bubbleRadius = radius
     }
     
-    func setContent() {
+    override func setContent() {
         let task = BBDataCenter.sharedDataCenter().getUnfinishedTaskWithID(self._taskID!)
         if task != nil {
             self._dueText = task!.getReadableDueTimeFromToday()
@@ -202,6 +196,19 @@ class BBTaskPreviewView: BBBubbleView {
     }
     
     func moreDetail(sender: UIButton!) {
-        println("more detail tapped")
+    }
+
+    
+    func returnToSmallBall(sender: UIButton) {
+        self._touming.removeFromSuperview()
+        self.removeFromSuperview()
+        self._newWindow.windowLevel = UIWindowLevelNormal
+        self._newWindow.hidden = true
+        
+        var delegate = UIApplication.sharedApplication().delegate as AppDelegate
+        delegate.window!.makeKeyAndVisible()
+        
+        delegate.window!.rootViewController?.view.removeBlurEffect()
+        
     }
 }
