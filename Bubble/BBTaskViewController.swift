@@ -311,11 +311,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol, eventCre
         if taskID <= 0 {
             return
         }
-        var newBubbleView = BBTaskBubbleView(origin: CGPointMake(60.0, 60.0), radius: 35.0)
-        // then we add to the visibelBubbleList
-        self.visibleTaskViews.append(newBubbleView)
-        newBubbleView._taskID = taskID
-        self.view.addSubview(newBubbleView)
+        self.insertTask(taskID)
         self.layoutTasksAnimated(true)
     }
     
