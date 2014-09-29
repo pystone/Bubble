@@ -179,6 +179,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol, eventCre
 
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.layoutTasksAnimated(true)
     }
     
     override func viewDidLoad() {
@@ -349,6 +350,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol, eventCre
     
     func haveGetNewItem(task:BBTask) {
         BBDataCenter.sharedDataCenter().addNewTask(task)
+        //insertTask(task._id)
     }
     
 }
