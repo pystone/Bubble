@@ -52,6 +52,7 @@
 		310E683819D60EF900C8D0EE /* BBCenterBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E683719D60EF900C8D0EE /* BBCenterBubbleView.swift */; };
 		310E683A19D6110000C8D0EE /* BBBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E683919D6110000C8D0EE /* BBBubbleView.swift */; };
 		310E683C19D7278200C8D0EE /* BBWaverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E683B19D7278200C8D0EE /* BBWaverView.swift */; };
+		317AA80D19D8E6A400DBEB9A /* icon-add-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 317AA80C19D8E6A400DBEB9A /* icon-add-normal.png */; };
 		31914F1019D8D2330075A065 /* BBStillBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31914F0F19D8D2330075A065 /* BBStillBubbleView.swift */; };
 		31A81CE419D837CE00F3284F /* BBTaskEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A81CE319D837CE00F3284F /* BBTaskEditorViewController.swift */; };
 		31A81CE919D8726800F3284F /* due_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31A81CE719D8726800F3284F /* due_icon@2x.png */; };
@@ -120,6 +121,7 @@
 		310E683719D60EF900C8D0EE /* BBCenterBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBCenterBubbleView.swift; sourceTree = "<group>"; };
 		310E683919D6110000C8D0EE /* BBBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBBubbleView.swift; sourceTree = "<group>"; };
 		310E683B19D7278200C8D0EE /* BBWaverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBWaverView.swift; sourceTree = "<group>"; };
+		317AA80C19D8E6A400DBEB9A /* icon-add-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-add-normal.png"; sourceTree = "<group>"; };
 		31914F0F19D8D2330075A065 /* BBStillBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBStillBubbleView.swift; sourceTree = "<group>"; };
 		31A81CE319D837CE00F3284F /* BBTaskEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBTaskEditorViewController.swift; sourceTree = "<group>"; };
 		31A81CE719D8726800F3284F /* due_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "due_icon@2x.png"; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 		31D7E11E19D7C23B00B2EC9A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				317AA80C19D8E6A400DBEB9A /* icon-add-normal.png */,
 				0C35AF3219D89AA8002FC55F /* icloud.png */,
 				0C35AF3319D89AA8002FC55F /* line_and_more@2x.png */,
 				0C35AF3419D89AA8002FC55F /* login_bg@2x.png */,
@@ -388,6 +391,7 @@
 				286AB8FD19D88AC4006145F2 /* design-normal.png in Resources */,
 				286AB8FB19D88AC4006145F2 /* code-normal.png in Resources */,
 				286AB90A19D88AD7006145F2 /* blue.png in Resources */,
+				317AA80D19D8E6A400DBEB9A /* icon-add-normal.png in Resources */,
 				286AB90019D88AC4006145F2 /* paper-normal.png in Resources */,
 				286AB90F19D88AD7006145F2 /* red.png in Resources */,
 				31A81CE919D8726800F3284F /* due_icon@2x.png in Resources */,
