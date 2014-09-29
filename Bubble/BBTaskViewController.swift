@@ -20,7 +20,7 @@ struct BubbleRect {
     }
 }
 
-class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCreationProtocol {
+class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol, eventCreationProtocol {
     var taskCenterBubbleView: BBCenterBubbleView!
     var visibleTaskViews: [BBTaskBubbleView]!
     var availableRects: [BubbleRect]!
@@ -190,7 +190,6 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
     
     func layoutTasksAnimated(animated: Bool) {
         var centerRect = self.taskCenterBubbleView.frame
-        
         var maxVisibleCount = 8, count = 0
         
         for taskView: BBTaskBubbleView in self.visibleTaskViews {
@@ -265,27 +264,27 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol,eventCrea
     
     func pushBubbleTask(taskID: Int) {
         // remove the bubbleView from visibleBubbleViews
-        var tmp = -1, i = 0
+        var delIndex = 0
         for i in 0..<self.visibleTaskViews.count {
             // find the match one 
             if (taskID == self.visibleTaskViews[i]._taskID) {
+                delIndex = i
                 break
             }
         }
         if self.taskCenterBubbleView._taskID == taskID {
             return
         }
-        self.taskCenterBubbleView.bubbleWaver.waverColor = self.visibleTaskViews[i].bubbleColor
+        self.taskCenterBubbleView.bubbleWaver.waverColor = self.visibleTaskViews[delIndex].bubbleColor
+        var popTaskID = self.taskCenterBubbleView._taskID
         self.taskCenterBubbleView._taskID = taskID
         // after push, remove the view with taskID from the visibleTaskViews
-        var view = self.visibleTaskViews[i]
-        view.removeFromSuperview()
-
-        self.visibleTaskViews.removeAtIndex(i)
-        if self.taskCenterBubbleView._taskID > 0 {
-            tmp = self.taskCenterBubbleView._taskID!
+        self.visibleTaskViews[delIndex].removeFromSuperview()
+        self.visibleTaskViews.removeAtIndex(delIndex)
+        
+        if popTaskID > 0 {
             // then pop centerBubbleView
-            self.popBubbleTask(tmp)
+            self.popBubbleTask(popTaskID!)
         } else {
             self.layoutTasksAnimated(true)
         }
