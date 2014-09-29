@@ -122,7 +122,7 @@ class BBTaskViewController: UIViewController, BBTaskBubbleViewProtocol, eventCre
         self.taskBubbleViewAdder.bubbleTaskIconView.hidden = false
         self.taskBubbleViewAdder.bubbleTaskIcon = UIImage(named: "icon-add-normal")
         
-        self.view.addSubview(self.taskBubbleViewAdder)
+//        self.view.addSubview(self.taskBubbleViewAdder)
         self.view.addSubview(self.taskCenterBubbleView)
         
         var sharingOrigin = adderOrigin
